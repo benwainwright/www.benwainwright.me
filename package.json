@@ -8,20 +8,24 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "deploy:stack": "cdk deploy",
+    "deploy": "aws s3 cp www s3://www.benwainwright.me/ --recursive"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.36.1",
     "@types/jest": "^25.2.1",
     "@types/node": "10.17.5",
+    "aws-cdk": "^1.42.1",
     "jest": "^25.5.0",
     "ts-jest": "^25.3.1",
-    "aws-cdk": "1.36.1",
     "ts-node": "^8.1.0",
     "typescript": "~3.7.2"
   },
   "dependencies": {
-    "@aws-cdk/core": "1.36.1",
+    "@aws-cdk/aws-route53": "^1.42.1",
+    "@aws-cdk/aws-route53-targets": "^1.42.1",
+    "@aws-cdk/aws-s3": "^1.42.1",
+    "@aws-cdk/core": "1.42.1",
     "source-map-support": "^0.5.16"
   }
 }
