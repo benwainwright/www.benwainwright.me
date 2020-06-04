@@ -1,7 +1,8 @@
 import * as cdk from "@aws-cdk/core";
 import * as s3 from "@aws-cdk/aws-s3";
 import * as route53 from "@aws-cdk/aws-route53";
-import * as alias from "@aws-cdk/aws-route53-targets";
+import * as route53Targets from "@aws-cdk/aws-route53-targets";
+import * as cloudfront from "@aws-cdk/aws-cloudfront";
 
 import { BlockPublicAccess } from "@aws-cdk/aws-s3";
 
@@ -17,6 +18,21 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       websiteIndexDocument: "index.html",
     });
 
+    const distribution = new cloudfront.CloudFrontWebDistribution(
+      this,
+      "BensWebsiteCloudfrontDistribution",
+      {
+        originConfigs: [
+          {
+            s3OriginSource: {
+              s3BucketSource: bucket,
+            },
+            behaviors: [{ isDefaultBehavior: true }],
+          },
+        ],
+      }
+    );
+
     const zone = new route53.HostedZone(this, "BensWebsiteBucket", {
       zoneName: `${recordName}.${domainName}`,
     });
@@ -25,7 +41,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       zone,
       recordName,
       target: route53.RecordTarget.fromAlias(
-        new alias.BucketWebsiteTarget(bucket)
+        new route53Targets.CloudFrontTarget(distribution)
       ),
     });
   }

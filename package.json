@@ -22,6 +22,7 @@
     "typescript": "~3.7.2"
   },
   "dependencies": {
+    "@aws-cdk/aws-cloudfront": "^1.42.1",
     "@aws-cdk/aws-route53": "^1.42.1",
     "@aws-cdk/aws-route53-targets": "^1.42.1",
     "@aws-cdk/aws-s3": "^1.42.1",
