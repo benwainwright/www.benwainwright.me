@@ -6,7 +6,7 @@ import { WwwDotBenwainwrightDotMeStack } from "../lib/www-dot-benwainwright-dot-
 const app = new cdk.App();
 new WwwDotBenwainwrightDotMeStack(app, "WwwDotBenwainwrightDotMeStack", {
   env: {
-    region: "us-west-2",
-    account: "661272765443",
-  },
+    region: "us-east-1",
+    account: "661272765443"
+  }
 });
