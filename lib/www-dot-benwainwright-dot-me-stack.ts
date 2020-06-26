@@ -44,7 +44,6 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       zoneName: `${recordName}.${domainName}`
     });
 
-    zon;
     new route53.ARecord(this, "BensWebsiteBucketRecord", {
       zone,
       recordName,
