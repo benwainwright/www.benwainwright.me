@@ -8,8 +8,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "deploy:stack": "cdk deploy",
-    "deploy": "aws s3 cp www s3://www.benwainwright.me/ --recursive"
+    "deploy": "cdk deploy"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.36.1",

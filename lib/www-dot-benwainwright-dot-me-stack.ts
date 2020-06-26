@@ -31,7 +31,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       this,
       "BensWebsiteCertificate",
       {
-        domainName,
+        domainName: `*.${domainName}`,
         hostedZone: zone
       }
     );
@@ -50,7 +50,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
         ],
         viewerCertificate: cloudfront.ViewerCertificate.fromAcmCertificate(
           certificate,
-          { aliases: [domainName] }
+          { aliases: [domainName, `*.${domainName}`] }
         )
       }
     );
@@ -60,6 +60,12 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       target: route53.RecordTarget.fromAlias(
         new route53Targets.CloudFrontTarget(distribution)
       )
+    });
+
+    new route53.CnameRecord(this, "BensWebsiteCnameRecord", {
+      zone,
+      domainName: "benwainwright.me",
+      recordName: "www.benwainwright.me"
     });
   }
 }
