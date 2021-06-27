@@ -21,9 +21,10 @@ const HeadingTwo: FC<HeadingTwoProps> = props => {
         margin: 0 0.5rem 0 0;
       `
     : null
+
   return (
     <StyledH2>
-      {StyledIcon}
+      {StyledIcon ? <StyledIcon /> : null}
       <div>{props.children}</div>
     </StyledH2>
   )
