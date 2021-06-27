@@ -22,13 +22,15 @@ const Template: FC<TemplateProps> = ({
   )
 }
 export const pageQuery = graphql`
-  query ($id: String!) {
-    markdownRemark(id: { eq: $id }) {
-      html
-      frontmatter {
-        date(formatString: "MMMM DD, YYYY")
-        slug
-        title
+  query {
+    allMarkdownRemark {
+      nodes {
+        html
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          slug
+          title
+        }
       }
     }
   }
