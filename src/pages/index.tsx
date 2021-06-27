@@ -81,7 +81,7 @@ const IndexPage: FC<IndexProps> = props => {
             <Anchor href="https://github.com/benwainwright">Github</Anchor>
           </ListItem>
           <ListItem>
-            <Anchor href="https://www.linkedin.com/in/benwainwright">
+            <Anchor href="https://www.linkedin.com/in/bwainwright">
               LinkedIn
             </Anchor>
           </ListItem>
