@@ -27,6 +27,20 @@ const Container = styled.main`
   padding: 0 2rem 0 2rem;
 `
 
+const DateBox = styled.div`
+  font-family: "Milliard";
+  align-self: flex-end;
+  line-height: 2rem;
+  font-size: 1.2rem;
+  margin: 0 0 0 1rem;
+  font-style: italic;
+`
+
+const HeadingContainer = styled.div`
+  margin: 0 0 0 0.5rem;
+  flex-grow: 999;
+`
+
 const BlogPost: FC<BlogPostProps> = props => {
   const renderAst = new rehypeReact({
     createElement,
@@ -38,8 +52,12 @@ const BlogPost: FC<BlogPostProps> = props => {
   return (
     <Layout>
       <Container>
-        <HeadingOne icon={BsFillStarFill}>
-          {props.pageContext.entry.frontmatter.title}
+        <HeadingOne>
+          <BsFillStarFill />
+          <HeadingContainer>
+            {props.pageContext.entry.frontmatter.title}
+          </HeadingContainer>
+          <DateBox>{props.pageContext.entry.frontmatter.date}</DateBox>
         </HeadingOne>
         {renderAst(props.pageContext.entry.htmlAst)}
       </Container>

@@ -7,6 +7,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-emotion`,
+    { resolve: `gatsby-plugin-feed`, options: { output: "/rss.xml" } },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {

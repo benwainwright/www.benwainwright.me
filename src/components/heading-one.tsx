@@ -13,21 +13,8 @@ const StyledH1 = styled.h1`
 
 StyledH1.displayName = "h1"
 
-interface HeadingOneProps {
-  icon: any
-}
-
-const HeadingContainer = styled.div`
-  margin: 0 0 0 0.5rem;
-`
-
-const HeadingOne: FC<HeadingOneProps> = props => {
-  return (
-    <StyledH1>
-      {props.icon ? <props.icon /> : null}
-      <HeadingContainer>{props.children}</HeadingContainer>
-    </StyledH1>
-  )
+const HeadingOne: FC = props => {
+  return <StyledH1>{props.children}</StyledH1>
 }
 
 export default HeadingOne

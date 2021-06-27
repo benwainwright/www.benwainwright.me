@@ -35,7 +35,10 @@ const Blog: FC<BlogProps> = props => {
   return (
     <Layout>
       <Container>
-        <HeadingOne icon={TiPencil}>Blog</HeadingOne>
+        <HeadingOne>
+          <TiPencil />
+          Blog
+        </HeadingOne>
         {props.data.allMarkdownRemark.nodes.map(entry => (
           <BlogSummary entry={entry} key={entry.frontmatter.slug} />
         ))}

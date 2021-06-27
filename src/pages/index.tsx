@@ -16,7 +16,7 @@ import styled from "@emotion/styled"
 const Container = styled.main`
   grid-column-start: 2;
   grid-row-start: 2;
-  padding-left: 2rem;
+  padding: 0 2rem 0 2rem;
 `
 
 const DecorativePhoto = styled.img`

@@ -6,6 +6,7 @@ const StyledParagraph = styled.p`
   line-height: 2rem;
   font-size: 1.15rem;
   margin: 0.5rem 0 1rem 0;
+  text-align: justify;
 `
 
 interface ParagraphTextProps {

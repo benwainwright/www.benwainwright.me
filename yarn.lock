@@ -9911,6 +9911,25 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"gatsby-plugin-feed@npm:^3.8.0":
+  version: 3.8.0
+  resolution: "gatsby-plugin-feed@npm:3.8.0"
+  dependencies:
+    "@babel/runtime": ^7.14.0
+    "@hapi/joi": ^15.1.1
+    common-tags: ^1.8.0
+    fs-extra: ^9.1.0
+    gatsby-plugin-utils: ^1.8.0
+    lodash.merge: ^4.6.2
+    rss: ^1.2.2
+  peerDependencies:
+    gatsby: ^3.0.0-next.0
+    react: ^16.9.0 || ^17.0.0
+    react-dom: ^16.9.0 || ^17.0.0
+  checksum: a02d002a3969a35b816b30cf6530796a3a3be0c69d2c085ae79415ee0a7a00df56de9f6ec8f58ebc67518f64906e04c7d83fd73d9cf59d314bd5f485214c924a
+  languageName: node
+  linkType: hard
+
 "gatsby-plugin-gatsby-cloud@npm:^2.6.1":
   version: 2.6.1
   resolution: "gatsby-plugin-gatsby-cloud@npm:2.6.1"
@@ -10103,6 +10122,17 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"gatsby-plugin-utils@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "gatsby-plugin-utils@npm:1.8.0"
+  dependencies:
+    joi: ^17.2.1
+  peerDependencies:
+    gatsby: ^3.0.0-next.0
+  checksum: 8831c441ea1d182077d57753dea4db84b7e90db05192e182e77ab6ae9d0a7f5dad06809c15b801f74e6f1d5cff4da9d154bcd444127f6fa7d43508296038bfa7
+  languageName: node
+  linkType: hard
+
 "gatsby-react-router-scroll@npm:^4.6.0":
   version: 4.6.0
   resolution: "gatsby-react-router-scroll@npm:4.6.0"
@@ -10244,6 +10274,7 @@ fsevents@~2.3.1:
     gatsby-legacy-polyfills: ^1.8.0
     gatsby-link: ^3.8.0
     gatsby-plugin-emotion: ^6.8.0
+    gatsby-plugin-feed: ^3.8.0
     gatsby-plugin-gatsby-cloud: ^2.6.1
     gatsby-plugin-image: ^1.8.0
     gatsby-plugin-linaria: ^2.2.0
@@ -14104,6 +14135,22 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"mime-db@npm:~1.25.0":
+  version: 1.25.0
+  resolution: "mime-db@npm:1.25.0"
+  checksum: 4b83320e60f57b76c3c4d6f96335a67d10bbfdb164a303b0384a2cbe2642b78ad1926f72a2527f48fa129f310a5321d578c004d93fcb118594398b35234e14be
+  languageName: node
+  linkType: hard
+
+"mime-types@npm:2.1.13":
+  version: 2.1.13
+  resolution: "mime-types@npm:2.1.13"
+  dependencies:
+    mime-db: ~1.25.0
+  checksum: 30ccfa2bc1c44bc569345b4118e250a38786e7fc3ad78f61ca54808daa49b8f9e720e0252c71575949a395832a817345f6827ad5a4fd305ac00a587195c5d8c8
+  languageName: node
+  linkType: hard
+
 "mime-types@npm:^2.1.12, mime-types@npm:^2.1.27, mime-types@npm:^2.1.30, mime-types@npm:~2.1.17, mime-types@npm:~2.1.24":
   version: 2.1.31
   resolution: "mime-types@npm:2.1.31"
@@ -17601,6 +17648,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"rss@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "rss@npm:1.2.2"
+  dependencies:
+    mime-types: 2.1.13
+    xml: 1.0.1
+  checksum: 1e4b2216353343869a4983edb485fbafe1e29c58d848f9bd6acbfb9a8736576787fcd68b48c8f7ff09a832005c63c9d0c95075e66a20a542fd4f0c9b40b6837c
+  languageName: node
+  linkType: hard
+
 "run-async@npm:^2.4.0":
   version: 2.4.1
   resolution: "run-async@npm:2.4.1"
@@ -20955,6 +21012,13 @@ typescript@^4.3.4:
     sax: ">=0.6.0"
     xmlbuilder: ~11.0.0
   checksum: 5e6e53955714a9d094c9f39ac7509706d136a3dae76684059019ca949e131775f69715715879df86b1a49519ffea3805ff2e930596e229c5f6228ce027e8a80e
+  languageName: node
+  linkType: hard
+
+"xml@npm:1.0.1":
+  version: 1.0.1
+  resolution: "xml@npm:1.0.1"
+  checksum: adde7652a6f6010d28079586e7f608d616138bcb6c44bbc9174292b5cc2fab09b351d6c5f009e9304df2e0030888198225dd2e9ccbf51b776c8928479bfea4cb
   languageName: node
   linkType: hard
 
