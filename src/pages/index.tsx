@@ -23,6 +23,7 @@ const DecorativePhoto = styled.img`
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 2;
+  object-position: top;
   object-fit: cover;
   width: 100%;
   height: 100%;
