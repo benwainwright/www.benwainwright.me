@@ -3,17 +3,18 @@ import { graphql } from "gatsby"
 import { TiPencil } from "react-icons/ti"
 import Layout from "../components/layout"
 import styled from "@emotion/styled"
-import BlogEntry from "../components/blog-entry"
+import BlogSummary from "../components/blog-summary"
 import HeadingOne from "../components/heading-one"
 
 const Container = styled.main`
-  grid-column-start: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
   grid-row-start: 2;
-  padding-left: 2rem;
+  padding: 0 2rem 0 2rem;
 `
 
-export interface BlogEntryData {
-  htmlAst: any
+export interface BlogSummaryData {
+  excerpt: string
   frontmatter: {
     date: string
     slug: string
@@ -24,7 +25,7 @@ export interface BlogEntryData {
 interface BlogProps {
   data: {
     allMarkdownRemark: {
-      nodes: BlogEntryData[]
+      nodes: BlogSummaryData[]
     }
   }
 }
@@ -35,7 +36,7 @@ const Blog: FC<BlogProps> = props => {
       <Container>
         <HeadingOne icon={TiPencil}>Blog</HeadingOne>
         {props.data.allMarkdownRemark.nodes.map(entry => (
-          <BlogEntry entry={entry} key={entry.frontmatter.slug} />
+          <BlogSummary entry={entry} key={entry.frontmatter.slug} />
         ))}
       </Container>
     </Layout>
@@ -48,7 +49,7 @@ export const pageQuery = graphql`
   query {
     allMarkdownRemark {
       nodes {
-        htmlAst
+        excerpt
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
           slug
