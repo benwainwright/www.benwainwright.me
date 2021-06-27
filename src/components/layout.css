@@ -11,3 +11,39 @@ body {
 *:after {
   box-sizing: inherit;
 }
+
+@font-face {
+  font-family: "Milliard";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Milliard Medium"),
+    url("../assets/fonts/proxima-nova/rene-bieder-milliard-medium.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "Milliard";
+  font-style: italic;
+  font-weight: normal;
+  src: local("Milliard Medium Italic"),
+    url("../assets/fonts/proxima-nova/rene-bieder-miliard-medium-italic.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "Milliard";
+  font-style: normal;
+  font-weight: bold;
+  src: local("Milliard Bold"),
+    url("../assets/fonts/proxima-nova/rene-bieder-milliard-bold.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "Milliard";
+  font-style: italic;
+  font-weight: bold;
+  src: local("Milliard Bold Italic"),
+    url("../assets/fonts/proxima-nova/rene-bieder-milliard-bold-italic.woff")
+      format("woff");
+}
