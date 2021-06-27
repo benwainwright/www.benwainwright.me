@@ -4104,6 +4104,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^15.0.1":
+  version: 15.12.5
+  resolution: "@types/node@npm:15.12.5"
+  checksum: 42485de7a0b7277ddaae25b36ab4174fc8f23e8a5de9ccaedd002ecec17135c48227a5e09088d181c2bc34fe6b2064feb4a468954372076fd8addac2f72dad7e
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^8.5.7":
   version: 8.10.66
   resolution: "@types/node@npm:8.10.66"
@@ -4198,6 +4205,15 @@ __metadata:
     "@types/glob": "*"
     "@types/node": "*"
   checksum: b50fd076c454890f9efd8e876972908d3d9503611a2e5207ef6d4e3dece4ff2367eab4c6889db726098db148a29bd29eeed6a1fc3154bf1d09d3da2f691470af
+  languageName: node
+  linkType: hard
+
+"@types/sax@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@types/sax@npm:1.2.1"
+  dependencies:
+    "@types/node": "*"
+  checksum: 99f2c89dd69b53136d6ffdd4bc431ef2e1cdf29ac2b5c67bb3ec09c12814b5440e85fe3d31562774ad093d3631cf0660b6e5443c70f8654dd7d4ef3a797a0964
   languageName: node
   linkType: hard
 
@@ -4898,6 +4914,13 @@ __metadata:
   version: 4.1.3
   resolution: "arg@npm:4.1.3"
   checksum: 81b3b40b1529c4fbf75b12f7c3e6fb2dcce9e78072063babc169de9b4f40777788f3d2b04380f659ef676a756e03ccfbfe78adf4477353bda906295fa69dab89
+  languageName: node
+  linkType: hard
+
+"arg@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "arg@npm:5.0.0"
+  checksum: d5e270723c079fd841dce7e94669e037676b7960110dea244f3de21c935debe800528ac3a7c4c306c1159c8ad7f3eb19ef3e3650243ebd45dfcd69f4a8041a39
   languageName: node
   linkType: hard
 
@@ -10036,6 +10059,22 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"gatsby-plugin-sitemap@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "gatsby-plugin-sitemap@npm:4.4.0"
+  dependencies:
+    "@babel/runtime": ^7.14.0
+    common-tags: ^1.8.0
+    minimatch: ^3.0.4
+    sitemap: ^7.0.0
+  peerDependencies:
+    gatsby: ^3.0.0-next.0
+    react: ^16.9.0 || ^17.0.0
+    react-dom: ^16.9.0 || ^17.0.0
+  checksum: 800760bf2351986122c3accb15715331b30ad2fb6abc24ff816457b029c6c2ae42d7fcd01ae10009c2ca197ee1c323677b94fc62e9be4f6ddab7f4715184e4e7
+  languageName: node
+  linkType: hard
+
 "gatsby-plugin-typescript@npm:^3.6.0":
   version: 3.6.0
   resolution: "gatsby-plugin-typescript@npm:3.6.0"
@@ -10212,6 +10251,7 @@ fsevents@~2.3.1:
     gatsby-plugin-offline: ^4.6.0
     gatsby-plugin-react-helmet: ^4.6.0
     gatsby-plugin-sharp: ^3.6.0
+    gatsby-plugin-sitemap: ^4.4.0
     gatsby-react-router-scroll: ^4.8.0
     gatsby-source-filesystem: ^3.8.0
     gatsby-transformer-remark: 3.2.0
@@ -18013,6 +18053,20 @@ resolve@^2.0.0-next.3:
   version: 1.0.5
   resolution: "sisteransi@npm:1.0.5"
   checksum: 6554debe10fa4c6a7e8d58531313fdb61c39bb435ba420f8d7a01d8aaffecc654cca846b586e33f3c904350e24f229d5bbd8069abdb583c93252849a0f73e933
+  languageName: node
+  linkType: hard
+
+"sitemap@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "sitemap@npm:7.0.0"
+  dependencies:
+    "@types/node": ^15.0.1
+    "@types/sax": ^1.2.1
+    arg: ^5.0.0
+    sax: ^1.2.4
+  bin:
+    sitemap: dist/cli.js
+  checksum: c3a7169c475d2f9c944eccb102e98ff2f8182c14fc8c8ca319faf74a417ff18a50ab4ad6f8902989ad8bd3d24eb87f6e7dd15a9f9bcd6293135a3fde688acb31
   languageName: node
   linkType: hard
 

@@ -3,6 +3,7 @@ module.exports = {
     title: `Ben Wainwright`,
     description: `Full stack JavaScript/Typescript engineer`,
     author: `Ben Wainwright`,
+    siteUrl: `https://benwainwright.me`,
   },
   plugins: [
     `gatsby-plugin-emotion`,
