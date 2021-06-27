@@ -26,8 +26,9 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       this,
       "BensWebsiteCertificate",
       {
-        domainName: `*.${domainName}`,
+        domainName: domainName,
         hostedZone: zone,
+        subjectAlternativeNames: [`www.${domainName}`],
       }
     )
 
@@ -45,7 +46,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
         ],
         viewerCertificate: cloudfront.ViewerCertificate.fromAcmCertificate(
           certificate,
-          { aliases: [domainName, `*.${domainName}`] }
+          { aliases: [domainName, `www.${domainName}`] }
         ),
       }
     )

@@ -30,7 +30,7 @@ const DecorativePhoto = styled.img`
 
 const IndexPage: FC = () => (
   <Layout>
-    <DecorativePhoto src={mePhoto} />
+    <DecorativePhoto src={mePhoto} alt="Ben sitting on a stone bench" />
     <Container>
       <Seo title="Home" />
       <HeadingOne icon={BsFillPersonFill}>About Me</HeadingOne>
