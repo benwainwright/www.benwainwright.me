@@ -11,15 +11,19 @@ const Container = styled.div`
   font-size: 5rem;
   text-align: center;
   padding: 2rem 0 2rem 0;
+  color: #393e41;
+`
+
+const StyledHeader = styled.header`
+  background: #3f88c5;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
 `
 
 const Header: FC<HeaderProps> = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
+  <StyledHeader>
     <Container>
       <Link
         to="/"
@@ -31,7 +35,7 @@ const Header: FC<HeaderProps> = ({ siteTitle }) => (
         {siteTitle}
       </Link>
     </Container>
-  </header>
+  </StyledHeader>
 )
 
 export default Header
