@@ -37,8 +37,9 @@ const IndexPage: FC = () => (
       <ParagraphText>
         Full stack TypeScript/JavaScript engineer with experience in AWS
         services and a variety of other programming languages and web
-        technologies. I currently work for the BBC based in MediaCity in
-        Manchester.
+        technologies. I currently work for{" "}
+        <Anchor href="https://www.cinch.co.uk/">Cinch Cars</Anchor> in
+        Manchester Manchester.
       </ParagraphText>
       <HeadingTwo icon={FaMapSigns}>Find me elsewhere</HeadingTwo>
       <ul>
