@@ -34,7 +34,10 @@ const IndexPage: FC = () => (
     <DecorativePhoto src={mePhoto} alt="Ben sitting on a stone bench" />
     <Container>
       <Seo title="Home" />
-      <HeadingOne icon={BsFillPersonFill}>About Me</HeadingOne>
+      <HeadingOne>
+        <BsFillPersonFill />
+        About Me
+      </HeadingOne>
       <ParagraphText>
         Full stack TypeScript/JavaScript engineer with experience in AWS
         services and a variety of other programming languages and web
@@ -42,7 +45,10 @@ const IndexPage: FC = () => (
         <Anchor href="https://www.cinch.co.uk/">Cinch Cars</Anchor> in
         Manchester.
       </ParagraphText>
-      <HeadingTwo icon={FaMapSigns}>Find me elsewhere</HeadingTwo>
+      <HeadingTwo>
+        <FaMapSigns />
+        Find me elsewhere
+      </HeadingTwo>
       <ul>
         <ListItem>
           <Anchor href="https://github.com/benwainwright">Github</Anchor>
@@ -53,7 +59,10 @@ const IndexPage: FC = () => (
           </Anchor>
         </ListItem>
       </ul>
-      <HeadingTwo icon={HiOutlineMail}>Get in touch</HeadingTwo>
+      <HeadingTwo>
+        <HiOutlineMail />
+        Get in touch
+      </HeadingTwo>
       <ParagraphText>
         You can reach me on{" "}
         <Anchor href="mailto:bwainwright28@gmail.com">
