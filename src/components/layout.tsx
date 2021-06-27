@@ -7,7 +7,7 @@ import "./layout.css"
 
 const Grid = styled.div`
   display: grid;
-  grid-template-rows: 1fr 7fr;
+  grid-template-rows: 10rem calc(100vh - 10rem)
   grid-template-columns: repeat(2, 1fr);
   color: #393e41;
 `
