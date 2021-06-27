@@ -11,7 +11,7 @@ const Container = styled.main`
 `
 
 export interface BlogEntryData {
-  html: string
+  htmlAst: any
   frontmatter: {
     date: string
     slug: string
@@ -28,12 +28,11 @@ interface BlogProps {
 }
 
 const Blog: FC<BlogProps> = props => {
-  console.log(JSON.stringify(props.data, null, 2))
   return (
     <Layout>
       <Container>
         {props.data.allMarkdownRemark.nodes.map(entry => (
-          <BlogEntry entry={entry} key={entry} />
+          <BlogEntry entry={entry} key={entry.frontmatter.slug} />
         ))}
       </Container>
     </Layout>
@@ -46,7 +45,7 @@ export const pageQuery = graphql`
   query {
     allMarkdownRemark {
       nodes {
-        html
+        htmlAst
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
           slug

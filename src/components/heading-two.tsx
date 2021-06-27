@@ -11,19 +11,20 @@ const StyledH2 = styled.h2`
   align-items: center;
 `
 
-const HeadingContainer = styled.div`
-  margin: 0 0 0 0.5rem;
-`
-
 interface HeadingTwoProps {
   icon: any
 }
 
 const HeadingTwo: FC<HeadingTwoProps> = props => {
+  const StyledIcon = props.icon
+    ? styled(props.icon)`
+        margin: 0 0.5rem 0 0;
+      `
+    : null
   return (
     <StyledH2>
-      <props.icon />
-      <HeadingContainer>{props.children}</HeadingContainer>
+      {StyledIcon}
+      <div>{props.children}</div>
     </StyledH2>
   )
 }

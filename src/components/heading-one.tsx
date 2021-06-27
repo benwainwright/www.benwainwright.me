@@ -11,6 +11,8 @@ const StyledH1 = styled.h1`
   align-items: center;
 `
 
+StyledH1.displayName = "h1"
+
 interface HeadingOneProps {
   icon: any
 }
@@ -22,7 +24,7 @@ const HeadingContainer = styled.div`
 const HeadingOne: FC<HeadingOneProps> = props => {
   return (
     <StyledH1>
-      <props.icon />
+      {props.icon ? <props.icon /> : null}
       <HeadingContainer>{props.children}</HeadingContainer>
     </StyledH1>
   )
