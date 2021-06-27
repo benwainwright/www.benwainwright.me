@@ -1,8 +1,10 @@
 import { FC } from "react"
 import { graphql } from "gatsby"
+import { TiPencil } from "react-icons/ti"
 import Layout from "../components/layout"
 import styled from "@emotion/styled"
 import BlogEntry from "../components/blog-entry"
+import HeadingOne from "../components/heading-one"
 
 const Container = styled.main`
   grid-column-start: 2;
@@ -31,6 +33,7 @@ const Blog: FC<BlogProps> = props => {
   return (
     <Layout>
       <Container>
+        <HeadingOne icon={TiPencil}>Blog</HeadingOne>
         {props.data.allMarkdownRemark.nodes.map(entry => (
           <BlogEntry entry={entry} key={entry.frontmatter.slug} />
         ))}
