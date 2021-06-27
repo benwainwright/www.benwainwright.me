@@ -5,6 +5,7 @@ module.exports = {
     author: `Ben Wainwright`,
   },
   plugins: [
+    `gatsby-plugin-linaria`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
