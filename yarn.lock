@@ -94,7 +94,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/code-frame@npm:^7.14.5":
+"@babel/code-frame@npm:^7.14.0, @babel/code-frame@npm:^7.14.5":
   version: 7.14.5
   resolution: "@babel/code-frame@npm:7.14.5"
   dependencies:
@@ -718,7 +718,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.14.5, @babel/parser@npm:^7.14.7":
+"@babel/parser@npm:^7.14.0, @babel/parser@npm:^7.14.5, @babel/parser@npm:^7.14.7":
   version: 7.14.7
   resolution: "@babel/parser@npm:7.14.7"
   bin:
@@ -5387,6 +5387,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babel-plugin-remove-graphql-queries@npm:^3.8.0":
+  version: 3.8.0
+  resolution: "babel-plugin-remove-graphql-queries@npm:3.8.0"
+  peerDependencies:
+    "@babel/core": ^7.0.0
+    gatsby: ^3.0.0-next.0
+  checksum: de2142746ed40db038603313c6e8bf1e4c83f390d49d04cb31c227d227ccc03b98fb42e7698185a84f6062f404c13b31c105e7107875b9c1e12019b7619ea2fb
+  languageName: node
+  linkType: hard
+
 "babel-plugin-syntax-object-rest-spread@npm:^6.8.0":
   version: 6.13.0
   resolution: "babel-plugin-syntax-object-rest-spread@npm:6.13.0"
@@ -9894,20 +9904,20 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-image@npm:^1.6.0":
-  version: 1.6.0
-  resolution: "gatsby-plugin-image@npm:1.6.0"
+"gatsby-plugin-image@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "gatsby-plugin-image@npm:1.8.0"
   dependencies:
-    "@babel/code-frame": ^7.12.13
-    "@babel/parser": ^7.12.5
-    "@babel/traverse": ^7.12.5
+    "@babel/code-frame": ^7.14.0
+    "@babel/parser": ^7.14.0
+    "@babel/traverse": ^7.14.0
     babel-jsx-utils: ^1.1.0
-    babel-plugin-remove-graphql-queries: ^3.6.0
+    babel-plugin-remove-graphql-queries: ^3.8.0
     camelcase: ^5.3.1
     chokidar: ^3.5.1
     common-tags: ^1.8.0
     fs-extra: ^8.1.0
-    gatsby-core-utils: ^2.6.0
+    gatsby-core-utils: ^2.8.0
     objectFitPolyfill: ^2.3.0
     prop-types: ^15.7.2
   peerDependencies:
@@ -9917,7 +9927,7 @@ fsevents@~2.3.1:
     gatsby-source-filesystem: ^3.0.0-next.0
     react: ^16.9.0 || ^17.0.0
     react-dom: ^16.9.0 || ^17.0.0
-  checksum: 6c7a30e457075424e50e348610913659fab79e54ea21b15a42f801d60660d4975a8c7b7ffaf98a9835fcef6141f0172b980785e2a89dd04dbc3d2088c8bacbe9
+  checksum: c6237e9ee413550a02c4e02b37a44e04c006c30cae51e4813709fae0b1371f9554406fece52f810336eb5586d539b3007f1337f07d152477b0d5b75df0842fd0
   languageName: node
   linkType: hard
 
@@ -10196,7 +10206,7 @@ fsevents@~2.3.1:
     gatsby-link: ^3.8.0
     gatsby-plugin-emotion: ^6.8.0
     gatsby-plugin-gatsby-cloud: ^2.6.1
-    gatsby-plugin-image: ^1.6.0
+    gatsby-plugin-image: ^1.8.0
     gatsby-plugin-linaria: ^2.2.0
     gatsby-plugin-manifest: ^3.6.0
     gatsby-plugin-offline: ^4.6.0
