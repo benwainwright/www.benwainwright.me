@@ -1,4 +1,4 @@
-name: Mainline Deployment Pipeline
+name: Deploy
 on:
   push:
     branches:
