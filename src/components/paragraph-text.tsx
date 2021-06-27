@@ -8,8 +8,12 @@ const StyledParagraph = styled.p`
   margin: 0.5rem 0 1rem 0;
 `
 
-const ParagraphText: FC = props => {
-  return <StyledParagraph>{props.children}</StyledParagraph>
+interface ParagraphTextProps {
+  role?: string
+}
+
+const ParagraphText: FC<ParagraphTextProps> = props => {
+  return <StyledParagraph role={props.role}>{props.children}</StyledParagraph>
 }
 
 export default ParagraphText

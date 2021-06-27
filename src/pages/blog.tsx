@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import styled from "@emotion/styled"
 import BlogSummary from "../components/blog-summary"
 import HeadingOne from "../components/heading-one"
+import ParagraphText from "../components/paragraph-text"
 
 const Container = styled.main`
   grid-column-start: 1;
