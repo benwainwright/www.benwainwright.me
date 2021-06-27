@@ -25,6 +25,10 @@ const Container = styled.main`
   grid-column-end: 3;
   grid-row-start: 2;
   padding: 0 2rem 0 2rem;
+  @media (min-width: 1400px) {
+    margin: 0 auto;
+    width: 70%;
+  }
 `
 
 const DateBox = styled.div`
@@ -39,6 +43,10 @@ const DateBox = styled.div`
 const HeadingContainer = styled.div`
   margin: 0 0 0 0.5rem;
   flex-grow: 999;
+`
+
+const ContentContainer = styled.div`
+  margin: 1rem 0 0 0;
 `
 
 const BlogPost: FC<BlogPostProps> = props => {
@@ -59,7 +67,9 @@ const BlogPost: FC<BlogPostProps> = props => {
           </HeadingContainer>
           <DateBox>{props.pageContext.entry.frontmatter.date}</DateBox>
         </HeadingOne>
-        {renderAst(props.pageContext.entry.htmlAst)}
+        <ContentContainer>
+          {renderAst(props.pageContext.entry.htmlAst)}
+        </ContentContainer>
       </Container>
     </Layout>
   )

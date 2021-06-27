@@ -6,13 +6,6 @@ interface HeaderProps {
   siteTitle: string
 }
 
-const Container = styled.div`
-  font-family: "Penna";
-  font-size: 5rem;
-  text-align: center;
-  padding: 2rem 0 2rem 0;
-`
-
 const StyledHeader = styled.header`
   background: #3f88c5;
   grid-column-start: 1;
@@ -21,10 +14,33 @@ const StyledHeader = styled.header`
   grid-row-end: 1;
 `
 
+const HomeLink = styled(Link)`
+  flex-grow: 999;
+`
+
+const Container = styled.div`
+  height: 100%;
+  padding: 2rem;
+  font-family: "Aileron";
+  display: flex;
+  font-size: 2rem;
+  align-items: center;
+`
+
+const MenuLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+  margin-left: 2rem;
+
+  &:hover {
+    color: black;
+  }
+`
+
 const Header: FC<HeaderProps> = ({ siteTitle }) => (
   <StyledHeader>
     <Container>
-      <Link
+      <HomeLink
         to="/"
         style={{
           color: `white`,
@@ -32,7 +48,9 @@ const Header: FC<HeaderProps> = ({ siteTitle }) => (
         }}
       >
         {siteTitle}
-      </Link>
+      </HomeLink>
+      <MenuLink to="/">Home</MenuLink>
+      <MenuLink to="/blog">Blog</MenuLink>
     </Container>
   </StyledHeader>
 )

@@ -12,6 +12,11 @@ const Container = styled.main`
   grid-column-end: 3;
   grid-row-start: 2;
   padding: 0 2rem 0 2rem;
+
+  @media (min-width: 1400px) {
+    margin: 0 auto;
+    width: 70%;
+  }
 `
 
 export interface BlogSummaryData {
@@ -51,7 +56,7 @@ export default Blog
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark {
+    allMarkdownRemark(sort: { fields: frontmatter___date }) {
       nodes {
         excerpt
         frontmatter {
