@@ -39,7 +39,7 @@ const IndexPage: FC = () => (
         services and a variety of other programming languages and web
         technologies. I currently work for{" "}
         <Anchor href="https://www.cinch.co.uk/">Cinch Cars</Anchor> in
-        Manchester Manchester.
+        Manchester.
       </ParagraphText>
       <HeadingTwo icon={FaMapSigns}>Find me elsewhere</HeadingTwo>
       <ul>
