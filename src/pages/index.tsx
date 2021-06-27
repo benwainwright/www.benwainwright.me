@@ -54,8 +54,12 @@ const IndexPage: FC = () => (
       </ul>
       <HeadingTwo icon={HiOutlineMail}>Get in touch</HeadingTwo>
       <ParagraphText>
-        You can reach me on bwainwright28@gmail.com. Please note that I'm
-        happilly employed at this time; recruiters will probably be ignored.
+        You can reach me on{" "}
+        <Anchor href="mailto:bwainwright28@gmail.com">
+          bwainwright28@gmail.com
+        </Anchor>
+        . Please note that I'm happilly employed at this time; recruiters will
+        probably be ignored.
       </ParagraphText>
     </Container>
   </Layout>
