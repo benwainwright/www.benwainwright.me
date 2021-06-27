@@ -16,6 +16,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       bucketName: domainName,
       publicReadAccess: true,
       websiteIndexDocument: "index.html",
+      websiteErrorDocument: "index.html",
     })
 
     const zone = route53.HostedZone.fromLookup(this, "MyHostedZone", {
