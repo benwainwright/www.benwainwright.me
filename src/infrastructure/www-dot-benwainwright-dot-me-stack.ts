@@ -40,8 +40,8 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
         originConfigs: [
           {
             customOriginSource: {
-              domainName: "s3.amazonaws.com",
-              originPath: domainName,
+              domainName: bucket.bucketWebsiteDomainName,
+              originProtocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
             },
             behaviors: [{ isDefaultBehavior: true }],
           },

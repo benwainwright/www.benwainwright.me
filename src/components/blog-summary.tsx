@@ -16,6 +16,7 @@ const BlogEntry: FC<BlogEntryProps> = props => (
         {props.entry.frontmatter.title}
       </Link>
     </HeadingTwo>
+    <p role="doc-subtitle">{props.entry.frontmatter.date}</p>
     <ParagraphText>{props.entry.excerpt}</ParagraphText>
   </article>
 )
