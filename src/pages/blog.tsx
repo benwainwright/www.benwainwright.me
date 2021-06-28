@@ -19,6 +19,7 @@ const Container = styled.div`
 export interface BlogSummaryData {
   excerpt: string
   frontmatter: {
+    published: boolean
     date: string
     slug: string
     title: string
@@ -42,9 +43,11 @@ const Blog: FC<BlogProps> = props => {
           <TiPencil />
           Blog
         </HeadingOne>
-        {props.data.allMarkdownRemark.nodes.map(entry => (
-          <BlogSummary entry={entry} key={entry.frontmatter.slug} />
-        ))}
+        {props.data.allMarkdownRemark.nodes
+          .filter(entry => entry.frontmatter.published)
+          .map(entry => (
+            <BlogSummary entry={entry} key={entry.frontmatter.slug} />
+          ))}
       </Container>
     </Layout>
   )
@@ -59,6 +62,7 @@ export const pageQuery = graphql`
         excerpt
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
+          published
           slug
           title
         }

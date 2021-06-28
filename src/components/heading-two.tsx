@@ -10,7 +10,7 @@ const StyledH2 = styled.h2`
   display: flex;
   align-items: center;
   @media (max-width: 800px) {
-    margin: 1.5rem 0 0 0;
+    margin: 2rem 0 0 0;
   }
 `
 
