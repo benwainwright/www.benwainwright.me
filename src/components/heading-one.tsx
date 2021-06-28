@@ -6,9 +6,16 @@ const StyledH1 = styled.h1`
   font-weight: lighter;
   font-size: 3rem;
   letter-spacing: 2px;
-  margin: 2rem 0 0 0;
+  margin: 3rem 0 2rem 0;
   display: flex;
   align-items: center;
+  @media (max-width: 800px) {
+    margin: 2rem 0 1rem 0;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 2rem;
+  }
 `
 
 StyledH1.displayName = "h1"
