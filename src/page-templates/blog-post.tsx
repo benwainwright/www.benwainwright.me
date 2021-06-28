@@ -6,6 +6,7 @@ import HeadingOne from "../components/heading-one"
 import HeadingTwo from "../components/heading-two"
 import ParagraphText from "../components/paragraph-text"
 import rehypeReact from "rehype-react"
+import Seo from "../components/seo"
 
 interface BlogPostProps {
   pageContext: {
@@ -20,10 +21,7 @@ interface BlogPostProps {
   }
 }
 
-const Container = styled.main`
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 2;
+const Container = styled.div`
   padding: 0 2rem 0 2rem;
   @media (min-width: 1400px) {
     margin: 0 auto;
@@ -60,6 +58,7 @@ const BlogPost: FC<BlogPostProps> = props => {
   return (
     <Layout>
       <Container>
+        <Seo title={props.pageContext.entry.frontmatter.title} />
         <HeadingOne>
           <BsFillStarFill />
           <HeadingContainer>

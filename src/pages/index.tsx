@@ -15,22 +15,19 @@ import HeadingOne from "../components/heading-one"
 import Anchor from "../components/anchor"
 import styled from "@emotion/styled"
 import { BlogSummaryData } from "./blog"
-import BlogSummary from "../components/blog-summary"
 
-const Container = styled.main`
-  grid-column-start: 2;
-  grid-row-start: 2;
+const Container = styled.div`
+  width: 50%;
   padding: 0 2rem 0 2rem;
+  object-fit: cover;
+  height: calc(100vh - 10rem);
 `
 
 const DecorativePhoto = styled.img`
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 2;
   object-position: top;
   object-fit: cover;
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: calc(100vh - 10rem);
 `
 
 interface IndexProps {

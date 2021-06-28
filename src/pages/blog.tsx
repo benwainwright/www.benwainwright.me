@@ -5,12 +5,9 @@ import Layout from "../components/layout"
 import styled from "@emotion/styled"
 import BlogSummary from "../components/blog-summary"
 import HeadingOne from "../components/heading-one"
-import ParagraphText from "../components/paragraph-text"
+import Seo from "../components/seo"
 
-const Container = styled.main`
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 2;
+const Container = styled.div`
   padding: 0 2rem 0 2rem;
 
   @media (min-width: 1400px) {
@@ -40,6 +37,7 @@ const Blog: FC<BlogProps> = props => {
   return (
     <Layout>
       <Container>
+        <Seo title="Blog" />
         <HeadingOne>
           <TiPencil />
           Blog

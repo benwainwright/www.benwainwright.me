@@ -10,7 +10,7 @@ interface SeoProps {
   title: string
 }
 
-const Seo: FC<SeoProps> = ({ description, lang, meta, title }) => {
+const Seo: FC<SeoProps> = ({ description, meta, title }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -68,7 +68,7 @@ const Seo: FC<SeoProps> = ({ description, lang, meta, title }) => {
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang: "en",
       }}
       title={title}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}

@@ -12,6 +12,14 @@ const Grid = styled.div`
   color: #393e41;
 `
 
+const MainContainer = styled.main`
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  display: flex;
+  height: 100%;
+`
+
 const Layout: FC = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -26,7 +34,7 @@ const Layout: FC = ({ children }) => {
   return (
     <Grid>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      {children}
+      <MainContainer>{children}</MainContainer>
     </Grid>
   )
 }
