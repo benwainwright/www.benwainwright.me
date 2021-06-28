@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 interface SeoProps {
-  description?: { name?: string; property?: string; content: string }
+  description?: string
   lang?: string
   meta?:
     | DetailedHTMLProps<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement>[]

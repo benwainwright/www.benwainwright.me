@@ -16,6 +16,7 @@ interface BlogPostProps {
         date: string
         slug: string
         title: string
+        description: string
       }
     }
   }
@@ -55,10 +56,14 @@ const BlogPost: FC<BlogPostProps> = props => {
       p: ParagraphText,
     },
   }).Compiler
+  console.log(props.pageContext.entry)
   return (
     <Layout>
       <Container>
-        <Seo title={props.pageContext.entry.frontmatter.title} />
+        <Seo
+          title={props.pageContext.entry.frontmatter.title}
+          description={props.pageContext.entry.frontmatter.description}
+        />
         <HeadingOne>
           <BsFillStarFill />
           <HeadingContainer>
