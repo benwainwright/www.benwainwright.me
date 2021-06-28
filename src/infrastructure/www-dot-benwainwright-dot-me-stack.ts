@@ -16,6 +16,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       bucketName: domainName,
       publicReadAccess: true,
       websiteIndexDocument: "index.html",
+
       websiteErrorDocument: "index.html",
     })
 
@@ -63,6 +64,9 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
     new s3Deploy.BucketDeployment(this, "BensWebsiteDeployment", {
       sources: [s3Deploy.Source.asset("./public")],
       destinationBucket: bucket,
+      cacheControl: [
+        s3Deploy.CacheControl.fromString("max-age=31536000,public,immutable"),
+      ],
       distribution,
       distributionPaths: ["/*"],
     })

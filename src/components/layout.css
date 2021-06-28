@@ -16,12 +16,14 @@ body {
 @font-face {
   font-family: "Aileron";
   font-style: normal;
+  font-display: swap;
   font-weight: normal;
   src: local("Aileron"), url("../assets/fonts/aileron/Aileron-Regular.otf");
 }
 
 @font-face {
   font-family: "Aileron";
+  font-display: swap;
   font-style: normal;
   font-weight: lighter;
   src: local("Aileron"), url("../assets/fonts/aileron/Aileron-Light.otf");
@@ -30,6 +32,7 @@ body {
 @font-face {
   font-family: "Milliard";
   font-style: normal;
+  font-display: swap;
   font-weight: normal;
   src: local("Milliard Medium"),
     url("../assets/fonts/proxima-nova/rene-bieder-milliard-medium.woff")
@@ -39,6 +42,7 @@ body {
 @font-face {
   font-family: "Milliard";
   font-style: italic;
+  font-display: swap;
   font-weight: normal;
   src: local("Milliard Medium Italic"),
     url("../assets/fonts/proxima-nova/rene-bieder-miliard-medium-italic.woff")
@@ -48,6 +52,7 @@ body {
 @font-face {
   font-family: "Milliard";
   font-style: normal;
+  font-display: swap;
   font-weight: lighter;
   src: local("Milliard light"),
     url("../assets/fonts/proxima-nova/rene-bieder-milliard-light.woff")
@@ -57,6 +62,7 @@ body {
 @font-face {
   font-family: "Milliard";
   font-style: italic;
+  font-display: swap;
   font-weight: bold;
   src: local("Milliard Bold Italic"),
     url("../assets/fonts/proxima-nova/rene-bieder-milliard-bold-italic.woff")
@@ -65,5 +71,6 @@ body {
 
 @font-face {
   font-family: "Penna";
+  font-display: swap;
   src: local("Penna"), url("../assets/fonts/penna.otf");
 }
