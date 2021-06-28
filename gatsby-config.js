@@ -29,10 +29,15 @@ module.exports = {
         resolveSiteUrl: () => siteUrl,
         serialize: ({ path, lastmod }) => ({ url: path, lastmod }),
         resolvePages: ({ allSitePage }) => {
-          return allSitePage.nodes.map(node => ({
-            path: node.path,
-            lastmod: node.context?.entry?.frontmatter?.last_modified,
-          }))
+          return allSitePage.nodes.map(node => {
+            const lastmod = node.context.entry
+              ? node.context.entry.frontmatter.last_modified
+              : null
+            return {
+              path: node.path,
+              lastmod,
+            }
+          })
         },
       },
     },
