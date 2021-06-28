@@ -12,7 +12,7 @@ module.exports = {
       options: {
         query: `
         {
-          allSitePage {
+          allSitePage(filter: {context: {entry: {frontmatter: {published: {ne: false}}}}}) {
             nodes {
               path
               context {
@@ -33,6 +33,7 @@ module.exports = {
             const lastmod = node.context.entry
               ? node.context.entry.frontmatter.last_modified
               : null
+
             return {
               path: node.path,
               lastmod,

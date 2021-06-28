@@ -1,7 +1,7 @@
 ---
 slug: "welcome"
-date: "2021-06-28"
-last-modified: "2021-06-28"
+date: "2021-06-27"
+last-modified: "2021-06-27"
 title: "Welcome"
 description: "My first blog post"
 published: true
