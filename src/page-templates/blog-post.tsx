@@ -4,6 +4,8 @@ import { BsFillStarFill } from "react-icons/bs"
 import styled from "@emotion/styled"
 import HeadingOne from "../components/heading-one"
 import HeadingTwo from "../components/heading-two"
+import HeadingThree from "../components/heading-three"
+import ListItem from "../components/list-item"
 import ParagraphText from "../components/paragraph-text"
 import rehypeReact from "rehype-react"
 import Seo from "../components/seo"
@@ -53,7 +55,9 @@ const BlogPost: FC<BlogPostProps> = props => {
     createElement,
     components: {
       h1: HeadingTwo,
+      h2: HeadingThree,
       p: ParagraphText,
+      li: ListItem,
     },
   }).Compiler
   console.log(props.pageContext.entry)
