@@ -1,13 +1,42 @@
+const siteUrl = `https://benwainwright.me`
 module.exports = {
   siteMetadata: {
     title: `Ben Wainwright`,
     description: `Full stack JavaScript/Typescript engineer`,
     author: `Ben Wainwright`,
-    siteUrl: `https://benwainwright.me`,
+    siteUrl,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `
+        {
+          allSitePage {
+            nodes {
+              path
+              context {
+                entry {
+                  frontmatter {
+                    last_modified
+                  }
+                }
+              }
+            }
+          }
+        }
+        `,
+        resolveSiteUrl: () => siteUrl,
+        serialize: ({ path, lastmod }) => ({ url: path, lastmod }),
+        resolvePages: ({ allSitePage }) => {
+          return allSitePage.nodes.map(node => ({
+            path: node.path,
+            lastmod: node.context?.entry?.frontmatter?.last_modified,
+          }))
+        },
+      },
+    },
     `gatsby-plugin-emotion`,
-    { resolve: `gatsby-plugin-feed`, options: { output: "/rss.xml" } },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {

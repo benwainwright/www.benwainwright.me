@@ -23,6 +23,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             htmlAst
             frontmatter {
               date(formatString: "MMMM DD, YYYY")
+              last_modified
               slug
               published
               description
