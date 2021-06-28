@@ -60,7 +60,6 @@ const BlogPost: FC<BlogPostProps> = props => {
       li: ListItem,
     },
   }).Compiler
-  console.log(props.pageContext.entry)
   return (
     <Layout>
       <Container>
