@@ -21,6 +21,10 @@ const Container = styled.div`
   padding: 0 2rem 0 2rem;
   object-fit: cover;
   height: calc(100vh - 10rem);
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `
 
 const DecorativePhoto = styled.img`
@@ -28,6 +32,11 @@ const DecorativePhoto = styled.img`
   object-fit: cover;
   width: 50%;
   height: calc(100vh - 10rem);
+
+  @media (max-width: 800px) {
+    width: 100%;
+    height: 30%;
+  }
 `
 
 interface IndexProps {

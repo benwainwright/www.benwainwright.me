@@ -21,10 +21,14 @@ const HomeLink = styled(Link)`
 const Container = styled.div`
   height: 100%;
   padding: 2rem;
-  font-family: "Aileron";
   display: flex;
-  font-size: 2rem;
   align-items: center;
+  font-size: 2rem;
+  font-family: "Aileron";
+  @media (max-width: 800px) {
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
 `
 
 const MenuLink = styled(Link)`

@@ -9,6 +9,9 @@ const StyledH2 = styled.h2`
   margin: 3rem 0 0 0;
   display: flex;
   align-items: center;
+  @media (max-width: 800px) {
+    margin: 1.5rem 0 0 0;
+  }
 `
 
 const HeadingTwo: FC = props => {

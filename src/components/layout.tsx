@@ -10,6 +10,10 @@ const Grid = styled.div`
   grid-template-rows: 10rem calc(100vh - 10rem);
   grid-template-columns: repeat(2, 1fr);
   color: #393e41;
+
+  @media (max-width: 800px) {
+    grid-template-rows: 5rem calc(100vh - 5rem);
+  }
 `
 
 const MainContainer = styled.main`
@@ -18,6 +22,10 @@ const MainContainer = styled.main`
   grid-row-start: 2;
   display: flex;
   height: 100%;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `
 
 const Layout: FC = ({ children }) => {

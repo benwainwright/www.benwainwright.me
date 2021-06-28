@@ -7,6 +7,9 @@ const StyledParagraph = styled.p`
   font-size: 1.15rem;
   margin: 0.5rem 0 1rem 0;
   text-align: justify;
+  @media (max-width: 800px) {
+    line-height: 1.7rem;
+  }
 `
 
 interface ParagraphTextProps {
