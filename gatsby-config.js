@@ -11,16 +11,16 @@ module.exports = {
       resolve: `gatsby-plugin-feed`,
       options: {
         query: `
-          {
-            site {
-              siteMetadata {
-                title
-                description
-                siteUrl
-                site_url: siteUrl
-              }
+        {
+          site {
+            siteMetadata {
+              title
+              description
+              siteUrl
+              site_url: siteUrl
             }
           }
+        }
         `,
 
         feeds: [
@@ -40,25 +40,25 @@ module.exports = {
               return result
             },
             query: `{
-                    allMarkdownRemark(
-                      sort: {order: DESC, fields: [frontmatter___date]}
-                      filter: {frontmatter: {published: {eq: true}}}
-                    ) {
-                      edges {
-                        node {
-                          excerpt
-                          html
-                          fields {
-                            slug
-                          }
-                          frontmatter {
-                            title
-                            date
-                          }
-                        }
-                      }
+              allMarkdownRemark(
+                sort: {order: DESC, fields: [frontmatter___date]}
+                filter: {frontmatter: {published: {eq: true}}}
+              ) {
+                edges {
+                  node {
+                    excerpt
+                    html
+                    fields {
+                      slug
                     }
-                  }`,
+                    frontmatter {
+                      title
+                      date
+                    }
+                  }
+                }
+              }
+            }`,
             output: "/rss.xml",
             title: "benwainwright.me",
           },
@@ -117,7 +117,19 @@ module.exports = {
         path: `${__dirname}/blog-entries`,
       },
     },
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              showLineNumbers: true
+            }
+          },
+        ],
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-gatsby-cloud`,

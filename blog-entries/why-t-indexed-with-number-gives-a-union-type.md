@@ -1,15 +1,15 @@
 ---
-slug: "why-t-indexed-with-number-gives-a-union-type"
+slug: "a-closer-look-at-index-access-types"
 date: "2021-08-07"
 last-modified: "2021-08-07"
 title: "A Closer Look at Index Access Types"
 description: "A followup from a question I did in a recent talk about why an
 array type indexed with the type 'number' resolves to a union type"
-published: false
+published: true
 ---
 
 I recently gave a talk at work about some advanced TypeScript techniques (which I imagine I'll blog about at some point). During that talk, I used a lesser
-known feature called [Index Access Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html), where you can index a type with another type to get back a further type. In this instance I was indexing a readonly array type that was limited to a particular set of values with the type `number` in order to produce a union type of those values. The question that came back was more or less... "wha...a..t did you just do". Its an interesting trick, so I thought I'd have a go at taking you through the detail.
+known feature called [Index Access Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html), allowing you to index a type with another type to get back a further type. I was indexing a readonly array type that was limited to a particular set of values with the type `number` in order to produce a union type. The question that came back was more or less... "wha...a..t did you just do?". Its an interesting trick, and one that provides a helpful illustration of what a type system actually is.
 
 Here is a simplified version of the code in question:
 
@@ -19,7 +19,6 @@ type TupleOfKeys<T> = ReadonlyArray<keyof T>
 
 type UnionOfKeys<T extends ReadonlyArray[]> = T[number]
 // Produces a union type containing all the possible array entries
-
 
 type LetsGetThoseEntries = UnionOfKeys<["foo", "bar">
 // Type is "foo" | "bar"
@@ -36,7 +35,7 @@ This ranges from the incredibly specific, to incredibly general. For example: `1
 So keeping this in mind, when I'm indexing type `A` with type `B`
 (so `A[B]`), what I'm really asking for is **all the possible values I might get
 back if I index a position with type `A` with any of the values that might be
-represented by type `B`.
+represented by type `B`**.
 
 Still confused? Lets break this down with a simple example. Consider the
 following type:

@@ -111,7 +111,10 @@ const IndexPage: FC<IndexProps> = props => {
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark(sort: { fields: frontmatter___date }, limit: 1) {
+    allMarkdownRemark(
+      sort: { order: DESC, fields: frontmatter___date }
+      limit: 1
+    ) {
       nodes {
         excerpt
         frontmatter {

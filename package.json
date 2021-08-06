@@ -37,7 +37,11 @@
     "gatsby-plugin-sharp": "^3.6.0",
     "gatsby-plugin-sitemap": "^4.4.0",
     "gatsby-react-router-scroll": "^4.8.0",
+    "gatsby-rehype-prismjs": "^2.0.0",
+    "gatsby-remark-highlight-code": "^3.0.1",
+    "gatsby-remark-prismjs": "^5.8.0",
     "gatsby-source-filesystem": "^3.8.0",
+    "gatsby-transformer-rehype": "^2.0.0",
     "gatsby-transformer-remark": "3.2.0",
     "gatsby-transformer-sharp": "^3.6.0",
     "linaria": "^2.1.0",
@@ -45,18 +49,21 @@
     "mitt": "^3.0.0",
     "path": "^0.12.7",
     "platform": "^1.3.6",
+    "prismjs": "^1.24.1",
     "prop-types": "^15.7.2",
     "query-string": "^7.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
+    "rehype-highlight": "^5.0.0",
     "rehype-react": "^6.2.1",
     "shallow-compare": "^1.2.2",
     "source-map-support": "^0.5.19",
     "stack-trace": "^1.0.0-pre1",
     "ts-node": "^10.0.0",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.4",
+    "unified": "^10.1.0"
   },
   "devDependencies": {
     "prettier": "2.2.1"
@@ -80,5 +87,6 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
-  }
+  },
+  "packageManager": "yarn@3.0.0"
 }
