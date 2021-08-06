@@ -20,7 +20,7 @@ type TupleOfKeys<T> = ReadonlyArray<keyof T>
 type UnionOfKeys<T extends ReadonlyArray[]> = T[number]
 // Produces a union type containing all the possible array entries
 
-type LetsGetThoseEntries = UnionOfKeys<["foo", "bar">
+type LetsGetThoseEntries = UnionOfKeys<["foo", "bar"]>
 // Type is "foo" | "bar"
 ```
 
