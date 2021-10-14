@@ -66,19 +66,6 @@ const IndexPage: FC<IndexProps> = props => {
           Manchester.
         </ParagraphText>
         <HeadingTwo>
-          <FaPencilAlt style={{ marginRight: "0.5rem" }} />
-          Latest Blog Post
-        </HeadingTwo>
-        <ul>
-          <li>
-            <ParagraphText>
-              <Link to={`/blog/${entry.frontmatter.slug}`}>
-                {entry.frontmatter.title}
-              </Link>
-            </ParagraphText>
-          </li>
-        </ul>
-        <HeadingTwo>
           <FaMapSigns style={{ marginRight: "0.5rem" }} />
           Find me elsewhere
         </HeadingTwo>
