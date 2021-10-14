@@ -48,9 +48,7 @@ interface IndexProps {
 }
 
 const IndexPage: FC<IndexProps> = props => {
-  const entry = props.data.allMarkdownRemark.nodes.filter(
-    entry => entry.frontmatter.published
-  )[0]
+  const [entry] = props.data.allMarkdownRemark.nodes
 
   return (
     <Layout>
@@ -116,6 +114,7 @@ export const pageQuery = graphql`
   query {
     allMarkdownRemark(
       sort: { order: DESC, fields: frontmatter___date }
+      filter: { frontmatter: { published: { ne: false } } }
       limit: 1
     ) {
       nodes {

@@ -43,11 +43,9 @@ const Blog: FC<BlogProps> = props => {
           <TiPencil />
           Blog
         </HeadingOne>
-        {props.data.allMarkdownRemark.nodes
-          .filter(entry => entry.frontmatter.published)
-          .map(entry => (
-            <BlogSummary entry={entry} key={entry.frontmatter.slug} />
-          ))}
+        {props.data.allMarkdownRemark.nodes.map(entry => (
+          <BlogSummary entry={entry} key={entry.frontmatter.slug} />
+        ))}
       </Container>
     </Layout>
   )
@@ -57,7 +55,10 @@ export default Blog
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark(sort: { order: DESC, fields: frontmatter___date }) {
+    allMarkdownRemark(
+      sort: { order: DESC, fields: frontmatter___date }
+      filter: { frontmatter: { published: { ne: false } } }
+    ) {
       nodes {
         excerpt
         frontmatter {
