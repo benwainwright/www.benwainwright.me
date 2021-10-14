@@ -78,16 +78,38 @@ console.log(uppercaseFirstLetter('bar'))
 
 When you execute `program.ts` from the command line, the following happens
 
-* `./file-one` is imported. There are no cached execution results, so `./file-one` is loaded, executed and the results are stored in the cache
-	* As part of this execution, `./pure-uppercase` is imported. There are no cached execution results, so `./pure-uppercase.ts` is loaded, executed and the results are stored in the cache. In this instance, `./pure-uppercase` does nothing other than define a function
-	* This cache entry is returned by the import statement, and the function that was defined is then utilised to log a message to the console
-* `./file-two` is imported. There are no cached execution results, so `./file-two` is loaded, executed and the results are stored in the cache
-	* As part of this execution, `./pure-uppercase` is imported. This time, we *do* have a cache entry, so `./pure-uppercase.ts` is not loaded/executed again.
-	* Instead, the same function that was defined and stored in the cache in the first call is returned again. This function is then used to log a message to the console.
-
-Now this seems interesting but fairly trivial; ultimately the cache isn't having an effect on the behaviour of the application. Let's now try again with our impure module.
+* `./file-one` is imported. There are no cached executions, so `./file-one` is loaded and executed. This imports a function from `./pure-uppercase`. Since that isn't in our cache yet, this module is executed; all that execution does is define and export a function which is then used to log a message to the console.
+* `./file-two` is imported. There are no cached executions, so `./file-two` is loaded and executed. Again, this imports a function from `./pure-uppercase`. This time the result *is* in our cache, so the module is not executed a second time, so we just use the function that already exists in our cache.
 
 
+Now this seems interesting but fairly trivial since here it doesn't really impact the behaviour of the application. Lets now try again with our impure module. Consider the following program:
 
+```TypeScript
+// program.ts
+import "./file-one"
+import "./file-two"
+```
 
+```TypeScript
+// file-one.ts
+import { setTag } from "./impure-set-tag"
 
+setTag('foo', 'bar')
+```
+
+```TypeScript
+// file-two.ts
+import { setTag } from "./impure-set-tag"
+
+setTag('bar', 'baz')
+```
+
+When you execute `program.ts` from the command line, the following happens
+
+* `./file-one` is imported. There are no cached executions, so `./file-one` is loaded and executed. This imports a function from `./impure-set-tag`. Since that isn't in our cache yet, this module is executed. As part of *this* execution, a `tracer` is imported from `third-party-tracing-library`, we then call `tracer.init()`, and finally define and export a function that captures the `tracer` reference within its scope. This function is then used in `./file-one` to set a tag on the `tracer`
+* `./file-two` is imported. There are no cached executions, so `./file-two` is loaded and executed. Again, this imports a function from `./impure-set-tag`. This time the result *is* in our cache, so the module is not executed a second time, so we just use the same function that we put in our cache.
+
+Because this module is impure, there are two interesting consequences - regardless of how many times you import/call `setTag`:
+
+1. It is always setting the tag on the same `tracer`
+2. `tracer.init()` will only ever be called once
