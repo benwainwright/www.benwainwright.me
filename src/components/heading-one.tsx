@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 const StyledH1 = styled.h1`
   font-family: "Aileron";
   font-weight: lighter;
-  font-size: 3rem;
+  font-size: 1.9rem;
   letter-spacing: 2px;
   margin: 3rem 0 2rem 0;
   display: flex;
@@ -14,7 +14,7 @@ const StyledH1 = styled.h1`
   }
 
   @media (max-width: 500px) {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 `
 
