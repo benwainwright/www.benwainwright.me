@@ -122,6 +122,7 @@ export const pageQuery = graphql`
         excerpt
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
+          published
           slug
           title
         }
