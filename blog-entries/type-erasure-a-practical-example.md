@@ -22,6 +22,7 @@ test("a test", async () => {
    await functionUnderTest()
 })
 ```
+
 His test was failing, and he couldn't understand why. When looking at the implementation code, he showed me something like the below snippet and stepped through it with the VSCode debugger. An error was being thrown, but the type guard designed to check whether the error was *actually* an error or not (a sensible thing to do by the way, since it is perfectly legal JavaScript to throw something completely unexpected, like `throw NaN`)
 
 ```TypeScript
