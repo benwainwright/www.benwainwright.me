@@ -215,8 +215,8 @@ is failing again in exactly the same way.
 If you think back to the section on
 module caching, you'll understand why. When the first test executes it imports
 `./impure-set-tag` which executes the module and calls `tracer.init()`. Since
-this is a mock function, the call count is incremented by one. However, before
-our next test executes we reset all mock state, so the count goes back to zero. In the next test,
+this is a mock function, its call count is incremented by one. Before
+our next test executes however, we reset all mock state so the count goes back to zero. In the next test,
 `./impure-set-tag` **does not get executed again** which means `tracer.init()`
 does not get called again, and thus the expectation fails.
 
