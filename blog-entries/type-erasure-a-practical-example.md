@@ -3,8 +3,9 @@ slug: "type-erasure-a-practical-example"
 date: "2021-10-14"
 last-modified: "2021-10-14"
 title: "Type Erasure: A Practical Example"
-description: "A writeup of some troubleshooting I did with a colleague that demonstrates one of the trickier concepts to get your head around in TypeScript"
-published: false
+description: "An practical example of how Type erasure can trip developers up
+and what can be learned from the solution"
+published: true
 ---
 
 A colleague asked for some help today with a piece of code they were working on. This is a minimal version of the test that was failing:
