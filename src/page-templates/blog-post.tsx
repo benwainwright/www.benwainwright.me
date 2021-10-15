@@ -15,6 +15,7 @@ interface BlogPostProps {
     entry: {
       htmlAst: any
       frontmatter: {
+        published: boolean
         date: string
         slug: string
         title: string
@@ -35,15 +36,31 @@ const Container = styled.div`
 const DateBox = styled.div`
   font-family: "Milliard";
   align-self: flex-end;
+  font-weight: lighter;
   line-height: 2rem;
-  font-size: 1.2rem;
+  font-size: 2rem;
+  white-space: nowrap;
   margin: 0 0 0 1rem;
-  font-style: italic;
+`
+
+const UnPublishedNotice = styled.p`
+  font-family: "Milliard";
+  @media (max-width: 800px) {
+    line-height: 1.7rem;
+  }
+  font-size: 1.15rem;
+  line-height: 2rem;
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 0.5rem;
+  border: 1px solid black;
+  color: red;
 `
 
 const HeadingContainer = styled.div`
   margin: 0 0 0 0.5rem;
   flex-grow: 999;
+  white-space: nowrap;
 `
 
 const ContentContainer = styled.div`
@@ -51,6 +68,7 @@ const ContentContainer = styled.div`
 `
 
 const BlogPost: FC<BlogPostProps> = props => {
+  const isPublished = props.pageContext.entry.frontmatter.published
   const renderAst = new rehypeReact({
     createElement,
     components: {
@@ -75,6 +93,12 @@ const BlogPost: FC<BlogPostProps> = props => {
           <DateBox>{props.pageContext.entry.frontmatter.date}</DateBox>
         </HeadingOne>
         <ContentContainer>
+          {!isPublished && (
+            <UnPublishedNotice>
+              This page has not yet been published. Please do not share the URL
+              without my permission.
+            </UnPublishedNotice>
+          )}
           {renderAst(props.pageContext.entry.htmlAst)}
         </ContentContainer>
       </Container>
