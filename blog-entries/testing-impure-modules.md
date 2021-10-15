@@ -177,7 +177,7 @@ Let's walk through what is happening here.
 The problem here is that we are actually trying to test a behaviour that occurs
 *at the point of import*, which is outside of the test. We could
 of course change our `beforeEach` to an `afterEach` so that we don't reset that
-state before the test runs, but we shouldn't have to do that; resetting mock state before each test is a best practise, and this solution is easily broken - if I add a second test before the one I've written, the state will get reset and the same issue will appear.
+state before the test runs, but we shouldn't have to do that; resetting mock state before each test is a very uncontroversial best practise, and this solution is easily broken - if I add a second test before the one I've written, the state will get reset and the same issue will appear.
 
 ## Move the import into the test
 
