@@ -70,6 +70,16 @@ body {
 }
 
 @font-face {
+  font-family: "Milliard";
+  font-style: normal;
+  font-display: swap;
+  font-weight: bold;
+  src: local("Milliard Bold"),
+    url("../assets/fonts/proxima-nova/rene-bieder-milliard-medium.woff")
+      format("woff");
+}
+
+@font-face {
   font-family: "Penna";
   font-display: swap;
   src: local("Penna"), url("../assets/fonts/penna.otf");
