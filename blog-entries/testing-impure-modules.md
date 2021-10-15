@@ -1,10 +1,11 @@
 ---
-slug: "a-case-for-pure-modules-node-edition"
+slug: "testing-impure-modules"
 date: "2021-10-15"
 last-modified: "2021-10-15"
-title: "A case for pure modules - node edition"
-description: "An article that explains why you should try to always use pure
-modules in node applications where possible"
+title: "Testing impure modules"
+description: "Testing 'impure' JavaScript modules in NodeJS is tricker than you
+might expect. This post takes you through why its difficult, and how to do it
+correctly"
 published: false
 ---
 
