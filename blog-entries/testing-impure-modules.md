@@ -237,7 +237,7 @@ explicit and calling `jest.resetModules()` half way through a test file may
 cause surprising behaviour for subsequent tests.
 
 Note that
-`jest.isolatedModules()` _cannot_ accept an asynchronous callback which means
+`jest.isolateModules()` _cannot_ accept an asynchronous callback which means
 if your test is asynchronous (as ours is), you need to use `jest.resetModules()`. In our current
 example, you could also overcome this by replacing `await import()` with `require()` (which is synchronous)
 
