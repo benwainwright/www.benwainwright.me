@@ -13,7 +13,7 @@ In a node application, a single JavaScript file forms a self-contained unit know
 
 Fans of functional programming will be familiar with the idea of 'pure functions', that is "functions that don't have any side effects". We use this terminology in a similar way when referring to JavaScript modules, and it turns out that this is an important concept that you can use to make your code simpler and easier to test.
 
-Note that most of my sample code is written in TypeScript as that's the language I mostly work in. Where I refer to 'execution' of a `.ts` file, it should be understood that I'm really referring to execution of the transpiled JavaScript. The syntax for TypeScript is closer to ES6, but everything in this article also applies to both `commonjs` and `es6` module systems. For testing, I use [jest](https://github.com/facebook/jest) - the meat of what I'm discussing here applies to other testing frameworks, but you might need to use different mechanisms to get around the specific problems discussed.
+Note that most of my sample code is written in TypeScript as that's the language I mostly work in. Where I refer to 'execution' of a `.ts` file, it should be understood that I'm really referring to execution of the transpiled JavaScript. The syntax for TypeScript is closer to ES6, but everything in this article also applies to both `commonjs` and `es6` module systems. For testing, I use [jest](https://github.com/facebook/jest) - the problems  I'm discussing here apply equally to other testing frameworks, but you might need to use different mechanisms to get around them.
 
 # What is a pure module?
 
