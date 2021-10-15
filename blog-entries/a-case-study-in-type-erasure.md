@@ -90,7 +90,7 @@ The answer to which is very clearly 'no'.
 
 The solution, for anyone interested, was to define a local es6 `class` within the test that extends `Error` (so `class MockError extends Error {}`), instantiate it and return it from the mock.
 
-## What's the key take away?
+# What's the key take away?
 
 When writing TypeScript, any part of your code that forms a "type annotation" will be erased at runtime and so **cannot possibly change the behaviour of your code**. This means that this:
 
