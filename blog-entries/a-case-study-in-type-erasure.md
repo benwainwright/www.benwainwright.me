@@ -22,7 +22,7 @@ test("a test", async () => {
    await functionUnderTest()
 })
 ```
-His test was failing, and he couldn't understand why. When looking at the implementation code, he showed me something like the below snippet; and stepped through it with the VSCode debugger. An error was being thrown, but for some reason the imported type guard designed to check whether his error was actually an error or not (a sensible thing to do by the way, since it is perfectly legal JavaScript to throw something completely unexpected, like `throw NaN`)
+His test was failing, and he couldn't understand why. When looking at the implementation code, he showed me something like the below snippet and stepped through it with the VSCode debugger. An error was being thrown, but the type guard designed to check whether his error was actually an error or not (a sensible thing to do by the way, since it is perfectly legal JavaScript to throw something completely unexpected, like `throw NaN`)
 
 ```TypeScript
 // code.ts
@@ -42,7 +42,7 @@ export const functionUnderTest = () => {
 }
 ```
 
-In explaining this to me he noted that he'd "tried casting it to Error". If you know TypeScript well, this should raise an eyebrow, for a reason we will come to in a second. 
+In explaining this to me he noted that he'd "tried casting it to Error". If you know TypeScript well, this should raise an eyebrow, for a reason we will come to further down.
 
 The next thing I did was to ask my colleague if I could see the definition of `isError`. This came from an internal third party library and was defined like so:
 
@@ -52,7 +52,7 @@ export const isError = (thing: unknown): thing is Error => thing instanceof Erro
 
 The first thing to note is that this isn't a very useful function; the `instanceof` operator is [already going to narrow the type](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#instanceof-narrowing) and so wrapping it in a function really only serves to obfuscate an operator that is a fundamental part of the language with well understood and documented semantics, all for the sake of about 7 less keystrokes.
 
-However the more interesting part of this is the apparent misapprehension here. My colleague had not understood something that many developers also struggle with when learning TypeScript - that is to say that **all type annotations are completely removed before any code is executed** - more formally as "Type Erasure". In practise, that means that in the test above, what is really executed by the node runtime is something akin to this:
+The more interesting part of this is the apparent misapprehension here. My colleague had not understood something that many developers also struggle with when learning TypeScript; that is to say that **all type annotations are completely removed before any code is executed** (more formally as "Type Erasure"). In practise, that means that in the test above, what is really executed by the node runtime is something akin to this:
 
 ```TypeScript
 // code.spec.js
@@ -68,13 +68,13 @@ test("a test", async () => {
 })
 ```
 
-and isError becomes this
+and 'isError' becomes this
 
 ```TypeScript
 export const isError = (thing) => thing instanceof Error;
 ```
 
- Which then means that what my colleague was trying to do boils down to the question 'is an object literal an instance of `Error`?'
+Consequently, what my colleague was trying to do boils down to the question 'is an object literal an instance of `Error`?'
 
 ```TypeScript
 const mockError =  { 
@@ -92,7 +92,7 @@ The solution, for anyone interested, was to define a local es6 `class` within th
 
 ## What's the key take away?
 
-When writing TypeScript, any part of your code that forms a "type annotation", will be erased at runtime, and so **cannot possibly change the behaviour of your code**. This means that this:
+When writing TypeScript, any part of your code that forms a "type annotation" will be erased at runtime and so **cannot possibly change the behaviour of your code**. This means that this:
 
 
 ```TypeScript
@@ -116,4 +116,10 @@ class Foo {}
 If you can get your head around this, and have a clear idea of which syntactic elements are 'type' annotations and which are not, it will help you understand two fundamental truths about TypeScript
 
 * Modifying a type definition or annotation is **always** a safe operation in that it will **never change the behaviour of your application**. What it *might* do is reduce or (improve) your ability to spot *future* errors at build time.
-* If your tests are failing, changing type definitions or annotations are not ever going to make them pass (unless the failures are type errors, which are easily spotted because they are always provided with a `TS-<number>` error code),  again because types never change the behaviour of your application. This was the reason for my raised eyebrow earlier.
+* If your tests are failing, changing type definitions or annotations (such as the type cast referred to above) is not ever going to make them pass (unless the failures are type errors, which are easily spotted because they are always provided with a `TS-<number>` error code),  again because types never change the behaviour of your application.
+
+## Recommended Reading
+
+* [TypeScript Docs -
+  Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+* [TypeScript FAQ](https://github.com/Microsoft/TypeScript/wiki/FAQ)
