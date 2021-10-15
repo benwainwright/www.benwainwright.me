@@ -329,7 +329,7 @@ test('the impure setTag function only calls tracer.init method once', async () =
 
 To summarise, if you want to test module level 'impure' logic, you need to
 
-* Move the import and all automocking into the test and
+* Move the import, all automocking, and imports of any mocks inside the test and
 * Ensure the module cache is fresh for each test
 
 There are good reasons to write impure modules, as I have done. But I would
