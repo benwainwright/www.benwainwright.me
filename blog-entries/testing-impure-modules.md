@@ -338,7 +338,7 @@ caching mechanism, or the 'impure' behaviour is trivial enough that you are
 happy not testing it.
 
 As you have already seen, the resulting tests are verbose and more complicated
-than they need to be considering the behaviour under test. Mistakes are very
+than they need to be considering the simplicity of the behaviour under test. Mistakes are very
 easy to make, and they result in subtle and hard to understand failures
 that eat up whole evenings.
 
