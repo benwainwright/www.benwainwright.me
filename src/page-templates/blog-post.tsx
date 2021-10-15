@@ -95,7 +95,7 @@ const BlogPost: FC<BlogPostProps> = props => {
         <ContentContainer>
           {!isPublished && (
             <UnPublishedNotice>
-              This page has not yet been published. Please do not share the URL
+              This post has not yet been published. Please do not share the URL
               without my permission.
             </UnPublishedNotice>
           )}
