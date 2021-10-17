@@ -1,4 +1,5 @@
 const path = require("path")
+const axios = require("axios")
 
 exports.onCreateBabelConfig = ({ actions }) => {
   actions.setBabelPreset({
@@ -29,6 +30,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               description
               title
             }
+            fields {
+              comments {
+                author
+                message
+                timestamp
+              }
+            }
           }
         }
       }
@@ -54,15 +62,32 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 }
 
 const { createFilePath } = require(`gatsby-source-filesystem`)
-exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.onCreateNode = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions
+
 
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
+
+
     createNodeField({
       name: `slug`,
       node,
       value: `/blog${value}`,
+    })
+
+    const apiPath = value.replace(/\//g, "")
+
+    console.log(`Getting comments for post '${apiPath}'`);
+
+    const { data } = await axios.get(`https://api.benwainwright.me/comments/${apiPath}`)
+
+    console.log(data)
+
+    createNodeField({
+      name: `comments`,
+      node,
+      value: data
     })
   }
 }

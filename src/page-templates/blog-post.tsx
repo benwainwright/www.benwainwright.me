@@ -9,6 +9,8 @@ import ListItem from "../components/list-item"
 import ParagraphText from "../components/paragraph-text"
 import rehypeReact from "rehype-react"
 import Seo from "../components/seo"
+import Comments from "../components/comments"
+import { Comment as CommentType } from "../comments/utils/comment"
 
 interface BlogPostProps {
   pageContext: {
@@ -20,6 +22,9 @@ interface BlogPostProps {
         slug: string
         title: string
         description: string
+      }
+      fields: {
+        comments: CommentType[]
       }
     }
   }
