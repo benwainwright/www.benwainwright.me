@@ -7,6 +7,8 @@ import * as s3Deploy from "aws-cdk-lib/aws-s3-deployment"
 import * as lambdaNodeJs from "aws-cdk-lib/aws-lambda-nodejs"
 import * as apiGateway from "aws-cdk-lib/aws-apigateway"
 import * as certificateManager from "aws-cdk-lib/aws-certificatemanager"
+import { ARecord, RecordTarget } from "aws-cdk-lib/aws-route53"
+import { ApiGatewayDomain } from "aws-cdk-lib/aws-route53-targets"
 
 export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -33,6 +35,15 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
         domainName: domainName,
         hostedZone: zone,
         subjectAlternativeNames: [`www.${domainName}`]
+      }
+    )
+
+    const apiCertificate = new certificateManager.DnsValidatedCertificate(
+      this,
+      "apiCertificate",
+      {
+        domainName: `api.${domainName}`,
+        hostedZone: zone
       }
     )
 
@@ -119,5 +130,16 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       "GET",
       new apiGateway.LambdaIntegration(listCommentsFunction)
     )
+
+    const apiDomainName = api.addDomainName("bens-website-api", {
+      domainName: `api.${domainName}`,
+      certificate: apiCertificate
+    })
+
+    new ARecord(this, "ApiARecord", {
+      zone,
+      recordName: `api.${domainName}`,
+      target: RecordTarget.fromAlias(new ApiGatewayDomain(apiDomainName))
+    })
   }
 }
