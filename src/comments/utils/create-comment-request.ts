@@ -1,11 +1,13 @@
-export interface CommentRequest {
+export interface CreateCommentRequest {
   author: string
   timestamp: number
   message: string
 }
 
-export const isCommentRequest = (thing: unknown): thing is CommentRequest => {
-  const rawThing = thing as CommentRequest
+export const isCreateCommentRequest = (
+  thing: unknown
+): thing is CreateCommentRequest => {
+  const rawThing = thing as CreateCommentRequest
 
   return (
     typeof rawThing.author === "string" &&

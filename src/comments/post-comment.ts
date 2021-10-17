@@ -1,28 +1,19 @@
 import { APIGatewayProxyHandler } from "aws-lambda"
-import { HttpError } from "./http-error"
-import { parseCommentRequest } from "./parse-comment-request"
 import { StatusCodes } from "http-status-codes"
-import { httpResponse } from "./http-response"
+import { parseCreateCommentRequest } from "./utils/parse-create-comment-request"
 import AWS from "aws-sdk"
 import * as crypto from "crypto"
-import { getBucket } from "./get-bucket"
+import { getBucket } from "./utils/get-bucket"
+import { HttpError } from "./utils/http-error"
+import { httpResponse } from "./utils/http-response"
+import { parseCommentsPath } from "./utils/parse-comments-path"
 
 export const postComment: APIGatewayProxyHandler = async event => {
   try {
     const Bucket = getBucket()
-    const comment = parseCommentRequest(event.body)
+    const comment = parseCreateCommentRequest(event.body)
+    const post = parseCommentsPath(event.path)
 
-    const parts = event.path?.split("/")
-
-    const post = parts?.[parts.length - 1]
-
-    if (!post) {
-      throw new HttpError(
-        StatusCodes.BAD_REQUEST,
-        "Invalid Request",
-        "The path must include the post name"
-      )
-    }
     const s3 = new AWS.S3()
     const Body = JSON.stringify(comment, null, 2)
     const hash = crypto.createHash("md5").update(Body).digest("hex")

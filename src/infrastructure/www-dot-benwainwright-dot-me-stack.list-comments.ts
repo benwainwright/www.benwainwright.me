@@ -1,2 +1,2 @@
-import { getComments } from "./comments/get-comments"
+import { getComments } from "../comments/get-comments"
 export { getComments as handler }

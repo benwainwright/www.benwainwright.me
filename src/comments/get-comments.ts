@@ -1,24 +1,17 @@
-import { APIGatewayProxyHandler } from "aws-lambda"
-import { HttpError } from "./http-error"
-import { StatusCodes } from "http-status-codes"
-import { httpResponse } from "./http-response"
 import AWS from "aws-sdk"
-import { getBucket } from "./get-bucket"
+import { APIGatewayProxyHandler } from "aws-lambda"
+
+import { HttpError } from "./utils/http-error"
+import { StatusCodes } from "http-status-codes"
+import { httpResponse } from "./utils/http-response"
+import { getBucket } from "./utils/get-bucket"
+import { parseCommentsPath } from "./utils/parse-comments-path"
 
 export const getComments: APIGatewayProxyHandler = async event => {
   try {
     const Bucket = getBucket()
-    const parts = event.path?.split("/")
+    const post = parseCommentsPath(event.path)
 
-    const post = parts?.[parts.length - 1]
-
-    if (!post) {
-      throw new HttpError(
-        StatusCodes.BAD_REQUEST,
-        "Invalid Request",
-        "The path must include the post name"
-      )
-    }
     const params = {
       Prefix: post,
       Bucket
@@ -28,13 +21,9 @@ export const getComments: APIGatewayProxyHandler = async event => {
 
     const { Contents } = await s3.listObjects(params).promise()
 
-    console.log(Contents)
-
     const keys = Contents?.map(object => object.Key)
 
-    console.log(keys)
-
-    const objects = await Promise.all(
+    const responses = await Promise.all(
       keys?.map(async Key => {
         if (!Key) {
           return
@@ -47,13 +36,13 @@ export const getComments: APIGatewayProxyHandler = async event => {
       }) ?? []
     )
 
-    console.log(objects)
+    const isDefined = (thing: string | undefined): thing is string =>
+      Boolean(thing)
 
-    const comments = objects.map(object =>
-      typeof object?.Body === "string" ? JSON.parse(object.Body) : object?.Body
-    )
-
-    console.log(comments)
+    const comments = responses
+      .map(response => response?.Body?.toString("utf-8"))
+      .filter(isDefined)
+      .map(response => JSON.parse(response))
 
     return httpResponse({
       status: "Success",
@@ -61,8 +50,6 @@ export const getComments: APIGatewayProxyHandler = async event => {
       body: comments
     })
   } catch (error) {
-    console.log(error)
-
     const status =
       error instanceof HttpError
         ? error.statusCode

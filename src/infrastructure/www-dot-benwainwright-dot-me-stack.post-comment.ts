@@ -1,2 +1,2 @@
-import { postComment } from "./comments/post-comment"
+import { postComment } from "../comments/post-comment"
 export { postComment as handler }

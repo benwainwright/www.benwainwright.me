@@ -1,16 +1,16 @@
 import { StatusCodes } from "http-status-codes"
 import {
-  GetCommentsRequest,
-  isGetCommentsRequest
-} from "./get-comments-request"
+  CreateCommentRequest,
+  isCreateCommentRequest
+} from "./create-comment-request"
 import { HttpError } from "./http-error"
 
-export const parseGetCommentsRequest = (
+export const parseCreateCommentRequest = (
   body: string | null
-): GetCommentsRequest => {
+): CreateCommentRequest => {
   const data = JSON.parse(body ?? "")
 
-  if (!isGetCommentsRequest(data)) {
+  if (!isCreateCommentRequest(data)) {
     throw new HttpError(
       StatusCodes.BAD_REQUEST,
       "BadRequest",
