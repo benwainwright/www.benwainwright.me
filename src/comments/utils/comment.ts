@@ -11,7 +11,7 @@ export const isComment = (thing: unknown): thing is Comment => {
   return (
     typeof rawThing.author === "string" &&
     typeof rawThing.timestamp === "number" &&
-    typeof rawThing.message === "string"
+    typeof rawThing.message === "string" &&
     typeof rawThing.email === "string"
   )
 }
