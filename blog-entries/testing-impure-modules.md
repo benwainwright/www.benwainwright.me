@@ -197,7 +197,7 @@ test("the impure setTag function only calls tracer.init method once", () => {
 Congratulations, you now have a passing test!
 
 While this appears to work, there is a big problem with it. We can
-demonstrate them by being diligent engineers and adding some more test coverage.
+demonstrate it by being diligent engineers and adding some more test coverage.
 Lets start by adding the following test *above* our existing test (order is
 important here).
 
