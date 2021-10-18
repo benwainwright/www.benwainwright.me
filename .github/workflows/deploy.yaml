@@ -32,6 +32,11 @@ jobs:
       - name: Build
         run: yarn build
 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+
   run-script:
     name: Run Package Script
     runs-on: ubuntu-latest
@@ -54,13 +59,9 @@ jobs:
       - name: Yarn install
         run: yarn install
 
-      - name: Build
-        run: yarn build
+      - name: Execute Script
+        run: yarn ${{ matrix.script }}
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: build
-          path: build
 
   deploy:
     name: Deploy
