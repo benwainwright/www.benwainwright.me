@@ -17,7 +17,7 @@ interface ParagraphTextProps {
 }
 
 const ParagraphText: FC<ParagraphTextProps> = props => {
-  return <StyledParagraph role={props.role}>{props.children}</StyledParagraph>
+  return <StyledParagraph {...props}>{props.children}</StyledParagraph>
 }
 
 export default ParagraphText

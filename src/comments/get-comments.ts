@@ -1,11 +1,10 @@
 import AWS from "aws-sdk"
 import { APIGatewayProxyHandler } from "aws-lambda"
 
-import { HttpError } from "./utils/http-error"
-import { StatusCodes } from "http-status-codes"
 import { httpResponse } from "./utils/http-response"
 import { getBucket } from "./utils/get-bucket"
 import { parseCommentsPath } from "./utils/parse-comments-path"
+import { handleLambdaError } from "./utils/handle-lambda-error"
 
 export const getComments: APIGatewayProxyHandler = async event => {
   try {
@@ -14,7 +13,7 @@ export const getComments: APIGatewayProxyHandler = async event => {
 
     const params = {
       Prefix: post,
-      Bucket,
+      Bucket
     }
 
     const s3 = new AWS.S3()
@@ -30,7 +29,7 @@ export const getComments: APIGatewayProxyHandler = async event => {
         }
         const params = {
           Key,
-          Bucket,
+          Bucket
         }
         return await s3.getObject(params).promise()
       }) ?? []
@@ -47,21 +46,9 @@ export const getComments: APIGatewayProxyHandler = async event => {
     return httpResponse({
       status: "Success",
       message: "foo",
-      body: comments,
+      body: comments
     })
   } catch (error) {
-    const status =
-      error instanceof HttpError
-        ? error.statusCode
-        : StatusCodes.INTERNAL_SERVER_ERROR
-
-    const statusMessage =
-      error instanceof HttpError ? error.statusMessage : "Error"
-
-    return httpResponse({
-      statusCode: status,
-      status: statusMessage,
-      message: error.message,
-    })
+    return handleLambdaError(error)
   }
 }

@@ -31,52 +31,56 @@ const Seo: FC<SeoProps> = ({ description, meta, title }) => {
   const defaultMeta = [
     {
       name: `description`,
-      content: metaDescription,
+      content: metaDescription
     },
     {
       property: `og:title`,
-      content: title,
+      content: title
     },
     {
       property: `og:description`,
-      content: metaDescription,
+      content: metaDescription
     },
     {
       property: `og:type`,
-      content: `website`,
+      content: `website`
     },
     {
       name: `twitter:card`,
-      content: `summary`,
+      content: `summary`
     },
     {
       name: `twitter:creator`,
-      content: site.siteMetadata?.author || ``,
+      content: site.siteMetadata?.author || ``
     },
     {
       name: `twitter:title`,
-      content: title,
+      content: title
     },
     {
       name: `twitter:description`,
-      content: metaDescription,
-    },
+      content: metaDescription
+    }
   ]
 
   const helmetMeta = meta ? [...defaultMeta, ...meta] : defaultMeta
 
   const defaultTitle = site.siteMetadata?.title
 
-  return (
+  const htmlAttributes = { lang: "en" }
+
+  const helmet = defaultTitle ? (
     <Helmet
-      htmlAttributes={{
-        lang: "en",
-      }}
+      htmlAttributes={htmlAttributes}
       title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}
+      titleTemplate={`%s | ${defaultTitle}`}
       meta={helmetMeta}
     />
+  ) : (
+    <Helmet htmlAttributes={htmlAttributes} title={title} meta={helmetMeta} />
   )
+
+  return helmet
 }
 
 export default Seo

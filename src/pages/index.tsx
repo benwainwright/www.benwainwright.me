@@ -50,6 +50,10 @@ interface IndexProps {
 const IndexPage: FC<IndexProps> = props => {
   const [entry] = props.data.allMarkdownRemark.nodes
 
+  if (!entry) {
+    throw new Error("Index was executed with incorrect props")
+  }
+
   return (
     <Layout>
       <DecorativePhoto src={mePhoto} alt="Ben sitting on a stone bench" />

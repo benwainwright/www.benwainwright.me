@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { BsFillStarFill, BsCalendarFill } from "react-icons/bs"
+import { BsFillStarFill } from "react-icons/bs"
 import { BlogSummaryData } from "../pages/blog"
 import HeadingTwo from "./heading-two"
 import ParagraphText from "./paragraph-text"

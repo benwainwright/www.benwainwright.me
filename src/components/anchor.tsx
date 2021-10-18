@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react"
+import { FC } from "react"
 import styled from "@emotion/styled"
 
 const StyledAnchor = styled.a`
@@ -12,7 +12,7 @@ interface AnchorProps {
 }
 
 const Anchor: FC<AnchorProps> = props => {
-  return <StyledAnchor href={props.href}>{props.children}</StyledAnchor>
+  return <StyledAnchor {...props}>{props.children}</StyledAnchor>
 }
 
 export default Anchor

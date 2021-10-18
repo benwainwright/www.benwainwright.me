@@ -27,6 +27,7 @@
   ],
   "exclude": [
     "cdk.out",
+    "gatsby-*.js",
     "coverage",
     "node_modules",
     "public",
