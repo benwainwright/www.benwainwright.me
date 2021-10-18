@@ -9,6 +9,8 @@ import ListItem from "../components/list-item"
 import ParagraphText from "../components/paragraph-text"
 import rehypeReact from "rehype-react"
 import Seo from "../components/seo"
+import Comments from "../components/comments"
+import { Comment as CommentType } from "../comments/utils/comment"
 
 interface BlogPostProps {
   pageContext: {
@@ -20,6 +22,9 @@ interface BlogPostProps {
         slug: string
         title: string
         description: string
+      }
+      fields: {
+        comments: CommentType[]
       }
     }
   }
@@ -64,7 +69,7 @@ const HeadingContainer = styled.div`
 `
 
 const ContentContainer = styled.div`
-  margin: 1rem 0 0 0;
+  margin: 1rem 0 1rem 0;
 `
 
 const BlogPost: FC<BlogPostProps> = props => {
@@ -100,6 +105,10 @@ const BlogPost: FC<BlogPostProps> = props => {
             </UnPublishedNotice>
           )}
           {renderAst(props.pageContext.entry.htmlAst)}
+          <Comments
+            slug={props.pageContext.entry.frontmatter.slug}
+            comments={props.pageContext.entry.fields.comments}
+          />
         </ContentContainer>
       </Container>
     </Layout>

@@ -3,8 +3,9 @@ slug: "type-erasure-a-practical-example"
 date: "2021-10-14"
 last-modified: "2021-10-14"
 title: "Type Erasure: A Practical Example"
-description: "A writeup of some troubleshooting I did with a colleague that demonstrates one of the trickier concepts to get your head around in TypeScript"
-published: false
+description: "An practical example of how Type erasure can trip developers up
+and what can be learned from the solution"
+published: true
 ---
 
 A colleague asked for some help today with a piece of code they were working on. This is a minimal version of the test that was failing:
@@ -23,7 +24,7 @@ test("a test", async () => {
 })
 ```
 
-His test was failing, and he couldn't understand why. When looking at the implementation code, he showed me something like the below snippet and stepped through it with the VSCode debugger. An error was being thrown, but the type guard designed to check whether the error was *actually* an error or not (a sensible thing to do by the way, since it is perfectly legal JavaScript to throw something completely unexpected, like `throw NaN`)
+His test was failing, and he couldn't understand why. When looking at the implementation code, he showed me something like the below snippet and stepped through it with the VSCode debugger. An error was being thrown, but execution was not getting past the type guard designed to check whether the error was *actually* an error or not (a sensible thing to do by the way, since it is perfectly legal JavaScript to throw something completely unexpected, like `throw NaN`)
 
 ```TypeScript
 // code.ts
