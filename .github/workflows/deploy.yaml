@@ -34,8 +34,8 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: build
-          path: build
+          name: public
+          path: public
 
   run-script:
     name: Run Package Script
@@ -82,8 +82,8 @@ jobs:
       - name: Download App
         uses: actions/download-artifact@v2
         with:
-          name: build
-          path: build
+          name: public
+          path: public
 
       - name: Deploy
         run: yarn cdk deploy --require-approval never
