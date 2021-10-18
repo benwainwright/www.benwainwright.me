@@ -80,8 +80,8 @@ const BlogPost: FC<BlogPostProps> = props => {
       h1: HeadingTwo,
       h2: HeadingThree,
       p: ParagraphText,
-      li: ListItem
-    }
+      li: ListItem,
+    },
   }).Compiler
   return (
     <Layout>

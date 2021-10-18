@@ -40,7 +40,7 @@ const FormLabel = styled.label`
 
 const FormInput = styled.input`
   flex-grow: 999;
-  line-height: 1.5rem;
+  line-height: 2rem;
   border: 0;
   margin: 0;
   padding: 0;
@@ -75,19 +75,19 @@ const SubmitCommentsForm: FC<SubmitCommentsProps> = props => {
     initialValues: {
       author: "",
       email: "",
-      message: ""
+      message: "",
     },
     onSubmit: async values => {
       const comment = {
         ...values,
-        timestamp: Math.floor(new Date(Date.now()).getTime() / 1000)
+        timestamp: Math.floor(new Date(Date.now()).getTime() / 1000),
       }
       assertComment(comment)
       setSentState("Sending")
 
       await axios.post(`${COMMENTS_API}/${props.slug}`, comment)
       setSentState("Complete")
-    }
+    },
   })
 
   useEffect(() => {

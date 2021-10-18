@@ -14,7 +14,7 @@ export const getComments: APIGatewayProxyHandler = async event => {
 
     const params = {
       Prefix: post,
-      Bucket
+      Bucket,
     }
 
     const s3 = new AWS.S3()
@@ -30,7 +30,7 @@ export const getComments: APIGatewayProxyHandler = async event => {
         }
         const params = {
           Key,
-          Bucket
+          Bucket,
         }
         return await s3.getObject(params).promise()
       }) ?? []
@@ -47,7 +47,7 @@ export const getComments: APIGatewayProxyHandler = async event => {
     return httpResponse({
       status: "Success",
       message: "foo",
-      body: comments
+      body: comments,
     })
   } catch (error) {
     const status =
@@ -61,7 +61,7 @@ export const getComments: APIGatewayProxyHandler = async event => {
     return httpResponse({
       statusCode: status,
       status: statusMessage,
-      message: error.message
+      message: error.message,
     })
   }
 }

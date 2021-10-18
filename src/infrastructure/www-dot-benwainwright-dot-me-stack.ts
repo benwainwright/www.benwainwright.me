@@ -21,11 +21,11 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       publicReadAccess: true,
       websiteIndexDocument: "index.html",
 
-      websiteErrorDocument: "index.html"
+      websiteErrorDocument: "index.html",
     })
 
     const zone = route53.HostedZone.fromLookup(this, "MyHostedZone", {
-      domainName
+      domainName,
     })
 
     const certificate = new certificateManager.DnsValidatedCertificate(
@@ -34,7 +34,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       {
         domainName: domainName,
         hostedZone: zone,
-        subjectAlternativeNames: [`www.${domainName}`]
+        subjectAlternativeNames: [`www.${domainName}`],
       }
     )
 
@@ -43,7 +43,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       "apiCertificate",
       {
         domainName: `api.${domainName}`,
-        hostedZone: zone
+        hostedZone: zone,
       }
     )
 
@@ -55,15 +55,15 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
           {
             customOriginSource: {
               domainName: bucket.bucketWebsiteDomainName,
-              originProtocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY
+              originProtocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
             },
-            behaviors: [{ isDefaultBehavior: true }]
-          }
+            behaviors: [{ isDefaultBehavior: true }],
+          },
         ],
         viewerCertificate: cloudfront.ViewerCertificate.fromAcmCertificate(
           certificate,
           { aliases: [domainName, `www.${domainName}`] }
-        )
+        ),
       }
     )
 
@@ -71,23 +71,23 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       zone,
       target: route53.RecordTarget.fromAlias(
         new route53Targets.CloudFrontTarget(distribution)
-      )
+      ),
     })
 
     new s3Deploy.BucketDeployment(this, "BensWebsiteDeployment", {
       sources: [s3Deploy.Source.asset("./public")],
       destinationBucket: bucket,
       cacheControl: [
-        s3Deploy.CacheControl.fromString("max-age=31536000,public,immutable")
+        s3Deploy.CacheControl.fromString("max-age=31536000,public,immutable"),
       ],
       distribution,
-      distributionPaths: ["/*"]
+      distributionPaths: ["/*"],
     })
 
     new route53.CnameRecord(this, "BensWebsiteCnameRecord", {
       zone,
       domainName: "benwainwright.me",
-      recordName: "www.benwainwright.me"
+      recordName: "www.benwainwright.me",
     })
 
     const commentsBucket = new s3.Bucket(this, "comments-bucket")
@@ -97,8 +97,8 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       "post-comment",
       {
         environment: {
-          COMMENTS_BUCKET: commentsBucket.bucketName
-        }
+          COMMENTS_BUCKET: commentsBucket.bucketName,
+        },
       }
     )
 
@@ -107,8 +107,8 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       "list-comments",
       {
         environment: {
-          COMMENTS_BUCKET: commentsBucket.bucketName
-        }
+          COMMENTS_BUCKET: commentsBucket.bucketName,
+        },
       }
     )
 
@@ -116,7 +116,9 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
     commentsBucket.grantRead(listCommentsFunction)
 
     const api = new apiGateway.RestApi(this, "comments-api", {
-      defaultCorsPreflightOptions: { allowOrigins: apiGateway.Cors.ALL_ORIGINS }
+      defaultCorsPreflightOptions: {
+        allowOrigins: apiGateway.Cors.ALL_ORIGINS,
+      },
     })
 
     const comments = api.root.addResource("comments")
@@ -135,13 +137,13 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
 
     const apiDomainName = api.addDomainName("bens-website-api", {
       domainName: `api.${domainName}`,
-      certificate: apiCertificate
+      certificate: apiCertificate,
     })
 
     new ARecord(this, "ApiARecord", {
       zone,
       recordName: `api.${domainName}`,
-      target: RecordTarget.fromAlias(new ApiGatewayDomain(apiDomainName))
+      target: RecordTarget.fromAlias(new ApiGatewayDomain(apiDomainName)),
     })
   }
 }

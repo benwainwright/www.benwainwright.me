@@ -22,14 +22,14 @@ export const postComment: APIGatewayProxyHandler = async event => {
     const params = {
       Key,
       Body,
-      Bucket
+      Bucket,
     }
 
     await s3.putObject(params).promise()
 
     return httpResponse({
       status: "Success",
-      message: `Successfully created ${Key}`
+      message: `Successfully created ${Key}`,
     })
   } catch (error) {
     console.log(error)
@@ -45,7 +45,7 @@ export const postComment: APIGatewayProxyHandler = async event => {
     return httpResponse({
       statusCode: status,
       status: statusMessage,
-      message: error.message
+      message: error.message,
     })
   }
 }

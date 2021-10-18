@@ -5,8 +5,10 @@ import { useStaticQuery, graphql } from "gatsby"
 interface SeoProps {
   description?: string
   lang?: string
-  meta?:
-    | DetailedHTMLProps<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement>[]
+  meta?: DetailedHTMLProps<
+    MetaHTMLAttributes<HTMLMetaElement>,
+    HTMLMetaElement
+  >[]
   title: string
 }
 

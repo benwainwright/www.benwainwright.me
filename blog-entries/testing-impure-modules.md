@@ -11,7 +11,7 @@ published: false
 
 In a node application, a single JavaScript file forms a self-contained unit known as a 'module'.  When executing your program, each one of these modules is executed and loaded into memory each time you call `require` (for commonjs) or `import` (for ES6 modules). 
 
-Fans of functional programming will be familiar with the idea of 'pure functions', that is "functions that don't have any side effects". We use this terminology in a similar way when referring to JavaScript modules, and it turns out that this is an important concept that you can use to make your code simpler and easier to test.
+Fans of functional programming will be familiar with the idea of "pure functions", that is "functions that don't have any side effects". We use this terminology in a similar way when referring to JavaScript modules and it turns out that this is an important concept that you can use to make your code simpler and easier to test.
 
 Note that most of my sample code is written in TypeScript as that's the language I mostly work in. Where I refer to 'execution' of a `.ts` file, it should be understood that I'm really referring to execution of the transpiled JavaScript. The syntax for TypeScript is closer to ES6, but everything in this article also applies to both `commonjs` and `es6` module systems. For testing, I use [jest](https://github.com/facebook/jest) - the problems  I'm discussing here apply equally to other testing frameworks, but you might need to use different mechanisms to get around them.
 
@@ -49,11 +49,11 @@ export const setTag = (tagName: string, tagValue: unknown) => {
 
 Note the use of `tracer.init()` at the top level of the module. This module is *impure* because the simple act of importing it will cause `tracer.init()` to be executed which very clearly has the side effect of initialising the tracer.
 
-In this particular case, there was a good reason why the module was written in this way as I'm taking advantage of the very mechanism that often trips people up in this area. However; in this article I will show you that _in general_, unless you know what you are doing, avoiding impure modules like the plague will give you a happier life.
+In this case there was a good reason why the module was written in this way as I'm taking advantage of the very mechanism that often trips people up. I'd like to show you, however, that testing this kind of module is *tricky*, and consequently avoiding them will probably help you have a happier life.
 
 # Import caching
 
-Modules in node are singletons; that is to say that because modules are *cached* by the runtime (using the file path as the cache key), the modules themselves are executed *once and only once* at the point of import. The runtime then stores the results of that execution in the cache and delivers it any time a further import is made for that file path.  Lets look at this in action
+Modules in node are singletons; that is to say that because modules are *cached* by the runtime (using the file path as the cache key), the modules themselves are executed *once and only once* at the point of import. The runtime then stores the results of that execution in the cache and uses the result any time a further import is made for that path.  Lets look at this in action
 
 First the pure module. Consider the following program:
 
@@ -77,10 +77,12 @@ import { uppercaseFirstLetter } from "./pure-uppercase" // no-execution
 console.log(uppercaseFirstLetter('bar'))
 ```
 
-When you execute `program.ts` from the command line, the following happens
+When you execute `program.ts`, the following happens
 
-* `./file-one` is imported. There are no cached executions, so `./file-one` is loaded and executed. This first imports a function from `./pure-uppercase`. Since that module isn't in our cache yet it is executed, and so defines and exports the function which is then used to log to the console.
-* `./file-two` is imported. There are no cached executions, so `./file-two` is loaded and executed. Again, this imports a function from `./pure-uppercase`. This time the result *is* in our cache, so we reuse the same function to log a message to the console with executing `./pure-uppercase` again.
+* `./file-one` is imported. There are no cached executions, so `./file-one` is loaded and executed. This imports a function from `./pure-uppercase`.
+* Since that module isn't in our cache yet it is executed, and so defines and exports the function which is then used to log to the console.
+* `./file-two` is imported. There are no cached executions, so `./file-two` is loaded and executed. Again, this imports a function from `./pure-uppercase`.
+* This time the result *is* in our cache, so we reuse the same function to log a message to the console without executing `./pure-uppercase` again.
 
 
 While interesting, this is fairly trivial since the caching mechanism doesn't impact the behaviour of the application. Lets now try again with our impure module. Consider the following program:
@@ -108,8 +110,11 @@ setTag('bar', 'baz')
 When you execute `program.ts` from the command line, the following happens
 
 
-* `./file-one` is imported. There are no cached executions, so `./file-one` is loaded and executed. This imports a function from `./impure-set-tag`. Again, this is not in the cache so it is executed. As part of *this* execution, a `tracer` is imported from `third-party-tracing-library`, and `tracer.init()` is called. Finally, we define an export a function that captures a reference to `tracer` within its scope.
-* `./file-two` is imported. There are no cached executions, so `./file-two` is loaded and executed. Again, this imports a function from `./impure-set-tag`. The result is already in our cache so instead of executing the module a second time the already defined `setTag` function is returned.
+* `./file-one` is imported. There are no cached executions, so `./file-one` is loaded and executed. This imports a function from `./impure-set-tag`.
+* Again, this is not in the cache so it is executed. As part of *this* execution, a `tracer` is imported from `third-party-tracing-library`, and `tracer.init()` is called.
+* Finally, we define an export a function that captures a reference to `tracer` within its scope.
+* `./file-two` is imported. There are no cached executions, so `./file-two` is loaded and executed.
+* Again, this imports a function from `./impure-set-tag`. The result is already in our cache so instead of executing the module a second time the already defined `setTag` function is returned.
 
 Because this module is impure, there are two interesting consequences - regardless of how many times you import/call `setTag`:
 
@@ -159,29 +164,23 @@ Received number of calls: 0
 
 Let's walk through what is happening here.
 
-* Before `jest` executes the test, it first transpiles the code with either
-  [babel-jest](https://www.npmjs.com/package/babel-jest) or [ts-jest](https://www.npmjs.com/package/ts-jest) depending on your configuration. In either case, this will result in the call to `jest.mock()` being moved ('hoisted') to the top of the file
-* Consequently when the code is executed, the first thing that happens is
-  `jest.mock('third-party-tracing-library')` automagically replaces any import
-  of `third-party-tracing-library` with a `jest.fn()` instances (mock function), with all known
-  properties replaced with further `jest.fn()` instances.
-* When execution reaches `import { setTag } from "./impure-set-tag`, this
-  immediately executes the code at the top level of the module. This calls
-  `import tracer from "third-party-tracing-library"`, which returns the mock
-  created above. `tracer.init()` is executed; since this is a mock function, it
-  increments its call counts by one.
-* A few lines later, we call `beforeEach(() => jest.resetAllMocks())` which
-  resets the state of all jest automocks.
-* The test then executes, expecting the call count to be 1 after calling `setTag` twice. Because we reset the mock state above, however, the call count is 0.
+* Before `jest` executes the test, it transpiles the code with either
+  [babel-jest](https://www.npmjs.com/package/babel-jest) or [ts-jest](https://www.npmjs.com/package/ts-jest) depending on your configuration.
+* In either case, this will result in the call to `jest.mock()` being moved ('hoisted') to the top of the file
+* Consequently when the code is executed, the first thing that happens is `jest.mock('third-party-tracing-library')` automagically replaces any import of `third-party-tracing-library` with a `jest.fn()` instances (mock function), with all known properties replaced with further `jest.fn()` instances.
+* When execution reaches `import { setTag } from "./impure-set-tag`, this immediately executes the code at the top level of the module.
+* This calls `import tracer from "third-party-tracing-library"`, which returns the mock created above.
+* `tracer.init()` is executed; since this is a mock function, it increments its call counts by one.
+* A few lines later, we call `beforeEach(() => jest.resetAllMocks())` which resets the state of all jest mock functions 
+* The test then executes and fails because it expects the call count to be 1, despite the fact that we reset the mock state in the previous step
 
-The problem here is that we are actually trying to test a behaviour that occurs
-*at the point of import*, which is outside of the test. We could
-of course change our `beforeEach` to an `afterEach` so that we don't reset that
-state before the test runs, but we shouldn't have to do that; resetting mock state before each test is a very uncontroversial best practise, and this solution is easily broken - if I add a second test before the one I've written, the state will get reset and the same issue will appear.
+The problem here is that we are trying to test a behaviour that occurs
+*at the point of import*, which is outside the test. We could
+of course change our `beforeEach` to an `afterEach` so that we don't reset mock state before the test runs, but we shouldn't have to do that; resetting mock state before each test is a very uncontroversial best practise, and this solution is easily broken - if I add a second test before the one I've written, the state will get reset and the same issue will appear.
 
 ## Move the import into the test
 
-So lets try to move the behaviour under test *into* the test. We can do this by
+Lets try to move the behaviour under test *into* the test. We can do this by
 removing the original import, making the test callback asynchronous and importing the module dynamically
 inside the test, like this:
 
