@@ -15,3 +15,11 @@ export const isComment = (thing: unknown): thing is Comment => {
     typeof rawThing.email === "string"
   )
 }
+
+export const assertComment: (
+  thing: unknown
+) => asserts thing is Comment = thing => {
+  if (!isComment(thing)) {
+    throw new Error("`${thing}` should be a valid comment")
+  }
+}

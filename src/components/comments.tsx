@@ -1,20 +1,24 @@
-import React, { FC } from "react"
+import { FC } from "react"
 import HeadingTwo from "./heading-two"
-import HeadingThree from "./heading-three"
 import Comment from "./comment"
 import { Comment as CommentType } from "../comments/utils/comment"
+import SubmitCommentsForm from "./submit-comment-form"
 
 interface CommentsProps {
+  slug: string
   comments: CommentType[]
 }
 
 const Comments: FC<CommentsProps> = props => (
   <>
     <HeadingTwo>Comments</HeadingTwo>
-    {props.comments.map(comment => (
-      <Comment comment={comment}></Comment>
-    ))}
-    <HeadingThree>Submit Comment</HeadingThree>
+    {props.comments
+      .slice()
+      .sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1))
+      .map(comment => (
+        <Comment comment={comment}></Comment>
+      ))}
+    <SubmitCommentsForm slug={props.slug} />
   </>
 )
 
