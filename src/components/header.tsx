@@ -48,13 +48,14 @@ const Header: FC<HeaderProps> = ({ siteTitle }) => (
         to="/"
         style={{
           color: `white`,
-          textDecoration: `none`,
+          textDecoration: `none`
         }}
       >
         {siteTitle}
       </HomeLink>
       <MenuLink to="/">Home</MenuLink>
       <MenuLink to="/blog">Blog</MenuLink>
+      <MenuLink to="/this-site">This Site</MenuLink>
     </Container>
   </StyledHeader>
 )

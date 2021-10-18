@@ -5,6 +5,7 @@ import HeadingTwo from "../components/heading-two"
 import ListItem from "../components/list-item"
 import ParagraphText from "../components/paragraph-text"
 import rehypeReact from "rehype-react"
+import Anchor from "../components/anchor"
 
 const processor = unified().use(rehypeReact, {
   createElement,
@@ -13,7 +14,8 @@ const processor = unified().use(rehypeReact, {
     h2: HeadingThree,
     p: ParagraphText,
     li: ListItem,
-  },
+    a: Anchor
+  }
 })
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
