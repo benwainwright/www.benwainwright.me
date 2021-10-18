@@ -112,7 +112,7 @@ When you execute `program.ts` from the command line, the following happens
 
 * `./file-one` is imported. There are no cached executions, so `./file-one` is loaded and executed. This imports a function from `./impure-set-tag`.
 * Again, this is not in the cache so it is executed. As part of *this* execution, a `tracer` is imported from `third-party-tracing-library`, and `tracer.init()` is called.
-* Finally, we define an export a function that captures a reference to `tracer` within its scope.
+* Finally, we define and export a function that captures a reference to `tracer` within its scope.
 * `./file-two` is imported. There are no cached executions, so `./file-two` is loaded and executed.
 * Again, this imports a function from `./impure-set-tag`. The result is already in our cache so instead of executing the module a second time the already defined `setTag` function is returned.
 
@@ -197,7 +197,7 @@ test("the impure setTag function only calls tracer.init method once", () => {
 Congratulations, you now have a passing test!
 
 While this appears to work, there is a big problem with it. We can
-demonstrate them by being diligent engineers and adding some more test coverage.
+demonstrate it by being diligent engineers and adding some more test coverage.
 Lets start by adding the following test *above* our existing test (order is
 important here).
 
