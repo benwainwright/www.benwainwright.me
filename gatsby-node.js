@@ -14,6 +14,23 @@ exports.onCreateBabelConfig = ({ actions }) => {
   })
 }
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type Comment {
+      author: String!
+      email: String!
+      message: String!
+      timestamp: Int!
+    }
+
+    type MarkdownRemarkFields implements Node {
+      comments: [Comment!]!
+    }
+  `
+  createTypes(typeDefs)
+}
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
