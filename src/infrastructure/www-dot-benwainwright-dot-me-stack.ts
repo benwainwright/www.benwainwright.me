@@ -115,7 +115,9 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
     commentsBucket.grantWrite(commentsFunction)
     commentsBucket.grantRead(listCommentsFunction)
 
-    const api = new apiGateway.RestApi(this, "comments-api")
+    const api = new apiGateway.RestApi(this, "comments-api", {
+      defaultCorsPreflightOptions: { allowOrigins: apiGateway.Cors.ALL_ORIGINS }
+    })
 
     const comments = api.root.addResource("comments")
 
