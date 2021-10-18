@@ -2,3 +2,5 @@
 package.json
 package-lock.json
 public
+cdk.out
+node_modules

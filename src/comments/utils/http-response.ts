@@ -13,8 +13,8 @@ export const httpResponse = ({
   body?: Record<string, string> | Record<string, string>[]
 }) => {
   return {
-    statusCode: statusCode,
+    statusCode,
     body: JSON.stringify(body, null, 2),
-    headers: { "access-control-allow-origin": "*", ...(headers ?? {}) },
+    headers: { "access-control-allow-origin": "*", ...headers },
   }
 }

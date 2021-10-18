@@ -14,7 +14,7 @@ known feature called [Index Access Types](https://www.typescriptlang.org/docs/ha
 Here is a simplified version of the code in question:
 
 ```TypeScript
-type TupleOfKeys<T> = ReadonlyArray<keyof T>          
+type TupleOfKeys<T> = ReadonlyArray<keyof T>
 // Keyof T produces a union type containing all the keys of T
 
 type UnionOfKeys<T extends ReadonlyArray[]> = T[number]

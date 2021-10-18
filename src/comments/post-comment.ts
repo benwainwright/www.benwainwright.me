@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandler } from "aws-lambda"
 import { parseCreateCommentRequest } from "./utils/parse-create-comment-request"
 import AWS from "aws-sdk"
-import * as crypto from "crypto"
+import * as crypto from "node:crypto"
 import { getBucket } from "./utils/get-bucket"
 import { httpResponse } from "./utils/http-response"
 import { parseCommentsPath } from "./utils/parse-comments-path"
@@ -21,14 +21,14 @@ export const postComment: APIGatewayProxyHandler = async event => {
     const params = {
       Key,
       Body,
-      Bucket
+      Bucket,
     }
 
     await s3.putObject(params).promise()
 
     return httpResponse({
       status: "Success",
-      message: `Successfully created ${Key}`
+      message: `Successfully created ${Key}`,
     })
   } catch (error) {
     return handleLambdaError(error)

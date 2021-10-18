@@ -142,7 +142,7 @@ const SubmitCommentsForm: FC<SubmitCommentsProps> = props => {
               <Button type="submit">Save</Button>
             </FormField>
           </Form>
-        ) : sentState === "Sending" ? (
+        ) : (sentState === "Sending" ? (
           <div>
             <BeatLoader />
           </div>
@@ -152,7 +152,7 @@ const SubmitCommentsForm: FC<SubmitCommentsProps> = props => {
             statically generated site, your comment will not appear straight
             away.
           </ParagraphText>
-        )}
+        ))}
       </Container>
     </>
   )

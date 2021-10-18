@@ -82,10 +82,8 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 exports.onCreateNode = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
-
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
-
 
     createNodeField({
       name: `slug`,
@@ -95,16 +93,18 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
 
     const apiPath = value.replace(/\//g, "")
 
-    console.log(`Getting comments for post '${apiPath}'`);
+    console.log(`Getting comments for post '${apiPath}'`)
 
-    const { data } = await axios.get(`https://api.benwainwright.me/comments/${apiPath}`)
+    const { data } = await axios.get(
+      `https://api.benwainwright.me/comments/${apiPath}`
+    )
 
     console.log(data)
 
     createNodeField({
       name: `comments`,
       node,
-      value: data
+      value: data,
     })
   }
 }

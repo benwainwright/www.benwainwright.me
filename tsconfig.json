@@ -21,10 +21,7 @@
     "declaration": true,
     "checkJs": true
   },
-  "include": [
-    "**/*",
-    ".eslintrc.js"
-  ],
+  "include": ["**/*", ".eslintrc.js"],
   "exclude": [
     "cdk.out",
     "gatsby-*.js",

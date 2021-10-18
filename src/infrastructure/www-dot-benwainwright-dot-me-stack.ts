@@ -32,7 +32,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       this,
       "BensWebsiteCertificate",
       {
-        domainName: domainName,
+        domainName,
         hostedZone: zone,
         subjectAlternativeNames: [`www.${domainName}`],
       }

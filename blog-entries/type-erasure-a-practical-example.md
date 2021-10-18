@@ -17,14 +17,14 @@ test("a test", async () => {
       message: 'Oh, noes!'
       // some other properties
    }
-   
+
    aMockedDependency.mockRejectedValue(mockError)
 
    await functionUnderTest()
 })
 ```
 
-His test was failing, and he couldn't understand why. When looking at the implementation code, he showed me something like the below snippet and stepped through it with the VSCode debugger. An error was being thrown, but execution was not getting past the type guard designed to check whether the error was *actually* an error or not (a sensible thing to do by the way, since it is perfectly legal JavaScript to throw something completely unexpected, like `throw NaN`)
+His test was failing, and he couldn't understand why. When looking at the implementation code, he showed me something like the below snippet and stepped through it with the VSCode debugger. An error was being thrown, but execution was not getting past the type guard designed to check whether the error was _actually_ an error or not (a sensible thing to do by the way, since it is perfectly legal JavaScript to throw something completely unexpected, like `throw NaN`)
 
 ```TypeScript
 // code.ts
@@ -63,7 +63,7 @@ test("a test", async () => {
       message: 'Oh, noes!'
       // some other properties
    }
-   
+
    aMockedDependency.mockRejectedValue(mockError)
 
    await functionUnderTest()
@@ -79,7 +79,7 @@ export const isError = (thing) => thing instanceof Error;
 Consequently, what my colleague was trying to do boils down to the question 'is an object literal an instance of `Error`?'
 
 ```TypeScript
-const mockError =  { 
+const mockError =  {
   message:  'Oh, noes!'
 }
 
@@ -95,7 +95,6 @@ The solution, for anyone interested, was to define a local es6 `class` within th
 # What's the key takeaway?
 
 When writing TypeScript, any part of your code that forms a "type annotation" will be erased at runtime and so **cannot possibly change the behaviour of your code**. This means that this:
-
 
 ```TypeScript
 const foo: string | number = 'This is a string but might also be a number'
@@ -117,11 +116,11 @@ class Foo {}
 
 If you can get your head around this, and have a clear idea of which syntactic elements are 'type' annotations and which are not, it will help you understand two fundamental truths about TypeScript
 
-* Modifying a type definition or annotation is **always** a safe operation in that it will **never change the behaviour of your application**. What it *might* do is reduce or (improve) your ability to spot *future* errors at build time.
-* If your tests are failing, changing type definitions or annotations (such as the type cast referred to above) is not ever going to make them pass (unless the failures are type errors, which are easily spotted because they are always provided with a `TS-<number>` error code),  again because types never change the behaviour of your application.
+- Modifying a type definition or annotation is **always** a safe operation in that it will **never change the behaviour of your application**. What it _might_ do is reduce or (improve) your ability to spot _future_ errors at build time.
+- If your tests are failing, changing type definitions or annotations (such as the type cast referred to above) is not ever going to make them pass (unless the failures are type errors, which are easily spotted because they are always provided with a `TS-<number>` error code), again because types never change the behaviour of your application.
 
 # Recommended Reading
 
-* [TypeScript Docs -
+- [TypeScript Docs -
   Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
-* [TypeScript FAQ](https://github.com/Microsoft/TypeScript/wiki/FAQ)
+- [TypeScript FAQ](https://github.com/Microsoft/TypeScript/wiki/FAQ)
