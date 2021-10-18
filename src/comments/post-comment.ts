@@ -1,7 +1,8 @@
 import { APIGatewayProxyHandler } from "aws-lambda"
 import { parseCreateCommentRequest } from "./utils/parse-create-comment-request"
 import AWS from "aws-sdk"
-import * as crypto from "node:crypto"
+// eslint-disable-next-line unicorn/prefer-node-protocol
+import * as crypto from "crypto"
 import { getBucket } from "./utils/get-bucket"
 import { httpResponse } from "./utils/http-response"
 import { parseCommentsPath } from "./utils/parse-comments-path"
@@ -24,7 +25,7 @@ export const postComment: APIGatewayProxyHandler = async event => {
     const params = {
       Key: key,
       Body: body,
-      Bucket: bucket,
+      Bucket: bucket
     }
     /* eslint-enable @typescript-eslint/naming-convention */
 
@@ -32,7 +33,7 @@ export const postComment: APIGatewayProxyHandler = async event => {
 
     return httpResponse({
       status: "Success",
-      message: `Successfully created ${key}`,
+      message: `Successfully created ${key}`
     })
   } catch (error) {
     return handleLambdaError(error)
