@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import HeadingThree from "./heading-three"
 import { useFormik } from "formik"
 import axios from "axios"
@@ -66,17 +66,22 @@ const SubmitCommentsForm: FC<SubmitCommentsProps> = props => {
         ...values,
         timestamp: Math.floor(new Date(Date.now()).getTime() / 1000)
       }
-      console.log(comment)
       assertComment(comment)
       setSentState("Sending")
-      const response = await axios.post(
-        `${COMMENTS_API}/${props.slug}`,
-        comment
-      )
-      console.log(response)
+
+      await axios.post(`${COMMENTS_API}/${props.slug}`, comment)
       setSentState("Complete")
     }
   })
+
+  useEffect(() => {
+    const timeout =
+      sentState === "Complete"
+        ? setTimeout(() => setSentState("Ready"), 5000)
+        : undefined
+
+    return () => timeout && clearTimeout(timeout)
+  }, [sentState])
 
   return (
     <>
