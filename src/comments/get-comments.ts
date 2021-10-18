@@ -15,7 +15,7 @@ export const getComments: APIGatewayProxyHandler = async event => {
     /* eslint-disable @typescript-eslint/naming-convention */
     const params = {
       Prefix: post,
-      Bucket: bucket
+      Bucket: bucket,
     }
 
     const { Contents } = await s3.listObjects(params).promise()
@@ -32,7 +32,7 @@ export const getComments: APIGatewayProxyHandler = async event => {
         /* eslint-disable @typescript-eslint/naming-convention */
         const getParams = {
           Key: key,
-          Bucket: bucket
+          Bucket: bucket,
         }
         /* eslint-enable @typescript-eslint/naming-convention */
         return await s3.getObject(getParams).promise()
@@ -51,7 +51,7 @@ export const getComments: APIGatewayProxyHandler = async event => {
     return httpResponse({
       status: "Success",
       message: "foo",
-      body: comments
+      body: comments,
     })
   } catch (error) {
     return handleLambdaError(error)

@@ -6274,6 +6274,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"aws-lambda@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "aws-lambda@npm:1.0.6"
+  dependencies:
+    aws-sdk: "*"
+    commander: ^3.0.2
+    js-yaml: ^3.13.1
+    watchpack: ^2.0.0-beta.10
+  bin:
+    lambda: ./bin/lambda
+  checksum: ec9e1cf07269b632e641d83378fa293b78ec066b5cd5d5d60a062e4414aafa868f314b63c4b2a0efa7f85d0b2a555409bf70f2e9b62b63d3ee6ca28051b25138
+  languageName: node
+  linkType: hard
+
+"aws-sdk@npm:*":
+  version: 2.1010.0
+  resolution: "aws-sdk@npm:2.1010.0"
+  dependencies:
+    buffer: 4.9.2
+    events: 1.1.1
+    ieee754: 1.1.13
+    jmespath: 0.15.0
+    querystring: 0.2.0
+    sax: 1.2.1
+    url: 0.10.3
+    uuid: 3.3.2
+    xml2js: 0.4.19
+  checksum: 1eb6c3e237ec5c460bbd7b6b18664aa8aa89b055915a8819b8807de90bb440a4cc8f24188d9539fd1308fdc6805d5e5df8fa98a169a6a90a49400866b817f0ea
+  languageName: node
+  linkType: hard
+
 "aws-sdk@npm:^2.1009.0":
   version: 2.1009.0
   resolution: "aws-sdk@npm:2.1009.0"
@@ -7779,6 +7810,13 @@ __metadata:
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
   checksum: ab8c07884e42c3a8dbc5dd9592c606176c7eb5c1ca5ff274bcf907039b2c41de3626f684ea75ccf4d361ba004bbaff1f577d5384c155f3871e456bdf27becf9e
+  languageName: node
+  linkType: hard
+
+"commander@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "commander@npm:3.0.2"
+  checksum: 6d14ad030d1904428139487ed31febcb04c1604db2b8d9fae711f60ee6718828dc0e11602249e91c8a97b0e721e9c6d53edbc166bad3cde1596851d59a8f824d
   languageName: node
   linkType: hard
 
@@ -12159,6 +12197,7 @@ fsevents@~2.3.1:
     anser: ^2.0.1
     aws-cdk: next
     aws-cdk-lib: ^2.0.0-rc.9
+    aws-lambda: ^1.0.6
     aws-sdk: ^2.1009.0
     axios: ^0.23.0
     babel-preset-gatsby: ^1.8.0
@@ -23115,7 +23154,7 @@ typescript@4.4.4:
   languageName: node
   linkType: hard
 
-"watchpack@npm:^2.2.0":
+"watchpack@npm:^2.0.0-beta.10, watchpack@npm:^2.2.0":
   version: 2.2.0
   resolution: "watchpack@npm:2.2.0"
   dependencies:

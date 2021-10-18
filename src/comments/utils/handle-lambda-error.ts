@@ -20,6 +20,6 @@ export const handleLambdaError = (error: unknown) => {
   return httpResponse({
     statusCode: status,
     status: statusMessage,
-    message
+    message,
   })
 }

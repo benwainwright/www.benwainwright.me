@@ -4,7 +4,7 @@ export const httpResponse = ({
   status,
   message,
   headers,
-  body = { status: status ?? "", message: message ?? "" }
+  body = { status: status ?? "", message: message ?? "" },
 }: {
   statusCode?: StatusCodes
   status?: string
@@ -16,6 +16,6 @@ export const httpResponse = ({
     statusCode,
     // eslint-disable-next-line unicorn/no-null
     body: JSON.stringify(body, null, 2),
-    headers: { "access-control-allow-origin": "*", ...headers }
+    headers: { "access-control-allow-origin": "*", ...headers },
   }
 }

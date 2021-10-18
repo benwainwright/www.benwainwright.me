@@ -99,6 +99,18 @@ const SubmitCommentsForm: FC<SubmitCommentsProps> = props => {
     return () => timeout && clearTimeout(timeout)
   }, [sentState])
 
+  const sendingMessage =
+    sentState === "Sending" ? (
+      <div>
+        <BeatLoader />
+      </div>
+    ) : (
+      <ParagraphText>
+        Thanks for your comment! Please note that because this is a statically
+        generated site, your comment will not appear straight away.
+      </ParagraphText>
+    )
+
   return (
     <>
       <HeadingThree>Submit Comment</HeadingThree>
@@ -142,17 +154,9 @@ const SubmitCommentsForm: FC<SubmitCommentsProps> = props => {
               <Button type="submit">Save</Button>
             </FormField>
           </Form>
-        ) : (sentState === "Sending" ? (
-          <div>
-            <BeatLoader />
-          </div>
         ) : (
-          <ParagraphText>
-            Thanks for your comment! Please note that because this is a
-            statically generated site, your comment will not appear straight
-            away.
-          </ParagraphText>
-        ))}
+          sendingMessage
+        )}
       </Container>
     </>
   )
