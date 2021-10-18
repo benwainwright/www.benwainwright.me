@@ -14,41 +14,79 @@ on:
       - "README.md"
 
 jobs:
-  install:
-    name: Install, Build and Deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Configure node 12
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12"
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache yarn dependencies
-        uses: actions/cache@v2
+      - name: Configure node 14
+        uses: actions/setup-node@v2
         with:
-          path: |
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}/Cypress
-            "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}--modules
-            ${{ runner.os }}
+          node-version: "14"
+          cache: yarn
 
       - name: Yarn install
-        if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install
 
       - name: Build
         run: yarn build
+
+  run-script:
+    name: Run Package Script
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        script:
+          - types
+          - lint
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          cache: yarn
+
+      - name: Yarn install
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+
+  deploy:
+    name: Deploy
+    needs: [run-script, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          cache: yarn
+
+      - name: Yarn install
+        run: yarn install
+
+      - name: Download App
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
 
       - name: Deploy
         run: yarn cdk deploy --require-approval never
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
