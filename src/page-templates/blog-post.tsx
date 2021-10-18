@@ -105,6 +105,10 @@ const BlogPost: FC<BlogPostProps> = props => {
             </UnPublishedNotice>
           )}
           {renderAst(props.pageContext.entry.htmlAst)}
+          <Comments
+            slug={props.pageContext.entry.frontmatter.slug}
+            comments={props.pageContext.entry.fields.comments}
+          />
         </ContentContainer>
       </Container>
     </Layout>
