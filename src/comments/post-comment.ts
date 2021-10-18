@@ -9,26 +9,30 @@ import { handleLambdaError } from "./utils/handle-lambda-error"
 
 export const postComment: APIGatewayProxyHandler = async event => {
   try {
-    const Bucket = getBucket()
+    const bucket = getBucket()
     const comment = parseCreateCommentRequest(event.body)
     const post = parseCommentsPath(event.path)
 
     const s3 = new AWS.S3()
-    const Body = JSON.stringify(comment, null, 2)
-    const hash = crypto.createHash("md5").update(Body).digest("hex")
-    const Key = `${post}/${hash}.json`
 
+    // eslint-disable-next-line unicorn/no-null
+    const body = JSON.stringify(comment, null, 2)
+    const hash = crypto.createHash("md5").update(body).digest("hex")
+    const key = `${post}/${hash}.json`
+
+    /* eslint-disable @typescript-eslint/naming-convention */
     const params = {
-      Key,
-      Body,
-      Bucket,
+      Key: key,
+      Body: body,
+      Bucket: bucket
     }
+    /* eslint-enable @typescript-eslint/naming-convention */
 
     await s3.putObject(params).promise()
 
     return httpResponse({
       status: "Success",
-      message: `Successfully created ${Key}`,
+      message: `Successfully created ${key}`
     })
   } catch (error) {
     return handleLambdaError(error)

@@ -22,7 +22,12 @@ const Comments: FC<CommentsProps> = props => (
       props.comments
         .slice()
         .sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1))
-        .map(comment => <Comment comment={comment}></Comment>)
+        .map(comment => (
+          <Comment
+            key={`${String(comment.timestamp)}-${comment.email}`}
+            comment={comment}
+          ></Comment>
+        ))
     )}
     <SubmitCommentsForm slug={props.slug} />
   </>

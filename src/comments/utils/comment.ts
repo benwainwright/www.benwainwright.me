@@ -20,6 +20,6 @@ export const assertComment: (
   thing: unknown
 ) => asserts thing is Comment = thing => {
   if (!isComment(thing)) {
-    throw new Error("`${thing}` should be a valid comment")
+    throw new Error(`'${thing}' should be a valid comment`)
   }
 }

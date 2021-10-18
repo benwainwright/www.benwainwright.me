@@ -3,6 +3,7 @@ import { HttpError } from "./http-error"
 import { httpResponse } from "./http-response"
 
 export const handleLambdaError = (error: unknown) => {
+  // eslint-disable-next-line no-console
   console.log(error)
 
   const status =
@@ -19,6 +20,6 @@ export const handleLambdaError = (error: unknown) => {
   return httpResponse({
     statusCode: status,
     status: statusMessage,
-    message,
+    message
   })
 }

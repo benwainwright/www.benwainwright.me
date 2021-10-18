@@ -11,6 +11,7 @@ import { renderAst } from "../utils/render-ast"
 interface BlogPostProps {
   pageContext: {
     entry: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       htmlAst: any
       frontmatter: {
         published: boolean

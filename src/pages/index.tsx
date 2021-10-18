@@ -2,7 +2,7 @@ import { FC } from "react"
 
 import { graphql, Link } from "gatsby"
 import { BsFillPersonFill } from "react-icons/bs"
-import { FaPencilAlt , FaMapSigns } from "react-icons/fa"
+import { FaPencilAlt, FaMapSigns } from "react-icons/fa"
 import { HiOutlineMail } from "react-icons/hi"
 import mePhoto from "../assets/images/me.jpg"
 import Layout from "../components/layout"
@@ -105,8 +105,8 @@ const IndexPage: FC<IndexProps> = props => {
           <Anchor href="mailto:bwainwright28@gmail.com">
             bwainwright28@gmail.com
           </Anchor>
-          . Please note that I'm happilly employed at this time; recruiters will
-          probably be ignored.
+          . Please note that I&apos;m happilly employed at this time; recruiters
+          will probably be ignored.
         </ParagraphText>
       </Container>
     </Layout>
