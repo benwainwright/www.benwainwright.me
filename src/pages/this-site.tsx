@@ -18,7 +18,7 @@ const ThisSite = () => (
     <Container>
       <HeadingTwo>About This Site</HeadingTwo>
       <ParagraphText>
-        <img src="https://github-actions.40ants.com/benwainwright/www.benwainwright.me/matrix.svg" />
+        <img src="https://github-actions.40ants.com/benwainwright/www.benwainwright.me/matrix.svg?only=Deployment%20Pipeline" />
       </ParagraphText>
       <ul>
         <ListItem>
