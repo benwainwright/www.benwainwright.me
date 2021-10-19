@@ -26,7 +26,7 @@ const ThisSite = () => (
           </Anchor>
         </ListItem>
         <ListItem>
-          This site is a statically generated website build using{" "}
+          This site is a statically generated website built using{" "}
           <Anchor href="https://www.gatsbyjs.com/">Gatsby</Anchor>,{" "}
           <Anchor href="https://www.typescriptlang.org/">TypeScript</Anchor> and{" "}
           <Anchor href="https://reacjs.org">React</Anchor>
