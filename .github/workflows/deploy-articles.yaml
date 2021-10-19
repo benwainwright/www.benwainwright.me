@@ -1,4 +1,4 @@
-name: Deployment Articles
+name: Deploy Articles
 
 concurrency:
   group: deploy
