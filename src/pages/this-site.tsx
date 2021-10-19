@@ -46,7 +46,7 @@ const ThisSite = () => (
         </ListItem>
 
         <ListItem>
-          Although the website is generated statically, their is a comments api
+          Although the website is generated statically, there is a comments api
           backed by{" "}
           <Anchor href="https://aws.amazon.com/apigateway/">
             AWS Api Gateway
