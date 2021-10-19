@@ -1,4 +1,4 @@
-name: Deploy
+name: Deployment Pipeline
 concurrency:
   group: deploy
   cancel-in-progress: true

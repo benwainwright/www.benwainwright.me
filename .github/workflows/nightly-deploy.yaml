@@ -1,4 +1,4 @@
-name: Deploy
+name: Nightly Redeploy
 concurrency:
   group: deploy
   cancel-in-progress: true
