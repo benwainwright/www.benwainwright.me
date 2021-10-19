@@ -9,10 +9,12 @@ const config: Config.InitialOptions = {
     {
       displayName: "JSDOM",
       testEnvironment: "jsdom",
+      setupFilesAfterEnv: ["<rootDir>/test-setup.ts"],
       testMatch: ["<rootDir>/**/*.spec.tsx"]
     },
     {
       displayName: "Node",
+      setupFilesAfterEnv: ["<rootDir>/test-setup.ts"],
       testEnvironment: "node",
       testMatch: ["<rootDir>/**/*.spec.ts"]
     }
