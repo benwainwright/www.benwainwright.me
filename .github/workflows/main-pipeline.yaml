@@ -124,7 +124,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Get S3 Bucket
-        run: echo "UPLOAD_BUCKET=$(cat outputs.json | jq --raw-output 'keys[] as $k | .[$k] | .bucket')" >> $GITHUB_ENV
+        run: echo "UPLOAD_BUCKET=$(cat outputs.json | jq --raw-output 'keys[] as $k | .[$k] | .bucketoutput')" >> $GITHUB_ENV
 
       - name: Deploy Statics
         uses: shallwefootball/s3-upload-action@master
@@ -135,7 +135,7 @@ jobs:
           source_dir: 'public'
 
       - name: Get Distribution ID
-        run: echo "CLOUDFRONT_ID=$(cat outputs.json | jq --raw-output 'keys[] as $k | .[$k] | .distribution')" >> $GITHUB_ENV
+        run: echo "CLOUDFRONT_ID=$(cat outputs.json | jq --raw-output 'keys[] as $k | .[$k] | .apioutput')" >> $GITHUB_ENV
 
       - name: Invalidate Cloudfront
         uses: chetan/invalidate-cloudfront-action@v2
