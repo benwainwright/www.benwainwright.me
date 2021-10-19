@@ -6,6 +6,9 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "^7.14.5",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.15.0",
     "@emotion/babel-plugin": "^11.3.0",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
@@ -14,7 +17,10 @@
     "@linaria/core": "^3.0.0-beta.4",
     "@linaria/shaker": "^3.0.0-beta.7",
     "@mikaelkristiansson/domready": "^1.0.11",
+    "@testing-library/react": "^12.1.2",
     "@types/aws-lambda": "^8.10.84",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.1",
     "@types/react": "^17.0.11",
     "@types/react-helmet": "^6.1.1",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
@@ -68,6 +74,7 @@
     "gatsby-transformer-remark": "3.2.0",
     "gatsby-transformer-sharp": "^3.6.0",
     "http-status-codes": "^2.1.4",
+    "jest": "^27.3.0",
     "linaria": "^2.1.0",
     "lodash": "^4.17.21",
     "mitt": "^3.0.0",
@@ -106,7 +113,9 @@
     "lint": "eslint src",
     "types": "tsc",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test:ci": "CI=true jest",
+    "test": "jest",
+    "test:Watch": "jest --watch"
   },
   "repository": {
     "type": "git",
