@@ -4,6 +4,7 @@ const config: Config.InitialOptions = {
   resetMocks: true,
   collectCoverage: true,
   coverageDirectory: "coverage",
+  collectCoverageFrom: ["<rootDir>/src/**/*.{ts,tsx,js}"],
   projects: [
     {
       displayName: "JSDOM",
