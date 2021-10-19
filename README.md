@@ -9,4 +9,4 @@ Actions.
 
 Blog posts are generated from markdown files contained in the `blog-entries`
 directory. If I've made a mistake in any of my articles, feel free to raise a
-Pull Request to correct it.
+pull request to correct it.
