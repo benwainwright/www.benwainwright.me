@@ -31,6 +31,8 @@ jobs:
 
       - name: Build
         run: yarn build
+        env:
+          GOOGLE_TRACKING_ID: ${{ secrets.GOOGLE_TRACKING_ID }}
 
       - name: Deploy Stack
         run: yarn cdk deploy --require-approval never --outputs-file outputs.json
