@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import React from "react"
 import Anchor from "../components/anchor"
+import HeadingThree from "../components/heading-three"
 import HeadingTwo from "../components/heading-two"
 import Layout from "../components/layout"
 import ListItem from "../components/list-item"
@@ -17,9 +18,6 @@ const ThisSite = () => (
   <Layout>
     <Container>
       <HeadingTwo>About This Site</HeadingTwo>
-      <ParagraphText>
-        <img src="https://github-actions.40ants.com/benwainwright/www.benwainwright.me/matrix.svg?only=Deployment%20Pipeline" />
-      </ParagraphText>
       <ul>
         <ListItem>
           The source code for this site can be found{" "}
@@ -56,6 +54,10 @@ const ThisSite = () => (
           to the site everytime it is rebuilt
         </ListItem>
       </ul>
+      <HeadingThree>Latest Pipeline Run</HeadingThree>
+      <ParagraphText>
+        <img src="https://github-actions.40ants.com/benwainwright/www.benwainwright.me/matrix.svg?only=Deployment%20Pipeline" />
+      </ParagraphText>
     </Container>
   </Layout>
 )
