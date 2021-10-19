@@ -127,7 +127,7 @@ jobs:
         run: echo "UPLOAD_BUCKET=$(cat outputs.json | jq --raw-output 'keys[] as $k | .[$k] | .bucket')" >> $GITHUB_ENV
 
       - name: Deploy Statics
-      - uses: shallwefootball/s3-upload-action@master
+        uses: shallwefootball/s3-upload-action@master
         with:
           aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
