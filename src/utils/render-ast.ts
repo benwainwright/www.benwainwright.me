@@ -14,8 +14,8 @@ const processor = unified().use(rehypeReact, {
     h2: HeadingThree,
     p: ParagraphText,
     li: ListItem,
-    a: Anchor
-  }
+    a: Anchor,
+  },
 })
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

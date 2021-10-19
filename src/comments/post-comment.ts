@@ -25,7 +25,7 @@ export const postComment: APIGatewayProxyHandler = async event => {
     const params = {
       Key: key,
       Body: body,
-      Bucket: bucket
+      Bucket: bucket,
     }
     /* eslint-enable @typescript-eslint/naming-convention */
 
@@ -33,7 +33,7 @@ export const postComment: APIGatewayProxyHandler = async event => {
 
     return httpResponse({
       status: "Success",
-      message: `Successfully created ${key}`
+      message: `Successfully created ${key}`,
     })
   } catch (error) {
     return handleLambdaError(error)

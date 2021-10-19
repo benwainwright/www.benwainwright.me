@@ -48,7 +48,7 @@ const Header: FC<HeaderProps> = ({ siteTitle }) => (
         to="/"
         style={{
           color: `white`,
-          textDecoration: `none`
+          textDecoration: `none`,
         }}
       >
         {siteTitle}
