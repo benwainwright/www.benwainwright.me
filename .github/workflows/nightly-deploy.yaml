@@ -91,7 +91,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: [check-types, lint, build]
+    needs: [check-types, lint, build, test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
