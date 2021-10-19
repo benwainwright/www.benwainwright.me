@@ -1,11 +1,15 @@
 name: Deployment Pipeline
+
 concurrency:
   group: deploy
   cancel-in-progress: true
 
 on:
-  schedule:
-    - cron:  '0 2 * * *' 
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "*.md"
 
   workflow_dispatch:
 
