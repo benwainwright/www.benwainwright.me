@@ -220,3 +220,66 @@ When the test module is executed
 * The test module has now finished executing. But again, jest is waiting for `done()`.
 * Before the event loop begins, the microtask queue executes. This sets `hasResolved` to true (too late) and executes `done()`
 * There is no handlers or requests to be made, so the event loop does not start
+
+### So what can we do?
+
+To summarise; the problem is that you are advancing the timer and then setting assertions in the same (synchronous) execution context. Advancing the timer *does* result in promise resolution, but the callbacks that get queued as a consequence are only executed *after* the execution context finishes.
+
+It follows that the solution to the problem is to somehow move the assertion *out* of the execution context. If you can do that the microtask queue will get processed *before* the assertion. If you've been following, you'll notice that we already did that in our very first (real time) test. This is indeed one solution, only with a small modification; since `setImmediate` is already patched by `jest.useFakeTimers()`, you'll need to grab a reference to the *original* version of setImmediate for this to work.
+
+```JavaScript
+const realSetImmediate = setImmediate
+
+test("it should resolve after three seconds", (done) => {
+  
+  // Some code...
+  
+  jest.advanceTimersByTime(3000)
+  
+  realSetImmediate(() => {
+     expect(hasResolved).toEqual(true)
+     done()
+  });
+})
+```
+
+This works; but is a somewhat clumsy API. If you want to test multiple delays in the same test, it quickly becomes pretty gross code because you need to *nest* your calls to `realSetImmediate`. For example, if you wanted to test that the promise hasn't resolved after 1 second, advance again by another two seconds and assert that it has now resolved, you'd have to do this:
+
+```JavaScript
+const realSetImmediate = global.setImmediate
+
+test("it should not have resolved after one second", (done) => {
+  
+  // some code...
+  
+  jest.advanceTimersByTime(1000)
+
+  realSetImmediate(() => {
+    expect(hasResolved).toEqual(false)
+    jest.advanceTimersByTime(3000)
+
+    realSetImmediate(() => {
+      expect(hasResolved).toEqual(true)
+      done()
+    });
+  })
+});
+```
+
+In modern JavaScript, the normal solution to this problem of callback nesting is promises and `async/await`. What if there was a solution to this problem that could make use of promises to provide a nice API that looks easy to read. Turns out there is.
+
+## Monkey Patching Jest
+
+To solve this problem, I've borrowed from the solution described [here](https://github.com/facebook/jest/issues/2157#issuecomment-279171856), and monkey patched the original `jest.advanceTimersByTime` function to return a promise, like this:
+
+```JavaScript
+const nextTick = process.nextTick
+const realAdvanceTimers = jest.advanceTimersByTime
+
+jest.advanceTimersByTime = (time) => {
+  realAdvanceTimers(time)
+  return new Promise((accept) => nextTick(accept))
+}
+```
+
+This can now be used exactly like normal; the only difference being that if there are promises involved, you'll need to await it.
