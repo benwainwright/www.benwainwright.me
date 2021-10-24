@@ -282,4 +282,19 @@ jest.advanceTimersByTime = (time) => {
 }
 ```
 
-This can now be used exactly like normal; the only difference being that if there are promises involved, you'll need to await it.
+This can now be used exactly like normal; the only difference being that if there are promises involved, you'll need to await it. Our previous example becomes this:
+
+```javascript
+test("it should not have resolved after one second", () => {
+  
+  // some code...
+  
+  await jest.advanceTimersByTime(1000)  
+  expect(hasResolved).toEqual(false)
+
+  await jest.advanceTimersByTime(3000)
+  expect(hasResolved).toEqual(true)
+});
+```
+
+This works because of the way that `async/await` works under the hood. An `async` function can be considered syntactic sugar over a
