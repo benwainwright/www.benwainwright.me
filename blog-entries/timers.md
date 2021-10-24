@@ -178,7 +178,7 @@ When our test module is executed, this is what happens
 
 Now that the main module has finished executing, 
 
-* Are there any active handles or requests? If so continue looping
+* Are there any active handles or requests? There are because the `setTimeout` callbacks have not been dealt with, so continue looping
 * The first step in the event loop is the timers stage
 * Since no timers have yet hit their timeout, Node checks the empty microtask queue and then proceeds to the next stage. 
 * There is nothing in the poll stage, so the event loop waits for a predefined timeout and then checks the empty microtask queue and proceeds back to the timers stage
@@ -194,7 +194,7 @@ The above loop continues until two seconds has elapsed. Then this happens
 * There is nothing in the poll stage, so the event loop waits for a predefined timeout and then checks the empty microtask queue and proceeds back to the timers stage
 * Since there are no timers left that have hit their timeout, Node checks the empty microtask queue and then proceeds to the next stage.
 
-Node then continues to pass through the event loop. There is nothing to do, but since there is still a `setTimeout` handle that hasn't been executed, the process remains alive. When three seconds elapses, the loop behaviour is as follows
+Node then continues to pass through the event loop. There is nothing to do, but since there is still a `setTimeout` handle that hasn't been executed, the loop remains alive. When three seconds elapses, the loop behaviour is as follows
 
 * ... *and proceeds back to the timers stage*
 * The `setTimeout` callback from the test has now reached its timeout. Node executes the provide callback
@@ -202,4 +202,21 @@ Node then continues to pass through the event loop. There is nothing to do, but 
 * The `done()` callback is executed which lets `jest` know that the test has finished
 
 
-At this point, there is one more pass through the poll and check phases. It then checks if there any active handles or requests; since there aren't (both `setTimeout`s are now dealt with), it does not continue looping and so the process is allowed to complete.
+At this point, there is one more pass through the poll and check phases. It then checks if there any active handles or requests; since there aren't (both `setTimeout` callbacks are are now dealt with), the loop ends and so the process is allowed to complete.
+
+## What about the fake timers?
+
+So how can we use this to understand our fake timers example. Well, the key takeaway is that timers are by default *asynchronous* and execute *after the currently executing context*. What is also useful to know is that Jest fake timers are currently implemented under the hood using [@sinonjs/fake-timers](https://github.com/sinonjs/fake-timers), which mocks out timer functions with *synchronous* equivalents, and provides no such replacement for Promises. Let's dissect our second example to try to understand the implications of this implementation. 
+
+When the test module is executed
+
+* `axios.get()` is mocked as before
+* `requestWithDelay()`  is called. This constructs a  `Promise`  object that contains a call to  `setTimeout`. Since we are using fake timers, the callback gets added to the Sinon fake timers data structure instead of the node timers queue. The promise is again immediately returned
+* Inside the test, a callback is passed to the `.then` callback as before
+* Calling `jest.advanceTimersByTime(3000)` synchronously executes the callback referenced in the second step as it has passed its timeout
+* This results `axios.get()` being called which returns an immediately resolving promise, resulting in the `accept()` callback being executed
+* Since the promise has resolved, the same `.then` callback is added to the microtask queue
+* An assertion now executes that `hasResolved` is true. It is not because **the microtask queue has not executed yet**
+* The test module has now finished executing. But again, jest is waiting for `done()`.
+* Before the event loop begins, the microtask queue executes. This sets `hasResolved` to true (too late) and executes `done()`
+* There is no handlers or requests to be made, so the event loop does not start
