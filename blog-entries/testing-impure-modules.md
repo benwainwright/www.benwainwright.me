@@ -1,12 +1,12 @@
 ---
 slug: "testing-impure-modules"
-date: "2021-10-19"
-last-modified: "2021-10-19"
+date: "2021-10-24"
+last-modified: "2021-10-24"
 title: "Testing impure modules"
 description: "Testing 'impure' JavaScript modules in NodeJS is tricker than you
 might expect. This post takes you through why its difficult, and how to do it
 correctly"
-published: false
+published: true
 ---
 
 In a node application, a single JavaScript file forms a self-contained unit known as a 'module'. When executing your program, each one of these modules is executed and loaded into memory each time you call `require` (for commonjs) or `import` (for ES6 modules).
@@ -342,3 +342,9 @@ that eat up whole evenings.
 Since you have read this post, you know how to handle them properly. But many
 engineers don't and you can make their lives much easier in the first place by
 favouring pure modules by default.
+
+# Links
+
+* [jest.isolateModules()](https://jestjs.io/docs/jest-object#jestisolatemodulesfn)
+* [jest.resetModules()](https://jestjs.io/docs/jest-object#jestresetmodules)
+* [NodeJS documentation on module caching](https://nodejs.org/api/modules.html#caching)
