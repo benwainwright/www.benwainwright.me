@@ -9,16 +9,20 @@ const config: Config.InitialOptions = {
     {
       displayName: "JSDOM",
       testEnvironment: "jsdom",
+      transform: {
+        "^.+\\.(svg|css|png|jpg)$": "jest-transform-stub",
+        "^.+\\.[jt]sx?$": "<rootDir>/jest-preprocess.js"
+      },
       setupFilesAfterEnv: ["<rootDir>/test-setup.ts"],
-      testMatch: ["<rootDir>/**/*.spec.tsx"],
+      testMatch: ["<rootDir>/**/*.spec.tsx"]
     },
     {
       displayName: "Node",
       setupFilesAfterEnv: ["<rootDir>/test-setup.ts"],
       testEnvironment: "node",
-      testMatch: ["<rootDir>/**/*.spec.ts"],
-    },
-  ],
+      testMatch: ["<rootDir>/**/*.spec.ts"]
+    }
+  ]
 }
 
 export default config

@@ -1,7 +1,4 @@
-module.exports = {
-  plugins: [
-    "babel-plugin-remove-graphql-queries"
-  ],
+const babelOptions = {
   presets: [
     "babel-preset-gatsby",
     [
@@ -21,3 +18,5 @@ module.exports = {
     ],
   ],
 }
+
+module.exports = require("babel-jest").default.createTransformer(babelOptions)
