@@ -1,7 +1,4 @@
 module.exports = {
-  plugins: [
-    "babel-plugin-remove-graphql-queries"
-  ],
   presets: [
     "babel-preset-gatsby",
     [
