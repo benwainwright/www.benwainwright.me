@@ -1,7 +1,7 @@
 ---
 slug: "dns-cheat-sheet"
 date: "2021-07-18"
-last-modified: "2021-07-18"
+last_modified: "2021-07-18"
 title: "DNS Cheat Sheet"
 description: "A summary of all the basic stuff you need to know to work with DNS as a web engineer"
 published: false

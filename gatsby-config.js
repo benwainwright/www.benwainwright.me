@@ -29,7 +29,6 @@ const plugins = [
                 custom_elements: [{ "content:encoded": edge.node.html }],
               }
             })
-            console.log(result)
             return result
           },
           query: `{
@@ -63,10 +62,12 @@ const plugins = [
     options: {
       query: `
     {
-      allSitePage(filter: {context: {entry: {frontmatter: {published: {ne: false}}}}}) {
+      allSitePage(
+        filter: {pageContext: {entry: {frontmatter: {published: {ne: false}}}}}
+      ) {
         nodes {
           path
-          context {
+          pageContext {
             entry {
               frontmatter {
                 last_modified
@@ -81,8 +82,8 @@ const plugins = [
       serialize: ({ path, lastmod }) => ({ url: path, lastmod }),
       resolvePages: ({ allSitePage }) => {
         return allSitePage.nodes.map(node => {
-          const lastmod = node.context.entry
-            ? node.context.entry.frontmatter.last_modified
+          const lastmod = node.pageContext.entry
+            ? node.pageContext.entry.frontmatter.last_modified
             : null
 
           return {

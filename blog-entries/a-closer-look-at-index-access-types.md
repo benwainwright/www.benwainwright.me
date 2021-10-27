@@ -1,7 +1,7 @@
 ---
 slug: "a-closer-look-at-index-access-types"
 date: "2021-08-06"
-last-modified: "2021-08-06"
+last_modified: "2021-08-06"
 title: "A Closer Look at Index Access Types"
 description: "A followup from a question I did in a recent talk about why an
 array type indexed with the type 'number' resolves to a union type"
