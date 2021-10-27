@@ -32,6 +32,7 @@ jobs:
       - name: Build
         run: yarn build
         env:
+          NODE_ENV: production
           GOOGLE_TRACKING_ID: ${{ secrets.GOOGLE_TRACKING_ID }}
 
       - uses: actions/upload-artifact@v2
