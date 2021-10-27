@@ -144,7 +144,7 @@ if (process.env.GOOGLE_TRACKING_ID) {
 module.exports = {
   siteMetadata: {
     title: `Ben Wainwright`,
-    description: `Full stack JavaScript/Typescript engineer`,
+    description: `Full stack JavaScript/TypeScript engineer`,
     author: `Ben Wainwright`,
     siteUrl,
   },
