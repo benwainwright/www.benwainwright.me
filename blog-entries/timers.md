@@ -1,7 +1,7 @@
 ---
 slug: "fake-timers-and-promises"
 date: "2021-10-24"
-last-modified: "2021-10-24"
+last_modified: "2021-10-24"
 title: "Fake timers and Promises"
 description: "An exploration of the JavaScript event loop in order to better
 understand the interaction between Jest fake timers and Promises"

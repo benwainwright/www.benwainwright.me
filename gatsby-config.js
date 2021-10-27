@@ -29,7 +29,6 @@ const plugins = [
                 custom_elements: [{ "content:encoded": edge.node.html }],
               }
             })
-            console.log(result)
             return result
           },
           query: `{
@@ -63,7 +62,9 @@ const plugins = [
     options: {
       query: `
     {
-      allSitePage(filter: {pageContext: {entry: {frontmatter: {published: {ne: false}}}}}) {
+      allSitePage(
+        filter: {pageContext: {entry: {frontmatter: {published: {ne: false}}}}}
+      ) {
         nodes {
           path
           pageContext {

@@ -27,6 +27,28 @@ exports.createSchemaCustomization = ({ actions }) => {
     type MarkdownRemarkFields implements Node {
       comments: [Comment!]!
     }
+
+    type FrontMatter {
+      date: String!
+      last_modified: String
+      slug: String!
+      published: Boolean!
+      description: String!
+    }
+    
+    type Entry {
+      id: String!
+      htmlAst: String!
+      frontmatter: FrontMatter!
+    }
+
+    type Context {
+      entry: Entry
+    }
+
+    type SitePage implements Node {
+      pageContext: Context
+    }
   `
   createTypes(typeDefs)
 }
@@ -72,7 +94,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       path: `/blog/${entry.frontmatter.slug}`,
       component: blogPost,
       context: {
-        entry: entry,
+        entry
       },
     })
   })

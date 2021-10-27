@@ -1,7 +1,7 @@
 ---
 slug: "testing-impure-modules"
 date: "2021-10-24"
-last-modified: "2021-10-24"
+last_modified: "2021-10-24"
 title: "Testing impure modules"
 description: "Testing 'impure' JavaScript modules in NodeJS is tricker than you
 might expect. This post takes you through why its difficult, and how to do it
