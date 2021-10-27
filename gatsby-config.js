@@ -131,15 +131,13 @@ const plugins = [
 
 if (process.env.GOOGLE_TRACKING_ID) {
   plugins.push({
-    resolve: `gatsby-plugin-google-analytics`,
+    resolve: `gatsby-plugin-google-tagmanager`,
     options: {
-      trackingId: process.env.GOOGLE_TRACKING_ID,
-      head: false,
-      anonymize: true,
-      pageTransitionDelay: 0,
-      defer: true,
-      cookieDomain: "benwainwright.me",
+      id: process.env.GOOGLE_TRACKING_ID,
+      includeInDevelopment: false,
+      defaultDataLayer: { platform: "gatsby" },
       enableWebVitalsTracking: true,
+      selfHostedOrigin: "https://benwainwright.me",
     },
   })
 }
