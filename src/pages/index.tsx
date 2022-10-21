@@ -15,7 +15,7 @@ import styled from "@emotion/styled"
 import { BlogSummaryData } from "./blog"
 
 const Container = styled.div`
-  width: 50%;
+  max-width: 50rem;
   padding: 0 2rem 0 2rem;
   object-fit: cover;
   height: calc(100vh - 10rem);
@@ -29,6 +29,7 @@ const DecorativePhoto = styled.img`
   object-position: top;
   object-fit: cover;
   width: 50%;
+  opacity: 0.6;
   height: calc(100vh - 10rem);
 
   @media (max-width: 800px) {

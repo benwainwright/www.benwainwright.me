@@ -9,6 +9,7 @@ import ParagraphText from "../components/paragraph-text"
 
 const Container = styled.div`
   padding: 0 2rem 0 2rem;
+  max-width: 1000px;
   @media (min-width: 1400px) {
     margin: 0 auto;
     width: 70%;
