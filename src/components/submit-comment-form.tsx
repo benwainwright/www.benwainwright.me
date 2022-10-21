@@ -120,7 +120,14 @@ const SubmitCommentsForm: FC<SubmitCommentsProps> = props => {
         <div className={dialogContainer}>
           <header className={header}>
             <HeadingThree className={headerText}>Submit Comment</HeadingThree>
-            <IconButton icon={IoMdClose} onClick={props.onClose} />
+            <IconButton
+              icon={IoMdClose}
+              onClick={() => {
+                props.onClose()
+                formik.resetForm()
+                setSentState("Ready")
+              }}
+            />
           </header>
           <div className={container}>
             {sentState === "Ready" ? (

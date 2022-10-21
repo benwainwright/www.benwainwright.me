@@ -2,7 +2,7 @@ code[class*="language-"],
 pre[class*="language-"] {
   color: #5d7079;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  font-size: 1.2em;
+  font-size: 1.1em;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -12,7 +12,6 @@ pre[class*="language-"] {
   line-height: 1.5;
   tab-size: 4;
   hyphens: none;
-  font-size: 1.2em;
 }
 
 code[class*="language-"] {

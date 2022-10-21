@@ -14,10 +14,9 @@ const CommentContainer = styled.p`
   }
   font-size: 1.15rem;
   line-height: 2rem;
-  background-color: #bdd9f0;
+  background-color: #dceaf5;
   border-radius: 10px;
-  padding: 1rem;
-  border: 1px solid black;
+  padding: 2rem;
   margin: 1rem 0 1rem 0;
 `
 

@@ -22,8 +22,8 @@ const Comments: FC<CommentsProps> = props => {
       </HeadingTwo>
       {props.comments.length === 0 ? (
         <ParagraphText>
-          No comments have been added for this post yet! Submit one using the
-          form below...
+          No comments have been added for this post yet! Click on the button
+          above to add one
         </ParagraphText>
       ) : (
         props.comments
