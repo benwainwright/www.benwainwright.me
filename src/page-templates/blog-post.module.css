@@ -2,21 +2,22 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
 .header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 2rem;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .headerH1 {
   margin: 0;
+  padding: 0;
   flex-grow: 2;
 }
 
@@ -29,7 +30,7 @@
 }
 
 .contentContainer {
-  margin: 1rem 0 1rem 0;
+  margin: 0.5rem 0 1rem 0;
 }
 
 .unpublishedNotice {

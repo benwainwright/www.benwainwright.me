@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { FC, useEffect, useState } from "react"
+import { FC, useState } from "react"
 import HeadingThree from "./heading-three"
 import { useFormik } from "formik"
 import axios from "axios"
