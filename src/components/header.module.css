@@ -1,0 +1,43 @@
+.header {
+  background: var(--color-primary);
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.container {
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-family: "Aileron";
+  @media (max-width: 800px) {
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+}
+
+.homeLink {
+  flex-grow: 999;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  margin-left: 2rem;
+  white-space: nowrap;
+}
+
+.link:hover {
+  color: var(--color-primary-dark);
+}
+
+.link:visited {
+  color: white;
+}
+
+.link:visited:hover {
+  color: var(--color-primary-dark);
+}

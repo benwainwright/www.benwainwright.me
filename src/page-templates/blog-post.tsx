@@ -30,16 +30,6 @@ interface BlogPostProps {
   }
 }
 
-const DateBox = styled.div`
-  font-family: "Milliard";
-  align-self: flex-end;
-  font-weight: lighter;
-  line-height: 2rem;
-  font-size: 2rem;
-  white-space: nowrap;
-  margin: 0 0 0 1rem;
-`
-
 const UnPublishedNotice = styled.p`
   font-family: "Milliard";
   @media (max-width: 800px) {
@@ -71,7 +61,13 @@ interface BlogPostProps {
 const BlogPost = (props: BlogPostProps) => {
   const isPublished = props.pageContext.entry.frontmatter.published
 
-  const { pageContainer } = getStyles(styles, "pageContainer")
+  const { dateBox, pageContainer, header, headerH1 } = getStyles(
+    styles,
+    "pageContainer",
+    "header",
+    "headerH1",
+    "dateBox"
+  )
 
   return (
     <Layout
@@ -79,14 +75,16 @@ const BlogPost = (props: BlogPostProps) => {
       description={props.pageContext.entry.frontmatter.description}
     >
       <div className={pageContainer}>
-        <header>
-          <HeadingOne>
+        <header className={header}>
+          <HeadingOne className={headerH1}>
             <BsFillStarFill />
             <HeadingContainer>
               {props.pageContext.entry.frontmatter.title}
             </HeadingContainer>
-            <DateBox>{props.pageContext.entry.frontmatter.date}</DateBox>
           </HeadingOne>
+          <div className={dateBox}>
+            {props.pageContext.entry.frontmatter.date}
+          </div>
         </header>
         <ContentContainer>
           {!isPublished && (

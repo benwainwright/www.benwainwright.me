@@ -10,9 +10,8 @@
 
 .blogSummaryGrid {
   display: grid;
-  width: 50rem;
   grid-template-rows: 1.5rem;
-  grid-template-columns: 1.5rem 30rem;
+  grid-template-columns: 1.5rem calc(100% - 1.5rem);
   gap: 0.5rem 1rem;
 }
 

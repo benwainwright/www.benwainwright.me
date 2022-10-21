@@ -11,32 +11,9 @@ import ParagraphText from "../components/paragraph-text"
 import HeadingTwo from "../components/heading-two"
 import HeadingOne from "../components/heading-one"
 import Anchor from "../components/anchor"
-import styled from "@emotion/styled"
 import { BlogSummaryData } from "./blog"
-
-const Container = styled.div`
-  max-width: 50rem;
-  padding: 0 2rem 0 2rem;
-  object-fit: cover;
-  height: calc(100vh - 10rem);
-
-  @media (max-width: 800px) {
-    width: 100%;
-  }
-`
-
-const DecorativePhoto = styled.img`
-  object-position: top;
-  object-fit: cover;
-  width: 50%;
-  opacity: 0.6;
-  height: calc(100vh - 10rem);
-
-  @media (max-width: 800px) {
-    width: 100%;
-    height: 30%;
-  }
-`
+import * as styles from "./index.module.css"
+import { getStyles } from "../utils/get-styles"
 
 interface IndexProps {
   data: {
@@ -47,6 +24,12 @@ interface IndexProps {
 }
 
 const IndexPage: FC<IndexProps> = props => {
+  const { icon, decorativePhoto, container } = getStyles(
+    styles,
+    "icon",
+    "decorativePhoto",
+    "container"
+  )
   const [entry] = props.data.allMarkdownRemark.nodes
 
   if (!entry) {
@@ -55,10 +38,17 @@ const IndexPage: FC<IndexProps> = props => {
 
   return (
     <Layout title="Home">
-      <DecorativePhoto src={mePhoto} alt="Ben sitting on a stone bench" />
-      <Container>
+      <img
+        className={decorativePhoto}
+        src={mePhoto}
+        alt="Ben sitting on a stone bench"
+      />
+      <div className={container}>
         <HeadingOne>
-          <BsFillPersonFill style={{ marginRight: "0.5rem" }} />
+          <BsFillPersonFill
+            className={icon}
+            style={{ marginRight: "0.5rem" }}
+          />
           About Me
         </HeadingOne>
         <ParagraphText>
@@ -69,7 +59,7 @@ const IndexPage: FC<IndexProps> = props => {
           Manchester.
         </ParagraphText>
         <HeadingTwo>
-          <FaPencilAlt style={{ marginRight: "0.5rem" }} />
+          <FaPencilAlt className={icon} />
           Latest Blog Post
         </HeadingTwo>
         <ul>
@@ -82,21 +72,19 @@ const IndexPage: FC<IndexProps> = props => {
           </li>
         </ul>
         <HeadingTwo>
-          <FaMapSigns style={{ marginRight: "0.5rem" }} />
+          <FaMapSigns className={icon} />
           Find me elsewhere
         </HeadingTwo>
         <ul>
           <ListItem>
-            <Anchor href="https://github.com/benwainwright">Github</Anchor>
+            <a href="https://github.com/benwainwright">Github</a>
           </ListItem>
           <ListItem>
-            <Anchor href="https://www.linkedin.com/in/bwainwright">
-              LinkedIn
-            </Anchor>
+            <a href="https://www.linkedin.com/in/bwainwright">LinkedIn</a>
           </ListItem>
         </ul>
         <HeadingTwo>
-          <HiOutlineMail style={{ marginRight: "0.5rem" }} />
+          <HiOutlineMail className={icon} />
           Get in touch
         </HeadingTwo>
         <ParagraphText>
@@ -107,7 +95,7 @@ const IndexPage: FC<IndexProps> = props => {
           . Please note that I&apos;m happilly employed at this time; recruiters
           will probably be ignored.
         </ParagraphText>
-      </Container>
+      </div>
     </Layout>
   )
 }

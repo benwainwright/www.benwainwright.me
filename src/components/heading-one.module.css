@@ -1,0 +1,18 @@
+.heading {
+  font-family: "Aileron";
+  font-weight: bold;
+  font-size: 1.9rem;
+  letter-spacing: 2px;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  @media (max-width: 800px) {
+    margin: 2rem 0 1rem 0;
+  }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.5rem;
+  }
+}

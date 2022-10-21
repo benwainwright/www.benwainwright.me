@@ -7,3 +7,35 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.headerH1 {
+  margin: 0;
+  flex-grow: 2;
+}
+
+.dateBox {
+  font-family: "Milliard";
+  font-weight: lighter;
+  line-height: 2rem;
+  font-size: 2rem;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .dateBox {
+    font-size: 1.5rem;
+    padding-left: 2.5rem;
+  }
+}

@@ -1,29 +1,16 @@
-import { FC } from "react"
-import styled from "@emotion/styled"
+import { ReactNode } from "react"
+import { getStyles } from "../utils/get-styles"
+import * as styles from "./heading-one.module.css"
 
-const StyledH1 = styled.h1`
-  font-family: "Aileron";
-  font-weight: bold;
-  font-size: 1.9rem;
-  letter-spacing: 2px;
-  margin: 3rem 0 1rem 0;
-  display: flex;
-  align-items: center;
-  @media (max-width: 800px) {
-    margin: 2rem 0 1rem 0;
-  }
+interface HeadingOneProps {
+  children: ReactNode
+  className?: string
+}
 
-  @media (max-width: 500px) {
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 1.5rem;
-  }
-`
-
-StyledH1.displayName = "h1"
-
-const HeadingOne: FC = props => {
-  return <StyledH1>{props.children}</StyledH1>
+const HeadingOne = (props: HeadingOneProps) => {
+  const { heading } = getStyles(styles, "heading")
+  const classes = props.className ? [heading, props.className] : [heading]
+  return <h1 className={classes.join(" ")}>{props.children}</h1>
 }
 
 export default HeadingOne

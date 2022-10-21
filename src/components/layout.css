@@ -1,7 +1,8 @@
 :root {
   --color-primary: #3f88c5;
-  --color-primary-dark: #090c9b;
+  --color-primary-dark: #306896;
   --color-secondary: #3a5743;
+  --color-accent: #360568;
 }
 
 html {
@@ -17,6 +18,14 @@ body {
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+a:visited {
+  color: var(--color-primary-dark);
 }
 
 ul {

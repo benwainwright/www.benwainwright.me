@@ -27,8 +27,9 @@ interface BlogProps {
 }
 
 const Blog: FC<BlogProps> = props => {
-  const { blogContainer, pageContainer } = getStyles(
+  const { blogContainer, pageContainer, icon } = getStyles(
     styles,
+    "icon",
     "blogContainer",
     "pageContainer"
   )
@@ -36,7 +37,7 @@ const Blog: FC<BlogProps> = props => {
     <Layout title="Blog">
       <div className={pageContainer}>
         <HeadingOne>
-          <TiPencil />
+          <TiPencil className={icon} />
           Blog
         </HeadingOne>
         <div className={blogContainer}>

@@ -102,15 +102,6 @@ const SubmitCommentsForm: FC<SubmitCommentsProps> = props => {
     },
   })
 
-  useEffect(() => {
-    const timeout =
-      sentState === "Complete"
-        ? setTimeout(() => setSentState("Ready"), 5000)
-        : undefined
-
-    return () => timeout && clearTimeout(timeout)
-  }, [sentState])
-
   const sendingMessage =
     sentState === "Sending" ? (
       <div>

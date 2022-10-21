@@ -14,8 +14,9 @@ const CommentContainer = styled.p`
   }
   font-size: 1.15rem;
   line-height: 2rem;
-  border-radius: 4px;
-  padding: 0.5rem;
+  background-color: #bdd9f0;
+  border-radius: 10px;
+  padding: 1rem;
   border: 1px solid black;
   margin: 1rem 0 1rem 0;
 `
@@ -34,7 +35,8 @@ const Meta = styled.div`
 
 const MetaRow = styled.div`
   text-align: right;
-  color: #3f88c5;
+  color: black;
+  font-weight: bold;
 `
 
 const Comment: FC<CommentProps> = props => {
