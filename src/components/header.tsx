@@ -1,26 +1,51 @@
-import { FC } from "react"
+import { useState } from "react"
 import { Link } from "gatsby"
+import { HiOutlineMenu } from "react-icons/hi"
 import * as styles from "./header.module.css"
 import { getStyles } from "../utils/get-styles"
+import { IconButton } from "./icon-button"
 
 interface HeaderProps {
   siteTitle: string
 }
 
-const Header: FC<HeaderProps> = ({ siteTitle }) => {
-  const { header, container, link, homeLink } = getStyles(
+const Header = ({ siteTitle }: HeaderProps) => {
+  const [showMenu, setShowMenu] = useState(false)
+  const {
+    submenuShow,
+    menuButton,
+    header,
+    link,
+    homeLink,
+    submenu,
+    mainBar,
+  } = getStyles(
     styles,
     "header",
+    "submenuShow",
+    "mainBar",
     "container",
+    "menuButton",
     "link",
-    "homeLink"
+    "homeLink",
+    "submenu"
   )
+
+  const menuClasses = showMenu ? [submenu, submenuShow] : [submenu]
+
   return (
     <div className={header}>
-      <div className={container}>
+      <div className={mainBar}>
         <Link className={`${homeLink} ${link}`} to="/">
           {siteTitle}
         </Link>
+        <IconButton
+          className={menuButton}
+          icon={HiOutlineMenu}
+          onClick={() => setShowMenu(value => !value)}
+        />
+      </div>
+      <div className={menuClasses.join(" ")}>
         <Link className={link} to="/blog">
           Blog
         </Link>

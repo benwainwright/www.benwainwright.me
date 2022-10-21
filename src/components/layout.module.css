@@ -9,7 +9,7 @@
 
 .pageGrid {
   display: grid;
-  grid-template-rows: 10rem 1fr 5rem;
+  grid-template-rows: var(--menu-height-desktop) 1fr 5rem;
   grid-template-columns: repeat(2, 1fr);
   color: #393e41;
   min-height: 100vh;
@@ -18,7 +18,9 @@
 
 @media (max-width: 800px) {
   .pageGrid {
-    grid-template-rows: 5rem calc(100vh - 5rem);
+    grid-template-rows: var(--menu-height-mobile) calc(
+        100vh - var(--menu-height-mobile)
+      );
   }
 
   .mainContainer {

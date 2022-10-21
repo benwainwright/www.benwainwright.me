@@ -1,10 +1,11 @@
 :root {
   --color-primary: #3f88c5;
+  --color-light: #dceaf5;
   --color-primary-dark: #306896;
   --color-secondary: #3a5743;
   --color-accent: #360568;
-  --breakpoint-small: 599px;
-  --breakpoint-medium: 899px;
+  --menu-height-desktop: 10rem;
+  --menu-height-mobile: 5rem;
 }
 
 html {
