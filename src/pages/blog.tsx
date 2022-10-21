@@ -4,7 +4,6 @@ import { TiPencil } from "react-icons/ti"
 import Layout from "../components/layout"
 import BlogSummary from "../components/blog-summary"
 import HeadingOne from "../components/heading-one"
-import Seo from "../components/seo"
 
 import * as styles from "./blog.module.css"
 import { getStyles } from "../utils/get-styles"

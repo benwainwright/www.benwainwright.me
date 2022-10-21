@@ -1,14 +1,13 @@
-import { FC } from "react"
 import Layout from "../components/layout"
 import { BsFillStarFill } from "react-icons/bs"
 import styled from "@emotion/styled"
 import HeadingOne from "../components/heading-one"
-import Seo from "../components/seo"
 import Comments from "../components/comments"
 import { Comment as CommentType } from "../comments/utils/comment"
 import { renderAst } from "../utils/render-ast"
 import { getStyles } from "../utils/get-styles"
 import * as styles from "./blog-post.module.css"
+import { ReactNode } from "react"
 
 interface BlogPostProps {
   pageContext: {
@@ -63,7 +62,11 @@ const ContentContainer = styled.div`
   margin: 1rem 0 1rem 0;
 `
 
-const BlogPost: FC<BlogPostProps> = props => {
+interface BlogPostProps {
+  children: ReactNode
+}
+
+const BlogPost = (props: BlogPostProps) => {
   const isPublished = props.pageContext.entry.frontmatter.published
 
   const { pageContainer } = getStyles(styles, "pageContainer")

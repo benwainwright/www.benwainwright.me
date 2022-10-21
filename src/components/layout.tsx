@@ -1,4 +1,3 @@
-import React, { FC } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
@@ -7,9 +6,10 @@ import * as styles from "./layout.module.css"
 import Footer from "./footer"
 import { getStyles } from "../utils/get-styles"
 import Seo, { SeoProps } from "./seo"
+import { ReactNode } from "react"
 
 type LayoutProps = {
-  children: React.ReactNode
+  children: ReactNode
 } & SeoProps
 
 const Layout = (props: LayoutProps) => {
