@@ -1,16 +1,18 @@
-import { FC } from "react"
-import styled from "@emotion/styled"
+import { ReactNode } from "react"
+import * as styles from "./heading-three.module.css"
+import { getStyles } from "../utils/get-styles"
 
-const StyledH3 = styled.h3`
-  font-family: "Aileron";
-  font-weight: bold;
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-  margin: 2rem 0 0 0;
-`
+interface HeadingThreeProps {
+  children: ReactNode
+  className?: string
+}
 
-const HeadingThree: FC = props => {
-  return <StyledH3>{props.children}</StyledH3>
+const HeadingThree = (props: HeadingThreeProps) => {
+  const { heading } = getStyles(styles, "heading")
+
+  const classes = props.className ? [heading, props.className] : [heading]
+
+  return <h3 className={classes.join(" ")}>{props.children}</h3>
 }
 
 export default HeadingThree

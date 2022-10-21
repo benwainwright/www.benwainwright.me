@@ -3,9 +3,13 @@ import { FC, useEffect, useState } from "react"
 import HeadingThree from "./heading-three"
 import { useFormik } from "formik"
 import axios from "axios"
+import { IoMdClose } from "react-icons/io"
 import { assertComment } from "../comments/utils/comment"
 import BeatLoader from "react-spinners/BeatLoader"
 import ParagraphText from "./paragraph-text"
+import * as styles from "./submit-comments-form.module.css"
+import { getStyles } from "../utils/get-styles"
+import { IconButton } from "./icon-button"
 
 const COMMENTS_API = `https://api.benwainwright.me/comments`
 
@@ -17,17 +21,8 @@ const Form = styled.form`
 const FormField = styled.div`
   margin: 1rem 0 0 0;
   display: flex;
-  width: 20rem;
-  width: 30rem;
   border: 1px solid black;
   align-items: center;
-`
-
-const FormFieldColumns = styled.div`
-  margin: 1rem 0 0 0;
-  display: flex;
-  flex-direction: column;
-  width: 50rem;
 `
 
 const FormLabel = styled.label`
@@ -58,18 +53,35 @@ const Button = styled.button`
   padding: 0.5rem 1rem;
 `
 
-const Container = styled.div`
-  margin: 1rem 0 0 0;
-`
-
 interface SubmitCommentsProps {
   slug: string
+  open: boolean
+  onClose: () => void
 }
 
 type SentState = "Ready" | "Sending" | "Complete"
 
 const SubmitCommentsForm: FC<SubmitCommentsProps> = props => {
   const [sentState, setSentState] = useState<SentState>("Ready")
+
+  const {
+    dialogContainer,
+    modal,
+    header,
+    headerText,
+    formGrid,
+    commentDescription,
+    container,
+  } = getStyles(
+    styles,
+    "dialogContainer",
+    "modal",
+    "header",
+    "headerText",
+    "commentDescription",
+    "container",
+    "formGrid"
+  )
 
   const formik = useFormik({
     initialValues: {
@@ -112,53 +124,61 @@ const SubmitCommentsForm: FC<SubmitCommentsProps> = props => {
     )
 
   return (
-    <>
-      <HeadingThree>Submit Comment</HeadingThree>
-      <Container>
-        {sentState === "Ready" ? (
-          <Form onSubmit={formik.handleSubmit}>
-            <FormField>
-              <FormLabel htmlFor="author">Name</FormLabel>
-              <FormInput
-                type="text"
-                name="author"
-                required
-                id="author"
-                onChange={formik.handleChange}
-                value={formik.values.author}
-              />
-            </FormField>
+    <dialog open={props.open}>
+      <div className={modal}>
+        <div className={dialogContainer}>
+          <header className={header}>
+            <HeadingThree className={headerText}>Submit Comment</HeadingThree>
+            <IconButton icon={IoMdClose} onClick={props.onClose} />
+          </header>
+          <div className={container}>
+            {sentState === "Ready" ? (
+              <Form onSubmit={formik.handleSubmit} className={formGrid}>
+                <FormField>
+                  <FormLabel htmlFor="author">Name</FormLabel>
+                  <FormInput
+                    type="text"
+                    name="author"
+                    required
+                    id="author"
+                    onChange={formik.handleChange}
+                    value={formik.values.author}
+                  />
+                </FormField>
 
-            <FormField>
-              <FormLabel htmlFor="email">Email</FormLabel>
+                <FormField>
+                  <FormLabel htmlFor="email">Email</FormLabel>
 
-              <FormInput
-                type="email"
-                required
-                name="email"
-                id="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-              />
-            </FormField>
-            <FormFieldColumns>
-              <FormLabel htmlFor="comment">Comment</FormLabel>
-              <FormTextArea
-                name="message"
-                id="message"
-                onChange={formik.handleChange}
-                value={formik.values.message}
-              ></FormTextArea>
-            </FormFieldColumns>
-            <FormField>
-              <Button type="submit">Save</Button>
-            </FormField>
-          </Form>
-        ) : (
-          sendingMessage
-        )}
-      </Container>
-    </>
+                  <FormInput
+                    type="email"
+                    required
+                    name="email"
+                    id="email"
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                  />
+                </FormField>
+
+                <div className={commentDescription}>
+                  <FormLabel htmlFor="comment">Comment</FormLabel>
+                  <FormTextArea
+                    name="message"
+                    id="message"
+                    onChange={formik.handleChange}
+                    value={formik.values.message}
+                  ></FormTextArea>
+                </div>
+                <FormField>
+                  <Button type="submit">Save</Button>
+                </FormField>
+              </Form>
+            ) : (
+              sendingMessage
+            )}
+          </div>
+        </div>
+      </div>
+    </dialog>
   )
 }
 export default SubmitCommentsForm

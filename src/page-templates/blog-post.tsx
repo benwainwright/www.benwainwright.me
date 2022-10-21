@@ -7,6 +7,8 @@ import { Comment as CommentType } from "../comments/utils/comment"
 import { renderAst } from "../utils/render-ast"
 import { getStyles } from "../utils/get-styles"
 import * as styles from "./blog-post.module.css"
+
+import "./prism-theme.css"
 import { ReactNode } from "react"
 
 interface BlogPostProps {
