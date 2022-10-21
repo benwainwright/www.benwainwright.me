@@ -7,6 +7,9 @@ import BlogSummary from "../components/blog-summary"
 import HeadingOne from "../components/heading-one"
 import Seo from "../components/seo"
 
+import * as styles from "./blog.module.css"
+import { getStyles } from "../utils/get-styles"
+
 const Container = styled.div`
   padding: 0 2rem 0 2rem;
 
@@ -35,6 +38,7 @@ interface BlogProps {
 }
 
 const Blog: FC<BlogProps> = props => {
+  const { blogContainer } = getStyles(styles, "blogContainer")
   return (
     <Layout>
       <Container>
@@ -43,9 +47,11 @@ const Blog: FC<BlogProps> = props => {
           <TiPencil />
           Blog
         </HeadingOne>
-        {props.data.allMarkdownRemark.nodes.map(entry => (
-          <BlogSummary entry={entry} key={entry.frontmatter.slug} />
-        ))}
+        <div className={blogContainer}>
+          {props.data.allMarkdownRemark.nodes.map(entry => (
+            <BlogSummary entry={entry} key={entry.frontmatter.slug} />
+          ))}
+        </div>
       </Container>
     </Layout>
   )

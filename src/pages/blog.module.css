@@ -1,0 +1,12 @@
+.blogContainer {
+  display: grid;
+  gap: 2rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(1rem, 1fr));
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}

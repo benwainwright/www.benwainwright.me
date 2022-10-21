@@ -5,6 +5,7 @@ module.exports = {
   },
   rules: {
     "react/react-in-jsx-scope": "off",
+    "unicorn/no-array-for-each": "off",
   },
   overrides: [
     {

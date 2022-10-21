@@ -1,21 +1,18 @@
-import { FC } from "react"
-import styled from "@emotion/styled"
+import { FC, ReactNode } from "react"
+import { getStyles } from "../utils/get-styles"
+import * as styles from "./heading-two.module.css"
 
-const StyledH2 = styled.h2`
-  font-family: "Aileron";
-  font-weight: bold;
-  font-size: 1.5rem;
-  letter-spacing: 2px;
-  margin: 3rem 0 0 0;
-  display: flex;
-  align-items: center;
-  @media (max-width: 800px) {
-    margin: 2rem 0 0 0;
-  }
-`
+interface HeadingTwoProps {
+  children: ReactNode
+  className?: string
+}
 
-const HeadingTwo: FC = props => {
-  return <StyledH2>{props.children}</StyledH2>
+const HeadingTwo = (props: HeadingTwoProps) => {
+  const { heading } = getStyles(styles, "heading")
+
+  const classes = props.className ? [heading, props.className] : [heading]
+
+  return <h2 className={classes.join(" ")}>{props.children}</h2>
 }
 
 export default HeadingTwo

@@ -1,45 +1,44 @@
-import { FC } from "react"
 import { BsFillStarFill } from "react-icons/bs"
 import { BlogSummaryData } from "../pages/blog"
 import HeadingTwo from "./heading-two"
 import ParagraphText from "./paragraph-text"
-import styled from "@emotion/styled"
 import { Link } from "gatsby"
+import * as styles from "./blog-summary.module.css"
+import { getStyles } from "../utils/get-styles"
 
 interface BlogEntryProps {
   entry: BlogSummaryData
 }
 
-const StyledStar = styled(BsFillStarFill)`
-  margin: 0 0.5rem 0 0;
-`
-
-const SummaryContents = styled.div`
-  margin: 0 0 0 2rem;
-`
-
-const DateContainer = styled.div`
-  font-family: "Aileron";
-  font-weight: lighter;
-  margin: -0.5rem 0 0 0;
-  font-style: italic;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-`
-const BlogEntry: FC<BlogEntryProps> = props => (
-  <article>
-    <HeadingTwo>
-      <StyledStar />
-      <Link to={`/blog/${props.entry.frontmatter.slug}`}>
-        {props.entry.frontmatter.title}
-      </Link>
-    </HeadingTwo>
-    <SummaryContents>
-      <ParagraphText>{props.entry.excerpt}</ParagraphText>
-      <DateContainer>{props.entry.frontmatter.date}</DateContainer>
-    </SummaryContents>
-  </article>
-)
+const BlogEntry = (props: BlogEntryProps) => {
+  const {
+    dateContainer,
+    styledStar,
+    blogSummaryGrid,
+    blogSummaryDescription,
+    blogSummaryHeader,
+  } = getStyles(
+    styles,
+    "dateContainer",
+    "styledStar",
+    "blogSummaryGrid",
+    "blogSummaryDescription",
+    "blogSummaryHeader"
+  )
+  return (
+    <article className={blogSummaryGrid}>
+      <BsFillStarFill className={styledStar} />
+      <HeadingTwo className={blogSummaryHeader}>
+        <Link to={`/blog/${props.entry.frontmatter.slug}`}>
+          {props.entry.frontmatter.title}
+        </Link>
+      </HeadingTwo>
+      <div className={blogSummaryDescription}>
+        <ParagraphText>{props.entry.excerpt}</ParagraphText>
+        <div className={dateContainer}>{props.entry.frontmatter.date}</div>
+      </div>
+    </article>
+  )
+}
 
 export default BlogEntry
