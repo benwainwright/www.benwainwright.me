@@ -7,6 +7,8 @@ import Seo from "../components/seo"
 import Comments from "../components/comments"
 import { Comment as CommentType } from "../comments/utils/comment"
 import { renderAst } from "../utils/render-ast"
+import { getStyles } from "../utils/get-styles"
+import * as styles from "./blog-post.module.css"
 
 interface BlogPostProps {
   pageContext: {
@@ -26,13 +28,6 @@ interface BlogPostProps {
     }
   }
 }
-
-const Container = styled.div`
-  padding: 0 2rem 0 2rem;
-  @media (min-width: 1400px) {
-    margin: 0 auto;
-  }
-`
 
 const DateBox = styled.div`
   font-family: "Milliard";
@@ -71,20 +66,23 @@ const ContentContainer = styled.div`
 const BlogPost: FC<BlogPostProps> = props => {
   const isPublished = props.pageContext.entry.frontmatter.published
 
+  const { pageContainer } = getStyles(styles, "pageContainer")
+
   return (
-    <Layout>
-      <Container>
-        <Seo
-          title={props.pageContext.entry.frontmatter.title}
-          description={props.pageContext.entry.frontmatter.description}
-        />
-        <HeadingOne>
-          <BsFillStarFill />
-          <HeadingContainer>
-            {props.pageContext.entry.frontmatter.title}
-          </HeadingContainer>
-          <DateBox>{props.pageContext.entry.frontmatter.date}</DateBox>
-        </HeadingOne>
+    <Layout
+      title={props.pageContext.entry.frontmatter.title}
+      description={props.pageContext.entry.frontmatter.description}
+    >
+      <div className={pageContainer}>
+        <header>
+          <HeadingOne>
+            <BsFillStarFill />
+            <HeadingContainer>
+              {props.pageContext.entry.frontmatter.title}
+            </HeadingContainer>
+            <DateBox>{props.pageContext.entry.frontmatter.date}</DateBox>
+          </HeadingOne>
+        </header>
         <ContentContainer>
           {!isPublished && (
             <UnPublishedNotice>
@@ -98,7 +96,7 @@ const BlogPost: FC<BlogPostProps> = props => {
             comments={props.pageContext.entry.fields.comments}
           />
         </ContentContainer>
-      </Container>
+      </div>
     </Layout>
   )
 }

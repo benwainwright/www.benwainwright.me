@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import React from "react"
 import Anchor from "../components/anchor"
-import HeadingThree from "../components/heading-three"
+import HeadingOne from "../components/heading-one"
 import HeadingTwo from "../components/heading-two"
 import Layout from "../components/layout"
 import ListItem from "../components/list-item"
@@ -15,15 +15,16 @@ const Container = styled.div`
   }
 `
 const ThisSite = () => (
-  <Layout>
+  <Layout title="About this site">
     <Container>
-      <HeadingTwo>About This Site</HeadingTwo>
+      <HeadingOne>About This Site</HeadingOne>
       <ul>
         <ListItem>
-          The source code for this site can be found{" "}
+          The{" "}
           <Anchor href="https://github.com/benwainwright/www.benwainwright.me">
-            here
-          </Anchor>
+            source code for this site
+          </Anchor>{" "}
+          can be found on Github.
         </ListItem>
         <ListItem>
           This site is a statically generated website built using{" "}
@@ -54,9 +55,12 @@ const ThisSite = () => (
           to the site everytime it is rebuilt
         </ListItem>
       </ul>
-      <HeadingThree>Latest Pipeline Run</HeadingThree>
+      <HeadingTwo>Latest Pipeline Run</HeadingTwo>
       <ParagraphText>
-        <img src="https://github-actions.40ants.com/benwainwright/www.benwainwright.me/matrix.svg?only=Deployment%20Pipeline" />
+        <img
+          src="https://github-actions.40ants.com/benwainwright/www.benwainwright.me/matrix.svg?only=Deployment%20Pipeline"
+          alt="Latest Pipeline Run"
+        />
       </ParagraphText>
     </Container>
   </Layout>

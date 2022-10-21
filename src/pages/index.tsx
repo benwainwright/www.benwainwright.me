@@ -54,18 +54,17 @@ const IndexPage: FC<IndexProps> = props => {
   }
 
   return (
-    <Layout>
+    <Layout title="Home">
       <DecorativePhoto src={mePhoto} alt="Ben sitting on a stone bench" />
       <Container>
-        <Seo title="Home" />
         <HeadingOne>
           <BsFillPersonFill style={{ marginRight: "0.5rem" }} />
           About Me
         </HeadingOne>
         <ParagraphText>
-          Full stack TypeScript/JavaScript engineer with experience in AWS
-          services and a variety of other programming languages and web
-          technologies. I currently work for{" "}
+          Full stack TypeScript/JavaScript engineer and technical leader with
+          experience in AWS services and a variety of other programming
+          languages and web technologies. I currently work for{" "}
           <Anchor href="https://www.cinch.co.uk/">Cinch Cars</Anchor> in
           Manchester.
         </ParagraphText>

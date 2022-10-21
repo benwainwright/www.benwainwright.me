@@ -7,6 +7,8 @@ import ParagraphText from "../components/paragraph-text"
 import rehypeReact from "rehype-react"
 import Anchor from "../components/anchor"
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const processor = unified().use(rehypeReact, {
   createElement,
   components: {

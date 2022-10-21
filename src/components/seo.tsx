@@ -2,7 +2,7 @@ import { FC, DetailedHTMLProps, MetaHTMLAttributes } from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-interface SeoProps {
+export interface SeoProps {
   description?: string
   lang?: string
   meta?: DetailedHTMLProps<
@@ -12,7 +12,7 @@ interface SeoProps {
   title: string
 }
 
-const Seo: FC<SeoProps> = ({ description, meta, title }) => {
+const Seo: FC<SeoProps> = ({ description, meta, title, lang }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -67,7 +67,7 @@ const Seo: FC<SeoProps> = ({ description, meta, title }) => {
 
   const defaultTitle = site.siteMetadata?.title
 
-  const htmlAttributes = { lang: "en" }
+  const htmlAttributes = { lang: lang ?? "en" }
 
   return defaultTitle ? (
     <Helmet

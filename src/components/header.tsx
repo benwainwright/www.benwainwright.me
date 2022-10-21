@@ -53,7 +53,6 @@ const Header: FC<HeaderProps> = ({ siteTitle }) => (
       >
         {siteTitle}
       </HomeLink>
-      <MenuLink to="/">Home</MenuLink>
       <MenuLink to="/blog">Blog</MenuLink>
       <MenuLink to="/this-site">This Site</MenuLink>
     </Container>

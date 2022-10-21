@@ -13,6 +13,24 @@ body {
   box-sizing: inherit;
 }
 
+ul {
+  margin: 0;
+  padding: 0 1.7rem;
+}
+
+li {
+  list-style-type: none;
+  position: relative; /* It's needed for setting position to absolute in the next rule. */
+}
+
+li::before {
+  content: "•";
+  position: absolute;
+  left: -0.7em; /* Adjust this value so that it appears where you want. */
+  top: -0.05em;
+  font-size: 2.1em; /* Adjust this value so that it appears what size you want. */
+}
+
 @font-face {
   font-family: "Aileron";
   font-style: normal;
