@@ -22,6 +22,7 @@ const FormField = styled.div`
   margin: 1rem 0 0 0;
   display: flex;
   border: 1px solid black;
+  border-radius: 5px;
   align-items: center;
 `
 
@@ -40,17 +41,22 @@ const FormInput = styled.input`
   margin: 0;
   padding: 0;
   font-size: 1.2rem;
+  background: 0;
 `
 
 const FormTextArea = styled.textarea`
   flex-grow: 999;
   font-size: 1.2rem;
+  border: 1px solid black;
+  border-radius: 5px;
   height: 10rem;
 `
 
 const Button = styled.button`
   flex-grow: 999;
+  background: 0;
   padding: 0.5rem 1rem;
+  border: 0;
 `
 
 interface SubmitCommentsProps {
