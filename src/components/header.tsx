@@ -11,17 +11,20 @@ interface HeaderProps {
 
 const Header = ({ siteTitle }: HeaderProps) => {
   const [showMenu, setShowMenu] = useState(false)
+
   const {
     submenuShow,
     menuButton,
     header,
     link,
     homeLink,
+    homeLinkContainer,
     submenu,
     mainBar,
   } = getStyles(
     styles,
     "header",
+    "homeLinkContainer",
     "submenuShow",
     "mainBar",
     "container",
@@ -36,9 +39,11 @@ const Header = ({ siteTitle }: HeaderProps) => {
   return (
     <div className={header}>
       <div className={mainBar}>
-        <Link className={`${homeLink} ${link}`} to="/">
-          {siteTitle}
-        </Link>
+        <div className={homeLinkContainer}>
+          <Link className={`${homeLink} ${link}`} to="/">
+            {siteTitle}
+          </Link>
+        </div>
         <IconButton
           className={menuButton}
           icon={HiOutlineMenu}

@@ -16,6 +16,10 @@
   color: white;
 }
 
+.homeLinkContainer {
+  flex-grow: 2;
+}
+
 .homeLink {
   flex-grow: 999;
   padding: 0;
