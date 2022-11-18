@@ -46,7 +46,7 @@ li::before {
   position: absolute;
   left: -0.7em; /* Adjust this value so that it appears where you want. */
   top: -0.05em;
-  font-size: 2.1em; /* Adjust this value so that it appears what size you want. */
+  font-size: 1.7em; /* Adjust this value so that it appears what size you want. */
 }
 
 @font-face {
