@@ -44,6 +44,7 @@ const BlogPost = (props: BlogPostProps) => {
     contentContainer,
     headingContainer,
     unpublishedNotice,
+    star,
   } = getStyles(
     styles,
     "pageContainer",
@@ -52,7 +53,8 @@ const BlogPost = (props: BlogPostProps) => {
     "dateBox",
     "contentContainer",
     "headingContainer",
-    "unpublishedNotice"
+    "unpublishedNotice",
+    "star"
   )
 
   return (
@@ -63,7 +65,7 @@ const BlogPost = (props: BlogPostProps) => {
       <div className={pageContainer}>
         <header className={header}>
           <HeadingOne className={headerH1}>
-            <BsFillStarFill />
+            <BsFillStarFill className={star} />
             <div className={headingContainer}>
               {props.pageContext.entry.frontmatter.title}
             </div>
