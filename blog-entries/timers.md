@@ -270,7 +270,7 @@ In modern JavaScript, the normal solution to this problem of callback nesting is
 
 ## Monkey Patching Jest
 
-To solve this problem, I've borrowed from the solution described [here](https://github.com/facebook/jest/issues/2157#issuecomment-279171856), and monkey patched the original `jest.advanceTimersByTime` function to return a promise, like this:
+To solve this problem, I've borrowed elements from original solution described [here](https://github.com/facebook/jest/issues/2157#issuecomment-279171856), and monkey patched `jest.advanceTimersByTime` function to return a promise:
 
 ```JavaScript
 const nextTick = process.nextTick
@@ -282,10 +282,10 @@ jest.advanceTimersByTime = (time) => {
 }
 ```
 
-This can now be used exactly like normal; the only difference being that if there are promises involved, you'll need to await it. Our previous example becomes this:
+This can now be used exactly as before; the only difference being that if there are promises involved, you'll need to await it. Our previous example becomes this:
 
 ```javascript
-test("it should not have resolved after one second", () => {
+test("it should not have resolved after one second", async () => {
   
   // some code...
   
@@ -297,4 +297,4 @@ test("it should not have resolved after one second", () => {
 });
 ```
 
-This works because of the way that `async/await` works under the hood. An `async` function can be considered syntactic sugar over a
+This works because of the way that `async/await` works under the hood. An `async` function can be considered syntactic sugar over a generator that returns a promise§
