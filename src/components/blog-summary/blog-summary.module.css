@@ -27,6 +27,12 @@
   grid-column: 1/3;
 }
 
+.summaryLink {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .heading.blogSummaryHeader {
   grid-row: 1;
   grid-column: 2;

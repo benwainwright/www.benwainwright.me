@@ -15,7 +15,7 @@ interface HeadingProps {
 
 export const Heading = (props: HeadingProps) => {
   const classes = props.className
-    ? [styles.heading, props.className]
+    ? [props.className, styles.heading]
     : [styles.heading]
 
   return React.createElement(

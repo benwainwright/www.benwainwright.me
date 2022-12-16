@@ -17,7 +17,10 @@ export const BlogSummary = (props: BlogEntryProps) => {
         level={2}
         className={`${styles.heading} ${styles.blogSummaryHeader}`}
       >
-        <Link to={`/blog/${props.entry.frontmatter.slug}`}>
+        <Link
+          className={styles.summaryLink}
+          to={`/blog/${props.entry.frontmatter.slug}`}
+        >
           {props.entry.frontmatter.title}
         </Link>
       </Heading>
