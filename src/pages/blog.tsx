@@ -1,9 +1,7 @@
 import { FC } from "react"
 import { graphql } from "gatsby"
 import { TiPencil } from "react-icons/ti"
-import Layout from "../components/layout"
-import BlogSummary from "../components/blog-summary"
-import HeadingOne from "../components/heading-one"
+import { Layout, BlogSummary, Heading } from "../components"
 
 import * as styles from "./blog.module.css"
 import { getStyles } from "../utils/get-styles"
@@ -36,10 +34,10 @@ const Blog: FC<BlogProps> = props => {
   return (
     <Layout title="Blog">
       <div className={pageContainer}>
-        <HeadingOne>
+        <Heading level={1}>
           <TiPencil className={icon} />
           Blog
-        </HeadingOne>
+        </Heading>
         <div className={blogContainer}>
           {props.data.allMarkdownRemark.nodes.map(entry => (
             <BlogSummary entry={entry} key={entry.frontmatter.slug} />

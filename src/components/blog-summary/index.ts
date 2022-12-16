@@ -1,1 +1,1 @@
-export { default as BlogSummary } from "./blog-summary"
+export { BlogSummary } from "./blog-summary"

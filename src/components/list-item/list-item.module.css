@@ -1,0 +1,12 @@
+.li {
+  font-family: "Milliard";
+  line-height: 2rem;
+  font-size: 1.15rem;
+  text-align: left;
+}
+
+@media (max-width: 800px) {
+  .li {
+    line-height: 1.7rem;
+  }
+}

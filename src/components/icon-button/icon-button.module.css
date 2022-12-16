@@ -1,0 +1,12 @@
+.button {
+  border: 0;
+  background: 0;
+  display: block;
+  height: 2rem;
+  width: 2rem;
+}
+
+.icon {
+  height: 2rem;
+  width: 2rem;
+}

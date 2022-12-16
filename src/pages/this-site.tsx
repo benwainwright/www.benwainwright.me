@@ -1,19 +1,12 @@
 import React from "react"
-import Anchor from "../components/anchor"
-import HeadingOne from "../components/heading-one"
-import HeadingTwo from "../components/heading-two"
-import Layout from "../components/layout"
-import ListItem from "../components/list-item"
-import ParagraphText from "../components/paragraph-text"
-import { getStyles } from "../utils/get-styles"
+import { Anchor, Heading, Layout, ListItem, ParagraphText } from "../components"
 import * as styles from "./this-site.module.css"
 
 const ThisSite = () => {
-  const { container } = getStyles(styles, "container")
   return (
     <Layout title="About this site">
-      <div className={container}>
-        <HeadingOne>About This Site</HeadingOne>
+      <div className={styles.container}>
+        <Heading level={1}>About This Site</Heading>
         <ul>
           <ListItem>
             The{" "}
@@ -52,7 +45,7 @@ const ThisSite = () => {
             to the site everytime it is rebuilt
           </ListItem>
         </ul>
-        <HeadingTwo>Latest Pipeline Run</HeadingTwo>
+        <Heading level={2}>Latest Pipeline Run</Heading>
         <ParagraphText>
           <img
             src="https://github-actions.40ants.com/benwainwright/www.benwainwright.me/matrix.svg?only=Deployment%20Pipeline"

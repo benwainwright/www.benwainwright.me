@@ -1,19 +1,11 @@
-import { FC } from "react"
-
 import { graphql, Link } from "gatsby"
 import { BsFillPersonFill } from "react-icons/bs"
 import { FaPencilAlt, FaMapSigns } from "react-icons/fa"
 import { HiOutlineMail } from "react-icons/hi"
 import mePhoto from "../assets/images/me.jpg"
-import Layout from "../components/layout"
-import ListItem from "../components/list-item"
-import ParagraphText from "../components/paragraph-text"
-import HeadingTwo from "../components/heading-two"
-import HeadingOne from "../components/heading-one"
-import Anchor from "../components/anchor"
+import { Anchor, Heading, Layout, ListItem, ParagraphText } from "../components"
 import { BlogSummaryData } from "./blog"
 import * as styles from "./index.module.css"
-import { getStyles } from "../utils/get-styles"
 
 interface IndexProps {
   data: {
@@ -23,13 +15,7 @@ interface IndexProps {
   }
 }
 
-const IndexPage: FC<IndexProps> = props => {
-  const { icon, decorativePhoto, container } = getStyles(
-    styles,
-    "icon",
-    "decorativePhoto",
-    "container"
-  )
+const IndexPage = (props: IndexProps) => {
   const [entry] = props.data.allMarkdownRemark.nodes
 
   if (!entry) {
@@ -39,18 +25,18 @@ const IndexPage: FC<IndexProps> = props => {
   return (
     <Layout title="Home">
       <img
-        className={decorativePhoto}
+        className={styles.decorativePhoto}
         src={mePhoto}
         alt="Ben sitting on a stone bench"
       />
-      <div className={container}>
-        <HeadingOne>
+      <div className={styles.container}>
+        <Heading level={1}>
           <BsFillPersonFill
-            className={icon}
+            className={styles.icon}
             style={{ marginRight: "0.5rem" }}
           />
           About Me
-        </HeadingOne>
+        </Heading>
         <ParagraphText>
           Full stack TypeScript/JavaScript engineer and technical leader with
           experience in AWS services and a variety of other programming
@@ -58,10 +44,10 @@ const IndexPage: FC<IndexProps> = props => {
           <Anchor href="https://www.cinch.co.uk/">Cinch Cars</Anchor> in
           Manchester.
         </ParagraphText>
-        <HeadingTwo>
-          <FaPencilAlt className={icon} />
+        <Heading level={2}>
+          <FaPencilAlt className={styles.icon} />
           Latest Blog Post
-        </HeadingTwo>
+        </Heading>
         <ul>
           <li>
             <ParagraphText>
@@ -71,10 +57,10 @@ const IndexPage: FC<IndexProps> = props => {
             </ParagraphText>
           </li>
         </ul>
-        <HeadingTwo>
-          <FaMapSigns className={icon} />
+        <Heading level={2}>
+          <FaMapSigns className={styles.icon} />
           Find me elsewhere
-        </HeadingTwo>
+        </Heading>
         <ul>
           <ListItem>
             <a href="https://github.com/benwainwright">Github</a>
@@ -83,10 +69,10 @@ const IndexPage: FC<IndexProps> = props => {
             <a href="https://www.linkedin.com/in/bwainwright">LinkedIn</a>
           </ListItem>
         </ul>
-        <HeadingTwo>
-          <HiOutlineMail className={icon} />
+        <Heading level={2}>
+          <HiOutlineMail className={styles.icon} />
           Get in touch
-        </HeadingTwo>
+        </Heading>
         <ParagraphText>
           You can reach me on{" "}
           <Anchor href="mailto:bwainwright28@gmail.com">

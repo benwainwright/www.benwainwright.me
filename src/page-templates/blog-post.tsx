@@ -1,14 +1,11 @@
-import Layout from "../components/layout"
 import { BsFillStarFill } from "react-icons/bs"
-import HeadingOne from "../components/heading-one"
-import Comments from "../components/comments"
 import { Comment as CommentType } from "../comments/utils/comment"
 import { renderAst } from "../utils/render-ast"
-import { getStyles } from "../utils/get-styles"
 import * as styles from "./blog-post.module.css"
 
 import "./prism-theme.css"
 import { ReactNode } from "react"
+import { Comments, Heading, Layout } from "../components"
 
 interface BlogPostProps {
   pageContext: {
@@ -36,47 +33,26 @@ interface BlogPostProps {
 const BlogPost = (props: BlogPostProps) => {
   const isPublished = props.pageContext.entry.frontmatter.published
 
-  const {
-    dateBox,
-    pageContainer,
-    header,
-    headerH1,
-    contentContainer,
-    headingContainer,
-    unpublishedNotice,
-    star,
-  } = getStyles(
-    styles,
-    "pageContainer",
-    "header",
-    "headerH1",
-    "dateBox",
-    "contentContainer",
-    "headingContainer",
-    "unpublishedNotice",
-    "star"
-  )
-
   return (
     <Layout
       title={props.pageContext.entry.frontmatter.title}
       description={props.pageContext.entry.frontmatter.description}
     >
-      <div className={pageContainer}>
-        <header className={header}>
-          <HeadingOne className={headerH1}>
-            <BsFillStarFill className={star} />
-            <div className={headingContainer}>
+      <div className={styles.pageContainer}>
+        <header className={styles.header}>
+          <Heading className={styles.headerH1} level={1}>
+            <BsFillStarFill className={styles.star} />
+            <div className={styles.headingContainer}>
               {props.pageContext.entry.frontmatter.title}
             </div>
-          </HeadingOne>
-          <div className={dateBox}>
+          </Heading>
+          <div className={styles.dateBox}>
             {props.pageContext.entry.frontmatter.date}
           </div>
         </header>
-        <div className={contentContainer}>
+        <div className={styles.contentContainer}>
           {!isPublished && (
-            <div className={unpublishedNotice}>
+            <div className={styles.unpublishedNotice}>
               This post has not yet been published. Please do not share the URL
               without my permission.
             </div>

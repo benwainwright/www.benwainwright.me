@@ -1,44 +1,32 @@
 import { BsFillStarFill } from "react-icons/bs"
 import { BlogSummaryData } from "../../pages/blog"
-import HeadingTwo from "../heading-two"
-import ParagraphText from "../paragraph-text"
+import { ParagraphText } from "../paragraph-text"
 import { Link } from "gatsby"
 import * as styles from "./blog-summary.module.css"
-import { getStyles } from "../../utils/get-styles"
+import { Heading } from "../heading"
 
 interface BlogEntryProps {
   entry: BlogSummaryData
 }
 
-const BlogEntry = (props: BlogEntryProps) => {
-  const {
-    dateContainer,
-    styledStar,
-    blogSummaryGrid,
-    blogSummaryDescription,
-    blogSummaryHeader,
-  } = getStyles(
-    styles,
-    "dateContainer",
-    "styledStar",
-    "blogSummaryGrid",
-    "blogSummaryDescription",
-    "blogSummaryHeader"
-  )
+export const BlogSummary = (props: BlogEntryProps) => {
   return (
-    <article className={blogSummaryGrid}>
-      <BsFillStarFill className={styledStar} />
-      <HeadingTwo className={blogSummaryHeader}>
+    <article className={styles.blogSummaryGrid}>
+      <BsFillStarFill className={styles.styledStar} />
+      <Heading
+        level={2}
+        className={`${styles.heading} ${styles.blogSummaryHeader}`}
+      >
         <Link to={`/blog/${props.entry.frontmatter.slug}`}>
           {props.entry.frontmatter.title}
         </Link>
-      </HeadingTwo>
-      <div className={blogSummaryDescription}>
+      </Heading>
+      <div className={styles.blogSummaryDescription}>
         <ParagraphText>{props.entry.excerpt}</ParagraphText>
-        <div className={dateContainer}>{props.entry.frontmatter.date}</div>
+        <div className={styles.dateContainer}>
+          {props.entry.frontmatter.date}
+        </div>
       </div>
     </article>
   )
 }
-
-export default BlogEntry

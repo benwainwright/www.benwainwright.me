@@ -1,4 +1,3 @@
-import { FC } from "react"
 import { Comment as CommentType } from "../../comments/utils/comment"
 import * as styles from "./comment.module.css"
 
@@ -6,7 +5,7 @@ interface CommentProps {
   comment: CommentType
 }
 
-const Comment: FC<CommentProps> = props => {
+export const Comment = (props: CommentProps) => {
   const date = new Date(props.comment.timestamp * 1000)
   return (
     <p className={styles.commentContainer}>
@@ -19,5 +18,3 @@ const Comment: FC<CommentProps> = props => {
     </p>
   )
 }
-
-export default Comment
