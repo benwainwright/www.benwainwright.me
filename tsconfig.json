@@ -13,7 +13,7 @@
     "noImplicitOverride": true,
     "noUnusedLocals": true,
     "noImplicitReturns": true,
-    "exactOptionalPropertyTypes": true,
+    "exactOptionalPropertyTypes": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "declarationMap": true,
