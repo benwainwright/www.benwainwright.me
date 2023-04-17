@@ -13,10 +13,7 @@ export const BlogSummary = (props: BlogEntryProps) => {
   return (
     <article className={styles.blogSummaryGrid}>
       <BsFillStarFill className={styles.styledStar} />
-      <Heading
-        level={2}
-        className={`${styles.heading} ${styles.blogSummaryHeader}`}
-      >
+      <Heading level={2} className={styles.blogSummaryHeader}>
         <Link
           className={styles.summaryLink}
           to={`/blog/${props.entry.frontmatter.slug}`}

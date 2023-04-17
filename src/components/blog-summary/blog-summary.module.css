@@ -33,7 +33,7 @@
   text-overflow: ellipsis;
 }
 
-.heading.blogSummaryHeader {
+.blogSummaryHeader {
   grid-row: 1;
   grid-column: 2;
   margin: 0;
