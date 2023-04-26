@@ -45,7 +45,7 @@ li {
 li::before {
   content: "•";
   position: absolute;
-  left: -0.7em; /* Adjust this value so that it appears where you want. */
+  left: -0.6em; /* Adjust this value so that it appears where you want. */
   top: -0.05em;
   font-size: 1.7em; /* Adjust this value so that it appears what size you want. */
 }

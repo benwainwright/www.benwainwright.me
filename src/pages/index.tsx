@@ -49,13 +49,13 @@ const IndexPage = (props: IndexProps) => {
           Latest Blog Post
         </Heading>
         <ul>
-          <li>
+          <ListItem>
             <ParagraphText>
               <Link to={`/blog/${entry.frontmatter.slug}`}>
                 {entry.frontmatter.title}
               </Link>
             </ParagraphText>
-          </li>
+          </ListItem>
         </ul>
         <Heading level={2}>
           <FaMapSigns className={styles.icon} />
@@ -63,10 +63,14 @@ const IndexPage = (props: IndexProps) => {
         </Heading>
         <ul>
           <ListItem>
-            <a href="https://github.com/benwainwright">Github</a>
+            <ParagraphText>
+              <Link to="https://github.com/benwainwright">Github</Link>
+            </ParagraphText>
           </ListItem>
           <ListItem>
-            <a href="https://www.linkedin.com/in/bwainwright">LinkedIn</a>
+            <ParagraphText>
+              <Link to="https://www.linkedin.com/in/bwainwright">LinkedIn</Link>
+            </ParagraphText>
           </ListItem>
         </ul>
         <Heading level={2}>

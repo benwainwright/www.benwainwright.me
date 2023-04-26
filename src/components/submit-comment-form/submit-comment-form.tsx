@@ -54,7 +54,7 @@ export const SubmitCommentForm = (props: SubmitCommentsProps) => {
     )
 
   return (
-    <dialog open={props.open}>
+    <dialog open={props.open} className={styles.dialog}>
       <div className={styles.modal}>
         <div className={styles.dialogContainer}>
           <header className={styles.header}>
