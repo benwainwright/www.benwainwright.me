@@ -27,11 +27,6 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       websiteErrorDocument: "index.html",
     })
 
-    new cdk.CfnOutput(this, "bucket-output", {
-      exportName: "bucket",
-      value: bucket.bucketName,
-    })
-
     const zone = route53.HostedZone.fromLookup(this, "MyHostedZone", {
       domainName,
     })
