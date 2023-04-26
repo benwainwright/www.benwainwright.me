@@ -1,13 +1,12 @@
 .paragraphText {
   font-family: "Milliard";
-  line-height: 2rem;
-  font-size: 1.15rem;
+  line-height: 1.6rem;
   margin: 0.5rem 0 1rem 0;
   text-align: left;
 }
 
 @media (max-width: 800px) {
   .paragraphText {
-    line-height: 1.7rem;
+    line-height: 1.6rem;
   }
 }

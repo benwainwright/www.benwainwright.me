@@ -1,4 +1,3 @@
-import { BsFillStarFill } from "react-icons/bs"
 import { Comment as CommentType } from "../comments/utils/comment"
 import { renderAst } from "../utils/render-ast"
 import * as styles from "./blog-post.module.css"
@@ -41,10 +40,7 @@ const BlogPost = (props: BlogPostProps) => {
       <div className={styles.pageContainer}>
         <header className={styles.header}>
           <Heading className={styles.headerH1} level={1}>
-            <BsFillStarFill className={styles.star} />
-            <div className={styles.headingContainer}>
-              {props.pageContext.entry.frontmatter.title}
-            </div>
+            {props.pageContext.entry.frontmatter.title}
           </Heading>
           <div className={styles.dateBox}>
             {props.pageContext.entry.frontmatter.date}

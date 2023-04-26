@@ -2,7 +2,6 @@ code[class*="language-"],
 pre[class*="language-"] {
   color: #5d7079;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  font-size: 1.1em;
   text-align: left;
   white-space: break-spaces;
   word-spacing: normal;
@@ -118,4 +117,11 @@ pre[class*="language-"] {
 
 .token.entity {
   cursor: help;
+}
+
+.gatsby-highlight {
+  margin: 1rem 0;
+  /* background-color: #fdf6e3; */
+  /* border-radius: 0.3em; */
+  /* overflow: auto; */
 }

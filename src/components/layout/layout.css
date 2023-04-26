@@ -32,11 +32,12 @@ a:visited {
 }
 
 ul {
-  margin: 0;
-  padding: 1rem 1.7rem;
+  padding: 0 0 0 1.5rem;
+  margin: 1rem 1.7rem;
 }
 
 li {
+  margin-bottom: 10px;
   list-style-type: none;
   position: relative; /* It's needed for setting position to absolute in the next rule. */
 }

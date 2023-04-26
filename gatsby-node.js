@@ -94,7 +94,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       path: `/blog/${entry.frontmatter.slug}`,
       component: blogPost,
       context: {
-        entry
+        entry,
       },
     })
   })
