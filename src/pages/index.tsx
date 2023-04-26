@@ -78,8 +78,8 @@ const IndexPage = (props: IndexProps) => {
           <Anchor href="mailto:bwainwright28@gmail.com">
             bwainwright28@gmail.com
           </Anchor>
-          . Please note that I&apos;m happilly employed at this time; recruiters
-          will probably be ignored.
+          . I am currently looking for new employment. Interested? Hit me up on
+          LinkedIn (see link above).
         </ParagraphText>
       </div>
     </Layout>

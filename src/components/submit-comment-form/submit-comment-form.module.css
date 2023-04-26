@@ -13,22 +13,26 @@
 .formField {
   margin: 1rem 0 0 0;
   display: flex;
-  border: 1px solid black;
+  font-family: "Milliard";
   border-radius: 5px;
   align-items: center;
+  border: 1px solid rgb(221, 221, 221);
 }
 
 .formButton {
   flex-grow: 999;
   background: 0;
   padding: 0.5rem 1rem;
+  font-family: "Milliard";
   border: 0;
 }
 
 .formTextArea {
   flex-grow: 999;
+  font-family: "Milliard";
   font-size: 1.2rem;
-  border: 1px solid black;
+  border: 1px solid rgb(221, 221, 221);
+
   border-radius: 5px;
   height: 10rem;
 }
@@ -45,6 +49,7 @@
   flex-grow: 999;
   line-height: 2rem;
   border: 0;
+  font-family: "Milliard";
   margin: 0;
   padding: 0;
   font-size: 1.2rem;
