@@ -4,7 +4,7 @@ date: "2023-04-26"
 last_modified: "2023-04-26"
 title: "Return type of the Mac"
 description: "Implicit or explicit return types in TypeScript. What is the right
-thing to do?""
+thing to do?"
 published: false
 ---
 
@@ -14,7 +14,7 @@ If you are reasonably familiar with TypeScript you'll know that _except in certa
 
 In TypeScript, return types are optional because in most cases the compiler is smart enough to work out ("infer") what the return type will be. Let's look at some examples:
 
-```
+```TypeScript
 const myFunc = () => {
    console.log('hello world!')
 }
@@ -42,7 +42,7 @@ This makes sense; you do not need to execute the last function to be absolutely 
 
 If you assign the return value from the second and third function to variables, you'll find that those variables will be assigned the type that has been inferred as the return type of the function. So taking the last example:
 
-```
+```TypeScript
 const baz = (arg: boolean) => {
   if(arg) {
     return "foo"
@@ -58,7 +58,7 @@ If you hover over `returnVal` you'll see it is typed as `"foo" | "baz"`.
 
 So given this knowledge; what happens to the type of `returnVal` if I change the implementation code of `baz()`? Let's have a look:
 
-```
+```TypeScript
 const baz = (arg: boolean) => {
   if(arg) {
     return 1
@@ -76,7 +76,7 @@ The above is a modified version of `baz()`. If you hover your mouse over `return
 
 As an alternative to the above, if we want to we can explicitly specify the return type of a function. So let's use the same examples as the ones we have used above, but this time we'll specify the return type:
 
-```
+```TypeScript
 const myFunc = (): void => {
    console.log('hello world!')
 }
@@ -96,7 +96,7 @@ const baz = (arg: boolean): "foo" | "baz" => {
 
 Note that I've chosen to use the literal type `"foo" | "baz"`, but I could have also used the type `string` (since the values `"foo"` and `"baz"` are both assignable to `string`). What's really interesting here (honest!), is what happens when you change the implementation code. Let's try it:
 
-```
+```TypeScript
 const baz = (arg: boolean): "foo" | "baz" => {
   if(arg) {
     // Error: Type '1' is not assignable to type "foo" | "baz"

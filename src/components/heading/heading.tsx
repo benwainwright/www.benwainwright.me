@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react"
 import * as styles from "./heading.module.css"
+import { titleCase } from "title-case"
 
 const headingSizes = {
   1: "1.9rem",
@@ -18,6 +19,11 @@ export const Heading = (props: HeadingProps) => {
     ? [props.className, styles.heading]
     : [styles.heading]
 
+  const children =
+    typeof props.children === "string"
+      ? titleCase(props.children)
+      : props.children
+
   return React.createElement(
     `h${props.level}`,
     {
@@ -26,6 +32,6 @@ export const Heading = (props: HeadingProps) => {
         fontSize: headingSizes[props.level],
       },
     },
-    props.children
+    children
   )
 }

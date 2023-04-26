@@ -102,7 +102,8 @@
     "unified": "^10.1.0"
   },
   "devDependencies": {
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "title-case": "^3.0.3"
   },
   "keywords": [
     "gatsby"

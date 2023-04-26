@@ -115,18 +115,14 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
 
     const apiPath = value.replace(/\//g, "")
 
-    console.log(`Getting comments for post '${apiPath}'`)
-
-    const { data } = await axios.get(
-      `https://api.benwainwright.me/comments/${apiPath}`
-    )
-
-    console.log(data)
+    // const { data } = await axios.get(
+    //   `https://api.benwainwright.me/comments/${apiPath}`
+    // )
 
     createNodeField({
       name: `comments`,
       node,
-      value: data,
+      value: [],
     })
   }
 }

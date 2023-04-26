@@ -11488,6 +11488,7 @@ __metadata:
     shallow-compare: ^1.2.2
     source-map-support: ^0.5.19
     stack-trace: ^1.0.0-pre1
+    title-case: ^3.0.3
     ts-node: 10.9.1
     typescript: 4.9.4
     typescript-plugin-css-modules: ^4.1.1
@@ -21223,6 +21224,15 @@ resolve@^2.0.0-next.3:
   version: 1.4.2
   resolution: "tinycolor2@npm:1.4.2"
   checksum: 57ed262e08815a4ab0ed933edafdbc6555a17081781766149813b44a080ecbe58b3ee281e81c0e75b42e4d41679f138cfa98eabf043f829e0683c04adb12c031
+  languageName: node
+  linkType: hard
+
+"title-case@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "title-case@npm:3.0.3"
+  dependencies:
+    tslib: ^2.0.3
+  checksum: e8b7ea006b53cf3208d278455d9f1e22c409459d7f9878da324fa3b18cc0aef8560924c19c744e870394a5d9cddfdbe029ebae9875909ee7f4fc562e7cbfc53e
   languageName: node
   linkType: hard
 
