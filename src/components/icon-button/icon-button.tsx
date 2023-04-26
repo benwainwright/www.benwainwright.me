@@ -8,6 +8,7 @@ type IconButtonProps = DetailedHTMLProps<
   HTMLButtonElement
 > & {
   icon: IconType
+  text?: string
 }
 
 export const IconButton = (props: IconButtonProps) => {
@@ -20,6 +21,7 @@ export const IconButton = (props: IconButtonProps) => {
   return (
     <button {...props} className={classes.join(" ")}>
       <Icon className={styles.icon} />
+      {props.text}
     </button>
   )
 }

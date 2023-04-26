@@ -70,10 +70,4 @@
     flex-wrap: wrap;
     padding-left: 0;
   }
-
-  .dateBox {
-    font-size: 1.5rem;
-    padding-left: 0;
-    padding-top: 1rem;
-  }
 }
