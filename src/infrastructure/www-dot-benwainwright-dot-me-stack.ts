@@ -1,6 +1,7 @@
 import * as cdk from "aws-cdk-lib"
 import * as s3 from "aws-cdk-lib/aws-s3"
 import * as route53 from "aws-cdk-lib/aws-route53"
+import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment"
 import * as route53Targets from "aws-cdk-lib/aws-route53-targets"
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront"
 import * as lambdaNodeJs from "aws-cdk-lib/aws-lambda-nodejs"
@@ -8,6 +9,9 @@ import * as apiGateway from "aws-cdk-lib/aws-apigateway"
 import * as certificateManager from "aws-cdk-lib/aws-certificatemanager"
 import { ARecord, RecordTarget } from "aws-cdk-lib/aws-route53"
 import { ApiGatewayDomain } from "aws-cdk-lib/aws-route53-targets"
+import { Source } from "aws-cdk-lib/aws-s3-deployment"
+import { Duration } from "aws-cdk-lib"
+import path from "path"
 
 export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
   public constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -70,6 +74,16 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
         ),
       }
     )
+
+    // eslint-disable-next-line unicorn/prefer-module
+    const publicDir = path.join(__dirname, "..", "..", "public")
+
+    new s3Deployment.BucketDeployment(this, `bucket-deployment`, {
+      sources: [Source.asset(publicDir)],
+      destinationBucket: bucket,
+      distribution,
+      cacheControl: [s3Deployment.CacheControl.maxAge(Duration.days(365))],
+    })
 
     new cdk.CfnOutput(this, "api-output", {
       exportName: "distribution",
