@@ -3840,6 +3840,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-icons/all-files@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@react-icons/all-files@npm:4.1.0"
+  peerDependencies:
+    react: "*"
+  checksum: c34c644650a144e4f2157c20b3106200ac1f76b3132dcda1a40f061e000a34c78df188266395afae571d5c85bf48365824db7b1bf8b7ae6229fdc148c941ab85
+  languageName: node
+  linkType: hard
+
 "@sideway/address@npm:^4.1.0":
   version: 4.1.2
   resolution: "@sideway/address@npm:4.1.2"
@@ -11117,6 +11126,7 @@ __metadata:
     "@linaria/core": 3.0.0-beta.4
     "@linaria/shaker": 3.0.0-beta.7
     "@mikaelkristiansson/domready": 1.0.11
+    "@react-icons/all-files": ^4.1.0
     "@testing-library/jest-dom": 5.14.1
     "@testing-library/react": 12.1.2
     "@types/aws-lambda": 8.10.84
@@ -11192,7 +11202,6 @@ __metadata:
     react: 17.0.1
     react-dom: 17.0.1
     react-helmet: 6.1.0
-    react-icons: 4.2.0
     react-spinners: 0.11.0
     rehype-highlight: 5.0.0
     rehype-react: 7.0.3
@@ -18431,15 +18440,6 @@ __metadata:
   peerDependencies:
     react: ">=16.3.0"
   checksum: a4998479dab7fc1c2799eddefb1870a9d881b5f71cfdf97979a9882e42f4bb50402d55335f308f461e735e01a06f46b16cc7b4e6bcb22c7a4a6f85a753c5c106
-  languageName: node
-  linkType: hard
-
-"react-icons@npm:4.2.0":
-  version: 4.2.0
-  resolution: "react-icons@npm:4.2.0"
-  peerDependencies:
-    react: "*"
-  checksum: 2b42d9b0ac85a57f8de28819b5f452b2c851f4caec09a855596d47557b775a434802fce1f3dc3811eebf46cf4d7c79fa4650330d5772345d6839f86c83afc01d
   languageName: node
   linkType: hard
 

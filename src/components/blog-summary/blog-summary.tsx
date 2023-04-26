@@ -1,4 +1,4 @@
-import { BsFillStarFill } from "react-icons/bs"
+import { BsFillStarFill } from "@react-icons/all-files/bs/BsFillStarFill"
 import { BlogSummaryData } from "../../pages/blog"
 import { ParagraphText } from "../paragraph-text"
 import { Link } from "gatsby"

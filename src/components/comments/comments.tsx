@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { BiMessageAdd } from "react-icons/bi"
+import { BiMessageAdd } from "@react-icons/all-files/bi/BiMessageAdd"
 import { Comment } from "../comment"
 import * as styles from "./comments.module.css"
 import { Comment as CommentType } from "../../comments/utils/comment"

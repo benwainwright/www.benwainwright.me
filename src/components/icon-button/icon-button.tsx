@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react"
-import { IconType } from "react-icons/lib"
+import { IconType } from "@react-icons/all-files/lib"
 
 import * as styles from "./icon-button.module.css"
 

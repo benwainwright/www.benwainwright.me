@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useFormik } from "formik"
 import axios from "axios"
-import { IoMdClose } from "react-icons/io"
+import { IoMdClose } from "@react-icons/all-files/io/IoMdClose"
 import { assertComment } from "../../comments/utils/comment"
 import BeatLoader from "react-spinners/BeatLoader"
 import { ParagraphText } from "../paragraph-text"

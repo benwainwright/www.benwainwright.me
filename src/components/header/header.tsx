@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "gatsby"
-import { HiOutlineMenu } from "react-icons/hi"
+import { HiOutlineMenu } from "@react-icons/all-files/hi/HiOutlineMenu"
 import * as styles from "./header.module.css"
 import { IconButton } from "../icon-button"
 
