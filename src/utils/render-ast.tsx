@@ -14,6 +14,9 @@ const processor = unified().use(rehypeReact, {
     h2: (props: { children: ReactNode }) => (
       <Heading level={3}>{props.children}</Heading>
     ),
+    h3: (props: { children: ReactNode }) => (
+      <Heading level={4}>{props.children}</Heading>
+    ),
     p: ParagraphText,
     li: ListItem,
     a: Anchor,

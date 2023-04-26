@@ -5,7 +5,8 @@ import { titleCase } from "title-case"
 const headingSizes = {
   1: "1.9rem",
   2: "1.5rem",
-  3: "1.1rem",
+  3: "1.3rem",
+  4: "1rem",
 } as const
 
 interface HeadingProps {
