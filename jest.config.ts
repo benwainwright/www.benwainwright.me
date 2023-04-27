@@ -1,6 +1,5 @@
-import { Config } from "@jest/types"
 
-const config: Config.InitialOptions = {
+const config = {
   resetMocks: true,
   collectCoverage: true,
   coverageDirectory: "coverage",
