@@ -12,7 +12,7 @@
   display: grid;
   grid-template-rows: 1.5rem;
   grid-template-columns: 1.5rem calc(100% - 1.5rem - 1rem);
-  gap: 0.5rem 1rem;
+  gap: 0.5rem 0.5rem;
 }
 
 .styledStar {
@@ -20,6 +20,7 @@
   grid-column: 1;
   width: 100%;
   height: 100%;
+  color: var(--color-primary)
 }
 
 .blogSummaryDescription {
@@ -31,10 +32,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-decoration: none;
 }
 
 .blogSummaryHeader {
   grid-row: 1;
   grid-column: 2;
+  color: var(--color-primary);
   margin: 0;
 }

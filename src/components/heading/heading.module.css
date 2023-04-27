@@ -3,8 +3,9 @@
     font-family: "Aileron";
     font-weight: bold;
     letter-spacing: 2px;
-    margin: 2rem 0 1rem 0;
+    margin: 2rem 0  0;
     display: flex;
+    color: var(--color-primary-dark);
     align-items: center;
   }
 
