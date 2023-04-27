@@ -25,5 +25,5 @@ const processor = unified().use(rehypeReact, {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const renderAst = (ast: any): JSX.Element => {
-  return processor.stringify(ast) as JSX.Element
+  return processor.stringify(ast) as unknown as JSX.Element
 }
