@@ -77,6 +77,7 @@
     "gatsby-transformer-sharp": "5.9.0",
     "http-status-codes": "2.1.4",
     "jest": "29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
     "jest-extended": "1.1.0",
     "jest-transform-stub": "2.0.0",
     "linaria": "2.1.0",
