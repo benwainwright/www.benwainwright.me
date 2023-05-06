@@ -1,9 +1,9 @@
 import { graphql, Link } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
 import { BsFillPersonFill } from "@react-icons/all-files/bs/BsFillPersonFill"
 import { FaPencilAlt } from "@react-icons/all-files/fa/FaPencilAlt"
 import { FaMapSigns } from "@react-icons/all-files/fa/FaMapSigns"
 import { HiOutlineMail } from "@react-icons/all-files/hi/HiOutlineMail"
-import mePhoto from "../assets/images/me.jpg"
 import { Anchor, Heading, Layout, ListItem, ParagraphText } from "../components"
 import { BlogSummaryData } from "./blog"
 import * as styles from "./index.module.css"
@@ -25,9 +25,11 @@ const IndexPage = (props: IndexProps) => {
 
   return (
     <Layout title="Home">
-      <img
+      <StaticImage
         className={styles.decorativePhoto}
-        src={mePhoto}
+        src={"../assets/images/me.jpg"}
+        objectPosition="top"
+        loading="eager"
         alt="Ben sitting on a stone bench"
       />
       <div className={styles.container}>

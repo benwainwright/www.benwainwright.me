@@ -16,9 +16,9 @@ const ThisSite = () => {
             can be found on Github.
           </ListItem>
           <ListItem>
-            This site is a statically generated website built using{" "}
-            <Anchor href="https://www.gatsbyjs.com/">Gatsby</Anchor>,{" "}
-            <Anchor href="https://www.typescriptlang.org/">TypeScript</Anchor>{" "}
+            This site is an entirely serverless statically generated website
+            built using <Anchor href="https://www.gatsbyjs.com/">Gatsby</Anchor>
+            , <Anchor href="https://www.typescriptlang.org/">TypeScript</Anchor>{" "}
             and <Anchor href="https://reacjs.org">React</Anchor>
           </ListItem>
 
