@@ -4,7 +4,6 @@ import { TiPencil } from "@react-icons/all-files/ti/TiPencil"
 import { Layout, BlogSummary, Heading } from "../components"
 
 import * as styles from "./blog.module.css"
-import { getStyles } from "../utils/get-styles"
 
 export interface BlogSummaryData {
   excerpt: string
@@ -25,20 +24,14 @@ interface BlogProps {
 }
 
 const Blog: FC<BlogProps> = props => {
-  const { blogContainer, pageContainer, icon } = getStyles(
-    styles,
-    "icon",
-    "blogContainer",
-    "pageContainer"
-  )
   return (
     <Layout title="Blog">
-      <div className={pageContainer}>
+      <div className={styles.pageContainer}>
         <Heading level={1}>
-          <TiPencil className={icon} />
+          <TiPencil className={styles.icon} />
           Blog
         </Heading>
-        <div className={blogContainer}>
+        <div className={styles.blogContainer}>
           {props.data.allMarkdownRemark.nodes.map(entry => (
             <BlogSummary entry={entry} key={entry.frontmatter.slug} />
           ))}
@@ -53,7 +46,7 @@ export default Blog
 export const pageQuery = graphql`
   query {
     allMarkdownRemark(
-      sort: { order: DESC, fields: frontmatter___date }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { published: { ne: false } } }
     ) {
       nodes {
