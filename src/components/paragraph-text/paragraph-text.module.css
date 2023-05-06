@@ -5,6 +5,10 @@
   text-align: left;
 }
 
+li .paragraphText {
+  margin: 0;
+}
+
 @media (max-width: 800px) {
   .paragraphText {
     line-height: 1.6rem;

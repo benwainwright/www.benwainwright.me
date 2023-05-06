@@ -75,6 +75,13 @@ const IndexPage = (props: IndexProps) => {
               <Link to="https://www.linkedin.com/in/bwainwright">LinkedIn</Link>
             </ParagraphText>
           </ListItem>
+          <ListItem>
+            <ParagraphText>
+              <Link to="https://stackoverflow.com/users/3104399/ben-wainwright">
+                Stack Overflow
+              </Link>
+            </ParagraphText>
+          </ListItem>
         </ul>
         <Heading level={2}>
           <HiOutlineMail className={styles.icon} />
