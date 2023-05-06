@@ -26,8 +26,8 @@ const IndexPage = (props: IndexProps) => {
   return (
     <Layout title="Home">
       <StaticImage
-        className={styles.decorativePhoto}
         src={"../assets/images/me.jpg"}
+        className={styles.decorativePhoto}
         objectPosition="top"
         loading="eager"
         alt="Ben sitting on a stone bench"
