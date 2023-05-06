@@ -57,47 +57,6 @@ li::before {
 }
 
 @font-face {
-  font-family: "Aileron";
-  font-style: normal;
-  font-display: swap;
-  font-weight: normal;
-  src: local("Aileron"), url("../../assets/fonts/aileron/Aileron-Regular.otf");
-}
-
-@font-face {
-  font-family: "Aileron";
-  font-display: swap;
-  font-style: normal;
-  font-weight: lighter;
-  src: local("Aileron"), url("../../assets/fonts/aileron/Aileron-Light.otf");
-}
-
-@font-face {
-  font-family: "Aileron";
-  font-display: swap;
-  font-style: normal;
-  font-weight: bold;
-  src: local("Aileron"), url("../../assets/fonts/aileron/Aileron-Bold.otf");
-}
-
-@font-face {
-  font-family: "Aileron";
-  font-display: swap;
-  font-style: italic;
-  font-weight: normal;
-  src: local("Aileron"), url("../../assets/fonts/aileron/Aileron-Italic.otf");
-}
-
-@font-face {
-  font-family: "Aileron";
-  font-display: swap;
-  font-style: italic;
-  font-weight: bold;
-  src: local("Aileron"),
-    url("../../assets/fonts/aileron/Aileron-BoldItalic.otf");
-}
-
-@font-face {
   font-family: "Milliard";
   font-style: normal;
   font-display: swap;
