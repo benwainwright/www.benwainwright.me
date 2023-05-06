@@ -1,5 +1,6 @@
 import * as cdk from "aws-cdk-lib"
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb"
+import { BackendConfig } from "../types/backend-config"
 import * as route53 from "aws-cdk-lib/aws-route53"
 import * as route53Targets from "aws-cdk-lib/aws-route53-targets"
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront"
@@ -19,7 +20,7 @@ import {
 import { Duration } from "aws-cdk-lib"
 import path from "path"
 import { UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito"
-import { Bucket } from "aws-cdk-lib/aws-s3"
+import { Bucket, HttpMethods } from "aws-cdk-lib/aws-s3"
 
 export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
   public constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -42,8 +43,18 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       bucketName: domainName,
       publicReadAccess: true,
       websiteIndexDocument: "index.html",
-
       websiteErrorDocument: "index.html",
+      cors: [
+        {
+          allowedMethods: [HttpMethods.GET],
+          allowedOrigins: [
+            "http://localhost:8000",
+            "https://benwainwright.me",
+            "https://www.benwainwright.me",
+          ],
+          allowedHeaders: [`*`],
+        },
+      ],
     })
 
     const zone = route53.HostedZone.fromLookup(this, "MyHostedZone", {
@@ -67,7 +78,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       },
     })
 
-    new UserPoolClient(this, "pool-client", {
+    const client = new UserPoolClient(this, "pool-client", {
       userPool: pool,
       oAuth: {
         flows: {
@@ -115,6 +126,24 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
     // eslint-disable-next-line unicorn/prefer-module
     const publicDir = path.join(__dirname, "..", "..", "public")
 
+    const config: BackendConfig = {
+      authSignInUrl: userPoolDomain.signInUrl(client, {
+        redirectUri: `https://${domainName}/`,
+      }),
+
+      authSignInUrlForLocal: userPoolDomain.signInUrl(client, {
+        redirectUri: `http://localhost:8000`,
+      }),
+      authSignOutUrl: userPoolDomain.signInUrl(client, {
+        redirectUri: `https://${domainName}/`,
+        signInPath: "/logout",
+      }),
+      authSignOutUrlForLocal: userPoolDomain.signInUrl(client, {
+        redirectUri: `http://localhost:8000`,
+        signInPath: "/logout",
+      }),
+    }
+
     new BucketDeployment(this, `bucket-deployment-for-everything-else`, {
       sources: [Source.asset(publicDir, { exclude: ["*.html"] })],
       destinationBucket: bucket,
@@ -128,6 +157,13 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       destinationBucket: bucket,
       distribution,
       cacheControl: [CacheControl.noCache()],
+      prune: false,
+    })
+
+    new BucketDeployment(this, "deployment", {
+      destinationBucket: bucket,
+      distribution,
+      sources: [Source.jsonData("config.json", config)],
       prune: false,
     })
 
