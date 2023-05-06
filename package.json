@@ -25,6 +25,7 @@
     "gatsby-legacy-polyfills": "3.9.0",
     "gatsby-plugin-feed": "5.9.0",
     "gatsby-plugin-gatsby-cloud": "^5.9.0",
+    "gatsby-plugin-google-tagmanager": "^5.9.0",
     "gatsby-plugin-image": "^3.9.0",
     "gatsby-plugin-react-helmet": "^6.9.0",
     "gatsby-plugin-sharp": "^5.9.0",
