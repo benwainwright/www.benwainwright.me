@@ -91,24 +91,24 @@ const IndexPage = (props: IndexProps) => {
   )
 }
 
-// export const pageQuery = graphql`
-//   query {
-//     allMarkdownRemark(
-//       sort: { order: DESC, fields: frontmatter___date }
-//       filter: { frontmatter: { published: { ne: false } } }
-//       limit: 1
-//     ) {
-//       nodes {
-//         excerpt
-//         frontmatter {
-//           date(formatString: "MMMM DD, YYYY")
-//           published
-//           slug
-//           title
-//         }
-//       }
-//     }
-//   }
-// `
+export const pageQuery = graphql`
+  query {
+    allMarkdownRemark(
+      sort: { order: DESC, fields: frontmatter___date }
+      filter: { frontmatter: { published: { ne: false } } }
+      limit: 1
+    ) {
+      nodes {
+        excerpt
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          published
+          slug
+          title
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage

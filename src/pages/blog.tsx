@@ -50,21 +50,21 @@ const Blog: FC<BlogProps> = props => {
 
 export default Blog
 
-// export const pageQuery = graphql`
-//   query {
-//     allMarkdownRemark(
-//       sort: { order: DESC, fields: frontmatter___date }
-//       filter: { frontmatter: { published: { ne: false } } }
-//     ) {
-//       nodes {
-//         excerpt
-//         frontmatter {
-//           date(formatString: "MMMM DD, YYYY")
-//           published
-//           slug
-//           title
-//         }
-//       }
-//     }
-//   }
-// `
+export const pageQuery = graphql`
+  query {
+    allMarkdownRemark(
+      sort: { order: DESC, fields: frontmatter___date }
+      filter: { frontmatter: { published: { ne: false } } }
+    ) {
+      nodes {
+        excerpt
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          published
+          slug
+          title
+        }
+      }
+    }
+  }
+`
