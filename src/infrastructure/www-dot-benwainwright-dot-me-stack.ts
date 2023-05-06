@@ -74,10 +74,17 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
     const publicDir = path.join(__dirname, "..", "..", "public")
 
     new s3Deployment.BucketDeployment(this, `bucket-deployment`, {
-      sources: [Source.asset(publicDir)],
+      sources: [Source.asset(publicDir, { exclude: ["*.html"] })],
       destinationBucket: bucket,
       distribution,
       cacheControl: [s3Deployment.CacheControl.maxAge(Duration.days(365))],
+    })
+
+    new s3Deployment.BucketDeployment(this, `bucket-deployment`, {
+      sources: [Source.asset(publicDir, { exclude: ["*", "!*.html"] })],
+      destinationBucket: bucket,
+      distribution,
+      cacheControl: [s3Deployment.CacheControl.noCache()],
     })
 
     new cdk.CfnOutput(this, "api-output", {
