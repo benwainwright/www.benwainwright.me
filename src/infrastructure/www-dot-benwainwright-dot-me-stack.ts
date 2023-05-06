@@ -1,17 +1,25 @@
 import * as cdk from "aws-cdk-lib"
-import * as s3 from "aws-cdk-lib/aws-s3"
+import * as dynamodb from "aws-cdk-lib/aws-dynamodb"
 import * as route53 from "aws-cdk-lib/aws-route53"
-import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment"
 import * as route53Targets from "aws-cdk-lib/aws-route53-targets"
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront"
 import * as lambdaNodeJs from "aws-cdk-lib/aws-lambda-nodejs"
 import * as apiGateway from "aws-cdk-lib/aws-apigateway"
 import * as certificateManager from "aws-cdk-lib/aws-certificatemanager"
 import { ARecord, RecordTarget } from "aws-cdk-lib/aws-route53"
-import { ApiGatewayDomain } from "aws-cdk-lib/aws-route53-targets"
-import { Source } from "aws-cdk-lib/aws-s3-deployment"
+import {
+  ApiGatewayDomain,
+  UserPoolDomainTarget,
+} from "aws-cdk-lib/aws-route53-targets"
+import {
+  BucketDeployment,
+  CacheControl,
+  Source,
+} from "aws-cdk-lib/aws-s3-deployment"
 import { Duration } from "aws-cdk-lib"
 import path from "path"
+import { UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito"
+import { Bucket } from "aws-cdk-lib/aws-s3"
 
 export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
   public constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -19,7 +27,18 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
 
     const domainName = "benwainwright.me"
 
-    const bucket = new s3.Bucket(this, "BensStaticWebsiteBucket", {
+    const pagesTable = new dynamodb.Table(this, `my-site-pages-table`, {
+      partitionKey: {
+        name: "slug",
+        type: dynamodb.AttributeType.STRING,
+      },
+    })
+
+    const pool = new UserPool(this, "user-pool", {
+      selfSignUpEnabled: false,
+    })
+
+    const bucket = new Bucket(this, "BensStaticWebsiteBucket", {
       bucketName: domainName,
       publicReadAccess: true,
       websiteIndexDocument: "index.html",
@@ -37,9 +56,32 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       {
         domainName,
         hostedZone: zone,
-        subjectAlternativeNames: [`www.${domainName}`],
+        subjectAlternativeNames: [`www.${domainName}`, `auth.${domainName}`],
       }
     )
+
+    const userPoolDomain = pool.addDomain("user-pool-domain", {
+      customDomain: {
+        domainName: `auth.${domainName}`,
+        certificate,
+      },
+    })
+
+    new UserPoolClient(this, "pool-client", {
+      userPool: pool,
+      oAuth: {
+        flows: {
+          implicitCodeGrant: true,
+        },
+        callbackUrls: [`https://${domainName}/`, `http://localhost:8000`],
+      },
+    })
+
+    new ARecord(this, "a-record-for-cognito", {
+      recordName: `auth.${domainName}`,
+      zone,
+      target: RecordTarget.fromAlias(new UserPoolDomainTarget(userPoolDomain)),
+    })
 
     const apiCertificate = new certificateManager.DnsValidatedCertificate(
       this,
@@ -73,18 +115,20 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
     // eslint-disable-next-line unicorn/prefer-module
     const publicDir = path.join(__dirname, "..", "..", "public")
 
-    new s3Deployment.BucketDeployment(this, `bucket-deployment`, {
+    new BucketDeployment(this, `bucket-deployment-for-everything-else`, {
       sources: [Source.asset(publicDir, { exclude: ["*.html"] })],
       destinationBucket: bucket,
       distribution,
-      cacheControl: [s3Deployment.CacheControl.maxAge(Duration.days(365))],
+      cacheControl: [CacheControl.maxAge(Duration.days(365))],
+      prune: false,
     })
 
-    new s3Deployment.BucketDeployment(this, `bucket-deployment`, {
+    new BucketDeployment(this, `bucket-deployment-for-html`, {
       sources: [Source.asset(publicDir, { exclude: ["*", "!*.html"] })],
       destinationBucket: bucket,
       distribution,
-      cacheControl: [s3Deployment.CacheControl.noCache()],
+      cacheControl: [CacheControl.noCache()],
+      prune: false,
     })
 
     new cdk.CfnOutput(this, "api-output", {
@@ -105,7 +149,7 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       recordName: "www.benwainwright.me",
     })
 
-    const commentsBucket = new s3.Bucket(this, "comments-bucket")
+    const commentsBucket = new Bucket(this, "comments-bucket")
 
     const commentsFunction = new lambdaNodeJs.NodejsFunction(
       this,
