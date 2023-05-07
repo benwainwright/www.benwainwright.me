@@ -1,4 +1,4 @@
-import { Comment as CommentType } from "../../backend/utils/comment"
+import { Comment as CommentType } from "../../backend/comments/utils/comment"
 import * as styles from "./comment.module.css"
 
 interface CommentProps {
