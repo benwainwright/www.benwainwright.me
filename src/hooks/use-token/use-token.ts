@@ -22,7 +22,9 @@ export const useToken = ({ redirectIfNotPresent }: TokenOptions) => {
   })
   const { config } = useConfig()
 
-  const params = getHashVars(window.location.hash)
+  const params = getHashVars(
+    typeof window !== "undefined" ? window.location.hash : ""
+  )
 
   if (!token && config) {
     if ("id_token" in params) {
