@@ -11,7 +11,7 @@ interface TextAreaProps {
 
 export const TextArea = ({ name, onChange, value, label }: TextAreaProps) => {
   return (
-    <FieldContainer label={label} name={name}>
+    <FieldContainer label={label} name={name} vertical>
       <textarea
         className={styles.textarea}
         name={name}

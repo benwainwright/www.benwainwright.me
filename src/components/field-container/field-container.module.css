@@ -1,0 +1,26 @@
+.field {
+  margin: 1rem 0 0 0;
+  display: flex;
+  font-family: "Milliard";
+  border-radius: 5px;
+  align-items: center;
+  border: 1px solid rgb(221, 221, 221);
+}
+
+.field.vertical {
+  flex-direction: column;
+}
+
+.label.vertical {
+  width: 100%;
+  margin: 0;
+  padding: 0 0.5rem;
+}
+
+.label {
+  font-family: "Milliard";
+  margin: 0 1rem 0 0.5rem;
+  line-height: 1.5rem;
+  padding: 0;
+  width: 3rem;
+}
