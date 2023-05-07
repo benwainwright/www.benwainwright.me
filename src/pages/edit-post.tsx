@@ -4,15 +4,20 @@ import { useApiRequest } from "../hooks/use-api-request/use-api-request"
 import { SerialisedPage } from "../types/page"
 import * as styles from "./edit-post.module.css"
 import loadable from "@loadable/component"
+import { useEffect, useState } from "react"
 const EditPostForm = loadable(
   async () => import("../components/edit-post-form/edit-post-form")
 )
 
 const EditPost = () => {
-  const slug = window.location.hash.slice(1)
+  const [slug, setSlug] = useState("")
+
+  useEffect(() => {
+    setSlug(window.location.hash.slice(1))
+  }, [])
 
   const { data: serialisedPage, isLoading } = useApiRequest<SerialisedPage>(
-    `page/${slug}`
+    slug && `page/${slug}`
   )
 
   const page = serialisedPage && {
