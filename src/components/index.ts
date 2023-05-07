@@ -11,4 +11,4 @@ export { ListItem } from "./list-item"
 export { ParagraphText } from "./paragraph-text"
 export { Seo } from "./seo"
 export { SubmitCommentForm } from "./submit-comment-form"
-
+export { Input } from "./input"

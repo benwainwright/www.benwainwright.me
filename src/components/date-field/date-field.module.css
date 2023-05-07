@@ -1,0 +1,10 @@
+.dateField {
+  flex-grow: 999;
+  line-height: 2rem;
+  border: 0;
+  font-family: "Milliard";
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+  background: 0;
+}

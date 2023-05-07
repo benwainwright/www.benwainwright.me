@@ -8,6 +8,8 @@ import { ParagraphText } from "../paragraph-text"
 import * as styles from "./submit-comment-form.module.css"
 import { IconButton } from "../icon-button"
 import { Heading } from "../heading"
+import { Input } from "../input"
+import { TextArea } from "../textarea"
 
 const COMMENTS_API = `https://api.benwainwright.me/comments`
 
@@ -73,49 +75,26 @@ export const SubmitCommentForm = (props: SubmitCommentsProps) => {
           <div className={styles.container}>
             {sentState === "Ready" ? (
               <form onSubmit={formik.handleSubmit} className={styles.formGrid}>
-                <div className={styles.formField}>
-                  <label className={styles.formLabel} htmlFor="author">
-                    Name
-                  </label>
-                  <input
-                    className={styles.formInput}
-                    type="text"
-                    name="author"
-                    required
-                    id="author"
-                    onChange={formik.handleChange}
-                    value={formik.values.author}
-                  />
-                </div>
+                <Input
+                  label="Author"
+                  name="author"
+                  onChange={formik.handleChange}
+                  value={formik.values.author}
+                />
 
-                <div className={styles.formField}>
-                  <label className={styles.formLabel} htmlFor="email">
-                    Email
-                  </label>
+                <Input
+                  label="Email"
+                  name="email"
+                  onChange={formik.handleChange}
+                  value={formik.values.author}
+                />
 
-                  <input
-                    className={styles.formInput}
-                    type="email"
-                    required
-                    name="email"
-                    id="email"
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                  />
-                </div>
-
-                <div className={styles.commentDescription}>
-                  <label className={styles.formLabel} htmlFor="comment">
-                    Comment
-                  </label>
-                  <textarea
-                    className={styles.formTextArea}
-                    name="message"
-                    id="message"
-                    onChange={formik.handleChange}
-                    value={formik.values.message}
-                  ></textarea>
-                </div>
+                <TextArea
+                  label="Comment"
+                  name="message"
+                  onChange={formik.handleChange}
+                  value={formik.values.message}
+                />
                 <div className={styles.formField}>
                   <button className={styles.formButton} type="submit">
                     Save

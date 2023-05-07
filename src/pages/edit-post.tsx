@@ -30,9 +30,7 @@ const EditPost = () => {
     <Layout title="Edit Post">
       <div className={styles.pageContainer}>
         <header className={styles.header}>
-          <Heading className={styles.headerH1} level={1}>
-            Edit Post
-          </Heading>
+          <Heading level={1}>Edit Post</Heading>
         </header>
         {isLoading ? (
           <ClipLoader
