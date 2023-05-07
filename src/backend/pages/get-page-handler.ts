@@ -1,17 +1,10 @@
-import { APIGatewayProxyEvent, APIGatewayProxyHandler } from "aws-lambda"
+import { APIGatewayProxyHandler } from "aws-lambda"
 import { httpResponse } from "../utils/http-response"
 import { PAGES_TABLE, SLUG } from "../../constants"
 import { getEnv } from "../utils/get-env"
 import { DynamoDB } from "@aws-sdk/client-dynamodb"
 import { DynamoDBDocument, QueryCommand } from "@aws-sdk/lib-dynamodb"
-
-const getSlug = (event: APIGatewayProxyEvent) => {
-  if (event.pathParameters) {
-    return event.pathParameters[SLUG]
-  }
-
-  throw new Error("Slug not found")
-}
+import { getSlug } from "./get-slug"
 
 export const getPage: APIGatewayProxyHandler = async event => {
   const table = getEnv(PAGES_TABLE)

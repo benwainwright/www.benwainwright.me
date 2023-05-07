@@ -1,32 +1,34 @@
 import useSWR from "swr"
 import { useToken } from "../use-token/use-token"
 import { useConfig } from "../use-config/use-config"
+import { makeFetcher } from "../../utils/make-fetcher"
 
-export const useApiRequest = <T>(path: string) => {
-  const token = useToken({ redirectIfNotPresent: false })
-  const { config } = useConfig()
-  const fetcher = async <R>(init?: RequestInit): Promise<R> => {
-    const fullPath = `https://${config?.apiUrl}/${path}`
+interface Options {
+  trigger?: boolean
+  resource: string
+  id?: string
+}
 
-    const withToken = {
-      headers: {
-        authorization: token,
-      },
-    }
-
-    const finalInit = init ? { ...init, ...withToken } : withToken
-
-    const response = await fetch(fullPath, finalInit)
-
-    const data = await response.json()
-
-    if (!response.ok) {
-      throw new Error(
-        `Tried to make a request to ${fullPath} but the server returned a ${response.status} status code with the message "${data.error}"`
-      )
-    }
-    return data
+const getPath = (
+  trigger: boolean,
+  resource: string,
+  id: string | undefined
+) => {
+  if (!trigger) {
+    return false
   }
 
+  if (!id) {
+    return resource
+  }
+
+  return `${resource}/${id}`
+}
+
+export const useApiRequest = <T>({ trigger = true, resource, id }: Options) => {
+  const path = getPath(trigger, resource, id)
+  const token = useToken({ redirectIfNotPresent: false })
+  const { config } = useConfig()
+  const fetcher = makeFetcher(config, path, token)
   return useSWR<T>(config && token && path, fetcher)
 }

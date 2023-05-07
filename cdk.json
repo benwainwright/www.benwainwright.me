@@ -1,4 +1,7 @@
 {
   "app": "npx ts-node  --project tsconfig.cdk.json src/infrastructure/entry-point.ts",
-  "context": {}
+  "context": {},
+  "watch": {
+    "include": ["./src/backend/**", "./src/infrastructure/**"]
+  }
 }

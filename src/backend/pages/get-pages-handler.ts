@@ -5,6 +5,7 @@ import { getEnv } from "../utils/get-env"
 import { DynamoDB } from "@aws-sdk/client-dynamodb"
 import { DynamoDBDocument, ScanCommand } from "@aws-sdk/lib-dynamodb"
 
+
 export const getPages: APIGatewayProxyHandler = async () => {
   const table = getEnv(PAGES_TABLE)
 

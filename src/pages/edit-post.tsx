@@ -16,14 +16,18 @@ const EditPost = () => {
     setSlug(window.location.hash.slice(1))
   }, [])
 
-  const { data: serialisedPage, isLoading } = useApiRequest<SerialisedPage>(
-    slug && `page/${slug}`
-  )
+  const { data: serialisedPage, isLoading } = useApiRequest<SerialisedPage>({
+    trigger: Boolean(slug),
+    resource: "page",
+    id: slug,
+  })
 
   const page = serialisedPage && {
     ...serialisedPage,
-    date: serialisedPage?.date && new Date(serialisedPage?.date),
-    published: serialisedPage?.published && new Date(serialisedPage.published),
+    date: new Date(serialisedPage?.date),
+    published: serialisedPage?.published
+      ? new Date(serialisedPage.published)
+      : undefined,
   }
 
   return (

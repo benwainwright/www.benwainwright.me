@@ -6,13 +6,12 @@ import * as styles from "./blog-backend.module.css"
 import { PageTableRow } from "../components/page-table-row/page-table-row"
 
 const BlogBackend = () => {
-  const { data: serialisedPages, isLoading } = useApiRequest<SerialisedPage[]>(
-    "page"
-  )
+  const { data: serialisedPages, isLoading } = useApiRequest<SerialisedPage[]>({
+    resource: "page",
+  })
 
   const pages = serialisedPages?.map(page => ({
     ...page,
-    published: page.published && new Date(page.published),
     date: new Date(page.date),
   }))
 

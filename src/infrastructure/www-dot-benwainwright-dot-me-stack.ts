@@ -53,6 +53,10 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
       },
     })
 
+    const updatePageFunction = new NodejsFunction(this, "update-page", {
+      environment: { [PAGES_TABLE]: pagesTable.tableName },
+    })
+
     const getPagesFunction = new NodejsFunction(this, "get-pages", {
       environment: { [PAGES_TABLE]: pagesTable.tableName },
     })
@@ -61,6 +65,7 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
       environment: { [PAGES_TABLE]: pagesTable.tableName },
     })
 
+    pagesTable.grantReadWriteData(updatePageFunction)
     pagesTable.grantReadData(getPagesFunction)
     pagesTable.grantReadData(getPageFunction)
 
@@ -246,20 +251,18 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
     })
 
     const pages = api.root.addResource("page")
-
     const page = pages.addResource("{slug}")
-    page.addMethod("GET", new LambdaIntegration(getPageFunction))
 
+    pages.addMethod("POST", new LambdaIntegration(updatePageFunction))
+    page.addMethod("PUT", new LambdaIntegration(updatePageFunction))
+
+    page.addMethod("GET", new LambdaIntegration(getPageFunction))
     pages.addMethod("GET", new LambdaIntegration(getPagesFunction))
 
     const comments = api.root.addResource("comments")
-
     const comment = comments.addResource("{post_slug}")
-
     comment.addMethod("POST", new LambdaIntegration(commentsFunction))
-
     comment.addMethod("GET", new LambdaIntegration(listCommentsFunction))
-
     const apiDomainName = api.addDomainName("bens-website-api", {
       domainName: apiDomain,
       certificate: apiCertificate,

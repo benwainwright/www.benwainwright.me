@@ -1,13 +1,21 @@
-export interface Page {
-  title: string
-  slug: string
-  date: Date
-  description: string
-  published: Date | undefined
-  content: string
-}
+import { z } from "zod"
 
-export type SerialisedPage = Page & {
-  date: number
-  published: number | undefined
-}
+export const pageSchema = z.object({
+  title: z.string(),
+  slug: z.string(),
+  date: z.date(),
+  description: z.string(),
+  content: z.string(),
+})
+
+export const serialisedPageSchema = z.object({
+  title: z.string(),
+  slug: z.string(),
+  date: z.number(),
+  description: z.string(),
+  content: z.string(),
+})
+
+export type Page = z.infer<typeof pageSchema>
+
+export type SerialisedPage = z.infer<typeof serialisedPageSchema>
