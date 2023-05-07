@@ -3,4 +3,5 @@ export interface BackendConfig {
   authSignInUrlForLocal: string
   authSignOutUrl: string
   authSignOutUrlForLocal: string
+  apiUrl: string
 }

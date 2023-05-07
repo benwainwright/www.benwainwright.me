@@ -1,38 +1,22 @@
 import useSWR from "swr"
+import { useToken } from "../use-token/use-token"
 import { useConfig } from "../use-config/use-config"
-import { useLocalStorage } from "../use-localstorage/use-localstorage"
-import { TOKEN_KEY } from "../../constants"
-
-const domainName = `benwainwright.me`
-
-const getHashVars = (hash: string) => {
-  return Object.fromEntries(
-    hash
-      .slice(1)
-      .split("&")
-      .map(pair => pair.split("="))
-  )
-}
 
 export const useApiRequest = <T>(path: string) => {
-  const [token, setToken] = useLocalStorage(TOKEN_KEY, "")
+  const token = useToken({ redirectIfNotPresent: false })
   const { config } = useConfig()
-
-  if (!token && config) {
-    const params = getHashVars(window.location.hash)
-    if ("id_token" in params) {
-      setToken(params[`id_token`])
-    } else {
-      window.location.href =
-        window.location.hostname === "localhost"
-          ? config.authSignInUrlForLocal
-          : config.authSignInUrl
-    }
-  }
-
   const fetcher = async <R>(init?: RequestInit): Promise<R> => {
-    const fullPath = `https://${domainName}/${path}`
-    const response = await fetch(fullPath, init)
+    const fullPath = `https://${config?.apiUrl}/${path}`
+
+    const withToken = {
+      headers: {
+        authorization: token,
+      },
+    }
+
+    const finalInit = init ? { ...init, ...withToken } : withToken
+
+    const response = await fetch(fullPath, finalInit)
 
     const data = await response.json()
 
@@ -44,5 +28,5 @@ export const useApiRequest = <T>(path: string) => {
     return data
   }
 
-  return useSWR<T>(config && path, fetcher)
+  return useSWR<T>(config && token && path, fetcher)
 }

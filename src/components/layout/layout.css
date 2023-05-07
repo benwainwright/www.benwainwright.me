@@ -162,6 +162,22 @@ li::before {
   margin: 2rem 0;
 }
 
+table {
+  text-align: center;
+  font-family: "Milliard";
+  border: 1px solid var(--color-primary-dark);
+  border-collapse: collapse;
+}
+
+tr {
+  border: 1px solid black;
+}
+
+td,
+th {
+  padding: 0.3em;
+}
+
 code[class*="language-"],
 pre[class*="language-"] {
   color: #393a34;

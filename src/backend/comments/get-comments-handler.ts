@@ -1,14 +1,15 @@
 import AWS from "aws-sdk"
 import { APIGatewayProxyHandler } from "aws-lambda"
 
-import { httpResponse } from "./utils/http-response"
-import { getBucket } from "./utils/get-bucket"
+import { httpResponse } from "../utils/http-response"
+import { getEnv } from "../utils/get-env"
 import { parseCommentsPath } from "./utils/parse-comments-path"
-import { handleLambdaError } from "./utils/handle-lambda-error"
+import { handleLambdaError } from "../utils/handle-lambda-error"
+import { COMMENTS_BUCKET } from "../../constants"
 
 export const getComments: APIGatewayProxyHandler = async event => {
   try {
-    const bucket = getBucket()
+    const bucket = getEnv(COMMENTS_BUCKET)
     const post = parseCommentsPath(event.path)
     const s3 = new AWS.S3()
 

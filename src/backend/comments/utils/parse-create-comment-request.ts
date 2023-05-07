@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes"
 import { Comment, isComment } from "./comment"
-import { HttpError } from "./http-error"
+import { HttpError } from "../../utils/http-error"
 
 export const parseCreateCommentRequest = (body: string | null): Comment => {
   const data = JSON.parse(body ?? "")

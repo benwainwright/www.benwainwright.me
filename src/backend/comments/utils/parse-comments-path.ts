@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes"
-import { HttpError } from "./http-error"
+import { HttpError } from "../../utils/http-error"
 
 export const parseCommentsPath = (path: string | null): string => {
   const parts = path?.split("/")

@@ -1,4 +1,4 @@
-import { Comment as CommentType } from "../comments/utils/comment"
+import { Comment as CommentType } from "../backend/comments/utils/comment"
 import { renderAst } from "../utils/render-ast"
 import * as styles from "./blog-post.module.css"
 

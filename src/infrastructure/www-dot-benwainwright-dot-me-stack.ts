@@ -1,39 +1,68 @@
-import * as cdk from "aws-cdk-lib"
-import * as dynamodb from "aws-cdk-lib/aws-dynamodb"
 import { BackendConfig } from "../types/backend-config"
-import * as route53 from "aws-cdk-lib/aws-route53"
-import * as route53Targets from "aws-cdk-lib/aws-route53-targets"
-import * as cloudfront from "aws-cdk-lib/aws-cloudfront"
-import * as lambdaNodeJs from "aws-cdk-lib/aws-lambda-nodejs"
-import * as apiGateway from "aws-cdk-lib/aws-apigateway"
-import * as certificateManager from "aws-cdk-lib/aws-certificatemanager"
-import { ARecord, RecordTarget } from "aws-cdk-lib/aws-route53"
+
+import {
+  ARecord,
+  CnameRecord,
+  HostedZone,
+  RecordTarget,
+} from "aws-cdk-lib/aws-route53"
+
 import {
   ApiGatewayDomain,
+  CloudFrontTarget,
   UserPoolDomainTarget,
 } from "aws-cdk-lib/aws-route53-targets"
+
 import {
   BucketDeployment,
   CacheControl,
   Source,
 } from "aws-cdk-lib/aws-s3-deployment"
-import { Duration } from "aws-cdk-lib"
+
+import { App, CfnOutput, Duration, Stack, StackProps } from "aws-cdk-lib"
 import path from "path"
 import { UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito"
 import { Bucket, HttpMethods } from "aws-cdk-lib/aws-s3"
+import { COMMENTS_BUCKET, PAGES_TABLE } from "../constants"
+import { AttributeType, Table } from "aws-cdk-lib/aws-dynamodb"
+import {
+  CloudFrontWebDistribution,
+  OriginProtocolPolicy,
+  ViewerCertificate,
+} from "aws-cdk-lib/aws-cloudfront"
+import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs"
+import {
+  AuthorizationType,
+  CognitoUserPoolsAuthorizer,
+  Cors,
+  LambdaIntegration,
+  RestApi,
+} from "aws-cdk-lib/aws-apigateway"
+import { DnsValidatedCertificate } from "aws-cdk-lib/aws-certificatemanager"
 
-export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
-  public constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
+export class WwwDotBenwainwrightDotMeStack extends Stack {
+  public constructor(scope: App, id: string, props?: StackProps) {
     super(scope, id, props)
 
     const domainName = "benwainwright.me"
 
-    const pagesTable = new dynamodb.Table(this, `my-site-pages-table`, {
+    const pagesTable = new Table(this, `my-site-pages-table`, {
       partitionKey: {
         name: "slug",
-        type: dynamodb.AttributeType.STRING,
+        type: AttributeType.STRING,
       },
     })
+
+    const getPagesFunction = new NodejsFunction(this, "get-pages", {
+      environment: { [PAGES_TABLE]: pagesTable.tableName },
+    })
+
+    const getPageFunction = new NodejsFunction(this, "get-page", {
+      environment: { [PAGES_TABLE]: pagesTable.tableName },
+    })
+
+    pagesTable.grantReadData(getPagesFunction)
+    pagesTable.grantReadData(getPageFunction)
 
     const pool = new UserPool(this, "user-pool", {
       selfSignUpEnabled: false,
@@ -57,11 +86,11 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       ],
     })
 
-    const zone = route53.HostedZone.fromLookup(this, "MyHostedZone", {
+    const zone = HostedZone.fromLookup(this, "MyHostedZone", {
       domainName,
     })
 
-    const certificate = new certificateManager.DnsValidatedCertificate(
+    const certificate = new DnsValidatedCertificate(
       this,
       "BensWebsiteCertificate",
       {
@@ -94,16 +123,12 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       target: RecordTarget.fromAlias(new UserPoolDomainTarget(userPoolDomain)),
     })
 
-    const apiCertificate = new certificateManager.DnsValidatedCertificate(
-      this,
-      "apiCertificate",
-      {
-        domainName: `api.${domainName}`,
-        hostedZone: zone,
-      }
-    )
+    const apiCertificate = new DnsValidatedCertificate(this, "apiCertificate", {
+      domainName: `api.${domainName}`,
+      hostedZone: zone,
+    })
 
-    const distribution = new cloudfront.CloudFrontWebDistribution(
+    const distribution = new CloudFrontWebDistribution(
       this,
       "BensWebsiteCloudfrontDistribution",
       {
@@ -111,25 +136,28 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
           {
             customOriginSource: {
               domainName: bucket.bucketWebsiteDomainName,
-              originProtocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
+              originProtocolPolicy: OriginProtocolPolicy.HTTP_ONLY,
             },
             behaviors: [{ isDefaultBehavior: true }],
           },
         ],
-        viewerCertificate: cloudfront.ViewerCertificate.fromAcmCertificate(
-          certificate,
-          { aliases: [domainName, `www.${domainName}`] }
-        ),
+        viewerCertificate: ViewerCertificate.fromAcmCertificate(certificate, {
+          aliases: [domainName, `www.${domainName}`],
+        }),
       }
     )
 
     // eslint-disable-next-line unicorn/prefer-module
     const publicDir = path.join(__dirname, "..", "..", "public")
 
+    const apiDomain = `api.${domainName}`
+
     const config: BackendConfig = {
       authSignInUrl: userPoolDomain.signInUrl(client, {
         redirectUri: `https://${domainName}/`,
       }),
+
+      apiUrl: apiDomain,
 
       authSignInUrlForLocal: userPoolDomain.signInUrl(client, {
         redirectUri: `http://localhost:8000`,
@@ -167,19 +195,17 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
       prune: false,
     })
 
-    new cdk.CfnOutput(this, "api-output", {
+    new CfnOutput(this, "api-output", {
       exportName: "distribution",
       value: distribution.distributionId,
     })
 
-    new route53.ARecord(this, "BensWebsiteBucketRecord", {
+    new ARecord(this, "BensWebsiteBucketRecord", {
       zone,
-      target: route53.RecordTarget.fromAlias(
-        new route53Targets.CloudFrontTarget(distribution)
-      ),
+      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
     })
 
-    new route53.CnameRecord(this, "BensWebsiteCnameRecord", {
+    new CnameRecord(this, "BensWebsiteCnameRecord", {
       zone,
       domainName: "benwainwright.me",
       recordName: "www.benwainwright.me",
@@ -187,59 +213,61 @@ export class WwwDotBenwainwrightDotMeStack extends cdk.Stack {
 
     const commentsBucket = new Bucket(this, "comments-bucket")
 
-    const commentsFunction = new lambdaNodeJs.NodejsFunction(
-      this,
-      "post-comment",
-      {
-        environment: {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          COMMENTS_BUCKET: commentsBucket.bucketName,
-        },
-      }
-    )
+    const commentsFunction = new NodejsFunction(this, "post-comment", {
+      environment: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        [COMMENTS_BUCKET]: commentsBucket.bucketName,
+      },
+    })
 
-    const listCommentsFunction = new lambdaNodeJs.NodejsFunction(
-      this,
-      "list-comments",
-      {
-        environment: {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          COMMENTS_BUCKET: commentsBucket.bucketName,
-        },
-      }
-    )
+    const listCommentsFunction = new NodejsFunction(this, "list-comments", {
+      environment: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        [COMMENTS_BUCKET]: commentsBucket.bucketName,
+      },
+    })
 
     commentsBucket.grantWrite(commentsFunction)
     commentsBucket.grantRead(listCommentsFunction)
 
-    const api = new apiGateway.RestApi(this, "comments-api", {
+    const authorizer = new CognitoUserPoolsAuthorizer(this, `user-pool-auth`, {
+      cognitoUserPools: [pool],
+    })
+
+    const api = new RestApi(this, "comments-api", {
       defaultCorsPreflightOptions: {
-        allowOrigins: apiGateway.Cors.ALL_ORIGINS,
+        allowOrigins: Cors.ALL_ORIGINS,
+      },
+
+      defaultMethodOptions: {
+        authorizationType: AuthorizationType.COGNITO,
+        authorizer,
       },
     })
+
+    const pages = api.root.addResource("page")
+
+    const page = pages.addResource("{slug}")
+    page.addMethod("GET", new LambdaIntegration(getPageFunction))
+
+    pages.addMethod("GET", new LambdaIntegration(getPagesFunction))
 
     const comments = api.root.addResource("comments")
 
     const comment = comments.addResource("{post_slug}")
 
-    comment.addMethod(
-      "POST",
-      new apiGateway.LambdaIntegration(commentsFunction)
-    )
+    comment.addMethod("POST", new LambdaIntegration(commentsFunction))
 
-    comment.addMethod(
-      "GET",
-      new apiGateway.LambdaIntegration(listCommentsFunction)
-    )
+    comment.addMethod("GET", new LambdaIntegration(listCommentsFunction))
 
     const apiDomainName = api.addDomainName("bens-website-api", {
-      domainName: `api.${domainName}`,
+      domainName: apiDomain,
       certificate: apiCertificate,
     })
 
     new ARecord(this, "ApiARecord", {
       zone,
-      recordName: `api.${domainName}`,
+      recordName: apiDomain,
       target: RecordTarget.fromAlias(new ApiGatewayDomain(apiDomainName)),
     })
   }

@@ -1,21 +1,20 @@
 import { StatusCodes } from "http-status-codes"
-export const httpResponse = ({
+export const httpResponse = <T>({
   statusCode = StatusCodes.OK,
-  status,
-  message,
   headers,
-  body = { status: status ?? "", message: message ?? "" },
+  body,
 }: {
   statusCode?: StatusCodes
   status?: string
   message?: string
   headers?: Record<string, string>
-  body?: Record<string, string> | Record<string, string>[]
+  body?: T
 }) => {
+  const finalBody = body ? body : { status, statusCode }
   return {
     statusCode,
     // eslint-disable-next-line unicorn/no-null
-    body: JSON.stringify(body, null, 2),
+    body: JSON.stringify(finalBody, null, 2),
     headers: { "access-control-allow-origin": "*", ...headers },
   }
 }

@@ -1,16 +1,16 @@
 import { StatusCodes } from "http-status-codes"
 import { HttpError } from "./http-error"
 
-export const getBucket = () => {
-  const bucket = process.env.COMMENTS_BUCKET
+export const getEnv = (envVar: string) => {
+  const value = process.env[envVar]
 
-  if (!bucket) {
+  if (!value) {
     throw new HttpError(
       StatusCodes.INTERNAL_SERVER_ERROR,
       "Error",
-      "Bucket not configured"
+      `${envVar} not configured`
     )
   }
 
-  return bucket
+  return value
 }
