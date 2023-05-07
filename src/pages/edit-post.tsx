@@ -1,9 +1,12 @@
 import ClipLoader from "react-spinners/ClipLoader"
 import { Heading, Layout } from "../components"
-import { EditPostForm } from "../components/edit-post-form/edit-post-form"
 import { useApiRequest } from "../hooks/use-api-request/use-api-request"
 import { SerialisedPage } from "../types/page"
 import * as styles from "./edit-post.module.css"
+import loadable from "@loadable/component"
+const EditPostForm = loadable(
+  async () => import("../components/edit-post-form/edit-post-form")
+)
 
 const EditPost = () => {
   const slug = window.location.hash.slice(1)

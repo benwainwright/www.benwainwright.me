@@ -8,7 +8,7 @@ interface EditPostFormProps {
   page: Page
 }
 
-export const EditPostForm = ({ page }: EditPostFormProps) => {
+const EditPostForm = ({ page }: EditPostFormProps) => {
   const formik = useFormik({
     initialValues: {
       title: page.title,
@@ -54,3 +54,5 @@ export const EditPostForm = ({ page }: EditPostFormProps) => {
     </form>
   )
 }
+
+export default EditPostForm
