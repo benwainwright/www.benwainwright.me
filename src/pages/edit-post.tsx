@@ -18,8 +18,6 @@ const EditPost = () => {
     published: serialisedPage?.published && new Date(serialisedPage.published),
   }
 
-  console.log(page)
-
   return (
     <Layout title="Edit Post">
       <div className={styles.pageContainer}>

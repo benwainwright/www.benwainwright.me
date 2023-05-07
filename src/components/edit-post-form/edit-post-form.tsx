@@ -15,6 +15,7 @@ export const EditPostForm = ({ page }: EditPostFormProps) => {
       slug: page.slug,
       content: page.content,
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
     onSubmit: async values => {},
   })
   return (
