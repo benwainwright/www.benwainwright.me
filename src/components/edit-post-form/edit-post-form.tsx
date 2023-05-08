@@ -68,15 +68,6 @@ const EditPostForm = ({ page: initialPage }: EditPostFormProps) => {
       />
 
       <Input
-        name="slug"
-        label="Slug"
-        value={page.slug}
-        onChange={event => {
-          setPage(newPage => ({ ...newPage, slug: event.target.value }))
-          setDirty(true)
-        }}
-      />
-      <Input
         name="description"
         label="Description"
         value={page.description}

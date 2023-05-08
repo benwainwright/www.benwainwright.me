@@ -4,14 +4,15 @@
   gap: 2rem;
   width: 100%;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 2rem;
   max-width: 1000px;
 }
 
 .heading {
-  align-items: baseline;
+  align-items: center;
   display: flex;
   gap: 1rem;
+  justify-content: space-between;
 }
 
 .table {

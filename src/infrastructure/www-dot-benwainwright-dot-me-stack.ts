@@ -19,14 +19,7 @@ import {
   Source,
 } from "aws-cdk-lib/aws-s3-deployment"
 
-import {
-  App,
-  CfnOutput,
-  Duration,
-  IgnoreMode,
-  Stack,
-  StackProps,
-} from "aws-cdk-lib"
+import { App, CfnOutput, Duration, Stack, StackProps } from "aws-cdk-lib"
 import path from "path"
 import { UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito"
 import { Bucket, HttpMethods } from "aws-cdk-lib/aws-s3"
@@ -60,6 +53,10 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
       },
     })
 
+    const deletePageFunction = new NodejsFunction(this, "delete-page", {
+      environment: { [PAGES_TABLE]: pagesTable.tableName },
+    })
+
     const updatePageFunction = new NodejsFunction(this, "update-page", {
       environment: { [PAGES_TABLE]: pagesTable.tableName },
     })
@@ -72,6 +69,7 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
       environment: { [PAGES_TABLE]: pagesTable.tableName },
     })
 
+    pagesTable.grantReadWriteData(deletePageFunction)
     pagesTable.grantReadWriteData(updatePageFunction)
     pagesTable.grantReadData(getPagesFunction)
     pagesTable.grantReadData(getPageFunction)
@@ -80,11 +78,13 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
       selfSignUpEnabled: false,
     })
 
+    const INDEX_DOT_HTML = "index.html"
+
     const bucket = new Bucket(this, "BensStaticWebsiteBucket", {
       bucketName: domainName,
       publicReadAccess: true,
-      websiteIndexDocument: "index.html",
-      websiteErrorDocument: "index.html",
+      websiteIndexDocument: INDEX_DOT_HTML,
+      websiteErrorDocument: INDEX_DOT_HTML,
       cors: [
         {
           allowedMethods: [HttpMethods.GET],
@@ -185,7 +185,7 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
     }
 
     new BucketDeployment(this, `bucket-deployment-for-everything-else`, {
-      sources: [Source.asset(publicDir, { exclude: ["index.html"] })],
+      sources: [Source.asset(publicDir, { exclude: [INDEX_DOT_HTML] })],
       destinationBucket: bucket,
       distribution,
       cacheControl: [CacheControl.maxAge(Duration.days(365))],
@@ -266,6 +266,7 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
 
     pages.addMethod("POST", new LambdaIntegration(updatePageFunction))
     page.addMethod("PUT", new LambdaIntegration(updatePageFunction))
+    page.addMethod("DELETE", new LambdaIntegration(deletePageFunction))
 
     page.addMethod("GET", new LambdaIntegration(getPageFunction))
     pages.addMethod("GET", new LambdaIntegration(getPagesFunction))

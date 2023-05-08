@@ -17,6 +17,7 @@ const defaultPage: Page = {
   slug: "",
   date: new Date(),
   content: "",
+  status: "draft",
 }
 
 const EditPostForm = () => {
