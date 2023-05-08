@@ -3,7 +3,7 @@
 This repository contains the source code for my personal website.
 (https://www.benwainwright.me).
 
-It is a statically generated Gatsby application written in TypeScript and hosted by AWS
+The site is a statically generated Gatsby application written in TypeScript and hosted by AWS
 S3. In order to keep the pages performant but provide myself with a simple
 editing UI, I'm working towards an architecture where blog posts are generated
 statically at build time including all of their content based on data from an API
