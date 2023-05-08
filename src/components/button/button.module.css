@@ -12,6 +12,7 @@
 .button.disabled,
 .button.disabled:hover {
   background-color: var(--color-light);
+  cursor: not-allowed;
 }
 
 .button:hover {
