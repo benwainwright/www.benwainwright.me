@@ -13,3 +13,19 @@
   display: flex;
   gap: 1rem;
 }
+
+.table {
+  text-align: center;
+  font-family: "Milliard";
+  border-spacing: 0.2rem;
+}
+
+.cell {
+  padding: 0.3em;
+}
+
+.row {
+  background: var(--color-primary);
+  color: white;
+  border: 1px solid black;
+}

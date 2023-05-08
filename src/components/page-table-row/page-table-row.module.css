@@ -1,0 +1,8 @@
+.cell {
+  padding: 0.3em;
+}
+
+.row {
+  background: var(--color-light);
+  border: 1px solid black;
+}

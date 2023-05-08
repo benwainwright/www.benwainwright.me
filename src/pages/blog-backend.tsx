@@ -34,14 +34,12 @@ const BlogBackend = () => {
             data-testid="loader"
           />
         ) : (
-          <table>
+          <table className={styles.table}>
             <thead>
-              <tr>
-                <th>slug</th>
-                <th>title</th>
-                <th>date</th>
-                <th>description</th>
-                <th>published</th>
+              <tr className={styles.row}>
+                <th className={styles.cell}>title</th>
+                <th className={styles.cell}>date</th>
+                <th className={styles.cell}>published</th>
               </tr>
             </thead>
             <tbody>
