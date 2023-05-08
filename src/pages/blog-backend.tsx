@@ -43,9 +43,12 @@ const BlogBackend = () => {
               </tr>
             </thead>
             <tbody>
-              {pages?.map(page => (
-                <PageTableRow key={page.slug} page={page} />
-              ))}
+              {pages
+                ?.slice()
+                .sort((a, b) => (a.date < b.date ? 1 : -1))
+                .map(page => (
+                  <PageTableRow key={page.slug} page={page} />
+                ))}
             </tbody>
           </table>
         )}
