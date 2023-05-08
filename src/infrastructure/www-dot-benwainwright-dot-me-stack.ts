@@ -19,7 +19,7 @@ import {
   Source,
 } from "aws-cdk-lib/aws-s3-deployment"
 
-import { App, CfnOutput, Duration, Stack, StackProps } from "aws-cdk-lib"
+import { App, Duration, Stack, StackProps } from "aws-cdk-lib"
 import path from "path"
 import { UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito"
 import { Bucket, HttpMethods } from "aws-cdk-lib/aws-s3"
@@ -28,10 +28,7 @@ import { AttributeType, Table } from "aws-cdk-lib/aws-dynamodb"
 import {
   CacheHeaderBehavior,
   CachePolicy,
-  CloudFrontWebDistribution,
   Distribution,
-  OriginProtocolPolicy,
-  ViewerCertificate,
   ViewerProtocolPolicy,
 } from "aws-cdk-lib/aws-cloudfront"
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs"
