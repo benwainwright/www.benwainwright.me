@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { TiPencil } from "@react-icons/all-files/ti/TiPencil"
 import { Layout, BlogSummary, Heading } from "../components"
 

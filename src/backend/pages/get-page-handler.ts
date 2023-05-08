@@ -1,6 +1,6 @@
 import { APIGatewayProxyHandler } from "aws-lambda"
 import { httpResponse } from "../utils/http-response"
-import { PAGES_TABLE, SLUG } from "../../constants"
+import { PAGES_TABLE } from "../../constants"
 import { getEnv } from "../utils/get-env"
 import { DynamoDB } from "@aws-sdk/client-dynamodb"
 import { DynamoDBDocument, QueryCommand } from "@aws-sdk/lib-dynamodb"
