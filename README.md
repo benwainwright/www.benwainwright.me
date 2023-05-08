@@ -1,5 +1,7 @@
 # www.benwainwright.me
 
+![build status](https://img.shields.io/github/actions/workflow/status/benwainwright/www.benwainwright.me/main-pipeline.yaml)
+
 This repository contains the source code for my personal website.
 (https://www.benwainwright.me).
 
