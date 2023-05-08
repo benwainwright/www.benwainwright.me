@@ -7,9 +7,6 @@ from diagrams.aws.compute import Lambda
 from diagrams.aws.database import Dynamodb
 from diagrams.onprem.vcs import Github
 
-
-
-
 with Diagram(show=False):
     frontend = React("Client") >> Route53("DNS")
     static_bucket = S3("Static Assets")
@@ -18,9 +15,3 @@ with Diagram(show=False):
     backend = frontend >> APIGateway("API")
     backend  >> Lambda("Posts CRUD") >> Dynamodb("Posts") >> github >> static_bucket
     backend  >> Lambda("Comments CRUD") >> Dynamodb("Comments") >> github
-    
-
-
-
-
-    
