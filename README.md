@@ -10,6 +10,6 @@ statically at build time including all of their content based on data from an AP
 The admin area doesn't need to be as fast, so it interfaces with the API directly.
 
 At the time of writing, I've written the admin area and transferred all the posts in the database,
-but I've not yet hooked the static page build up to that API.
+but I've not yet hooked the static page build up to that API. This is the architecture I'm working towards though:
 
 ![Architecture diagram](./docs/diagrams_image.png)
