@@ -1,7 +1,7 @@
 import ClipLoader from "react-spinners/ClipLoader"
 import { Heading, Layout, ParagraphText } from "../components"
 import { useApiRequest } from "../hooks/use-api-request/use-api-request"
-import { SerialisedPage } from "../types/page"
+import { Page, SerialisedPage } from "../types/page"
 import * as styles from "./edit-post.module.css"
 import loadable from "@loadable/component"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
@@ -34,7 +34,7 @@ const EditPost = () => {
     [serialisedPage]
   )
 
-  const [page, setPage] = useState(initialPage)
+  const [page, setPage] = useState<Page | undefined>(initialPage)
 
   useEffect(() => {
     setPage(initialPage)

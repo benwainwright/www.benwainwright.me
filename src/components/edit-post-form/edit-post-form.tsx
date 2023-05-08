@@ -7,25 +7,21 @@ import { IoMdAlert } from "@react-icons/all-files/io/IoMdAlert"
 import { IoMdCheckmarkCircleOutline } from "@react-icons/all-files/io/IoMdCheckmarkCircleOutline"
 import { Input } from "../input"
 import { DateField } from "../date-field/date-field"
-import { useCallback, useEffect, useRef, useState } from "react"
-import { useToken } from "../../hooks/use-token/use-token"
-import { useConfig } from "../../hooks/use-config/use-config"
-import { makeFetcher } from "../../utils/make-fetcher"
 import { Select } from "../select/select"
 
 interface EditPostFormProps {
   page: Page
-  setPage: (page: Page) => void
+  setPage: (callback: (page: Page | undefined) => Page | undefined) => void
   dirty: boolean
   setDirty: (dirty: boolean) => void
 }
 
 const EditPostForm = ({
-  page: initialPage,
+  page,
   dirty,
   setDirty,
+  setPage,
 }: EditPostFormProps) => {
-
   return (
     <form className={styles.form}>
       <div className={styles.dirtyText}>
@@ -46,7 +42,9 @@ const EditPostForm = ({
         label="Title"
         value={page.title}
         onChange={event => {
-          setPage(newPage => ({ ...newPage, title: event.target.value }))
+          setPage(
+            newPage => newPage && { ...newPage, title: event.target.value }
+          )
           setDirty(true)
         }}
       />
@@ -61,10 +59,13 @@ const EditPostForm = ({
         ]}
         value={page.status}
         onChange={event => {
-          setPage(newPage => ({
-            ...newPage,
-            status: event.target.value as Page["status"],
-          }))
+          setPage(
+            newPage =>
+              newPage && {
+                ...newPage,
+                status: event.target.value as Page["status"],
+              }
+          )
           setDirty(true)
         }}
       />
@@ -74,7 +75,10 @@ const EditPostForm = ({
         label="Description"
         value={page.description}
         onChange={event => {
-          setPage(newPage => ({ ...newPage, description: event.target.value }))
+          setPage(
+            newPage =>
+              newPage && { ...newPage, description: event.target.value }
+          )
           setDirty(true)
         }}
       />
@@ -84,7 +88,7 @@ const EditPostForm = ({
         value={page.date}
         onChange={event => {
           if (event) {
-            setPage(newPage => ({ ...newPage, date: event }))
+            setPage(newPage => newPage && { ...newPage, date: event })
             setDirty(true)
           }
         }}
@@ -95,7 +99,7 @@ const EditPostForm = ({
         className={styles.simpleMde}
         value={page.content}
         onChange={value => {
-          setPage(newPage => ({ ...newPage, content: value }))
+          setPage(newPage => newPage && { ...newPage, content: value })
           setDirty(true)
         }}
       />
