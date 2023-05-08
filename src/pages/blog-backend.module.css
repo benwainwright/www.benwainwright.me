@@ -7,3 +7,9 @@
   padding: 1rem;
   max-width: 1000px;
 }
+
+.heading {
+  align-items: baseline;
+  display: flex;
+  gap: 1rem;
+}

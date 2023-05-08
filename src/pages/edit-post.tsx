@@ -5,6 +5,7 @@ import { SerialisedPage } from "../types/page"
 import * as styles from "./edit-post.module.css"
 import loadable from "@loadable/component"
 import { useEffect, useState } from "react"
+import { Button } from "../components/button/button"
 const EditPostForm = loadable(
   async () => import("../components/edit-post-form/edit-post-form")
 )
@@ -25,16 +26,14 @@ const EditPost = () => {
   const page = serialisedPage && {
     ...serialisedPage,
     date: new Date(serialisedPage?.date),
-    published: serialisedPage?.published
-      ? new Date(serialisedPage.published)
-      : undefined,
   }
 
   return (
-    <Layout title="Edit Post">
+    <Layout title="Edit Post" needsAuth>
       <div className={styles.pageContainer}>
         <header className={styles.header}>
           <Heading level={1}>Edit Post</Heading>
+          <Button>Delete</Button>
         </header>
         {isLoading ? (
           <ClipLoader

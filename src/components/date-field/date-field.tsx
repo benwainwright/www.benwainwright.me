@@ -13,6 +13,7 @@ export const DateField = ({ label, name, onChange, value }: DateFieldProps) => {
   return (
     <FieldContainer label={label} name={name}>
       <DatePicker
+        wrapperClassName={styles.dateFieldWrapper}
         selected={value}
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         onChange={onChange}

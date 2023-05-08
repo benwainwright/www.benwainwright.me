@@ -4,6 +4,8 @@ import { SerialisedPage } from "../types/page"
 import ClipLoader from "react-spinners/ClipLoader"
 import * as styles from "./blog-backend.module.css"
 import { PageTableRow } from "../components/page-table-row/page-table-row"
+import { Button } from "../components/button/button"
+import { navigate } from "gatsby"
 
 const BlogBackend = () => {
   const { data: serialisedPages, isLoading } = useApiRequest<SerialisedPage[]>({
@@ -18,7 +20,12 @@ const BlogBackend = () => {
   return (
     <Layout title="Blog Backend" needsAuth>
       <div className={styles.pageContainer}>
-        <Heading level={1}>Pages</Heading>
+        <Heading level={1} className={styles.heading}>
+          <span>Pages</span>
+          <Button onClick={async () => navigate(`/create-post/`)}>
+            Create
+          </Button>
+        </Heading>
         {isLoading ? (
           <ClipLoader
             loading
@@ -30,8 +37,8 @@ const BlogBackend = () => {
           <table>
             <thead>
               <tr>
-                <th>title</th>
                 <th>slug</th>
+                <th>title</th>
                 <th>date</th>
                 <th>description</th>
                 <th>published</th>

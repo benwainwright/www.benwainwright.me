@@ -1,7 +1,23 @@
+.form {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
 .simpleMde {
   width: 100%;
   margin: 1rem 0 0 0;
   font-family: "Milliard";
+}
+
+.dirtyText {
+  color: var(--color-primary-dark);
+  font-family: "Milliard";
+  display: flex;
+}
+
+.dirtyDescription {
+  margin-left: 0.2rem;
 }
 
 .formButton {

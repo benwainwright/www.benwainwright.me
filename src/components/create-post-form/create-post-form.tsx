@@ -1,62 +1,41 @@
-import { Page } from "../../types/page"
-import * as styles from "./edit-post-form.module.css"
-import SimpleMDE from "react-simplemde-editor"
 import "easymde/dist/easymde.min.css"
+import { navigate } from "gatsby"
+import * as styles from "./create-post-form.module.css"
 import "react-datepicker/dist/react-datepicker.css"
-import { IoMdAlert } from "@react-icons/all-files/io/IoMdAlert"
-import { IoMdCheckmarkCircleOutline } from "@react-icons/all-files/io/IoMdCheckmarkCircleOutline"
 import { Input } from "../input"
 import { DateField } from "../date-field/date-field"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useToken } from "../../hooks/use-token/use-token"
 import { useConfig } from "../../hooks/use-config/use-config"
 import { makeFetcher } from "../../utils/make-fetcher"
+import { Button } from "../button/button"
+import { Page } from "../../types/page"
 
-interface EditPostFormProps {
-  page: Page
+const defaultPage: Page = {
+  title: "",
+  description: "",
+  slug: "",
+  date: new Date(),
+  content: "",
 }
 
-const EditPostForm = ({ page: initialPage }: EditPostFormProps) => {
-  const [page, setPage] = useState(initialPage)
-  const [dirty, setDirty] = useState(false)
+const EditPostForm = () => {
+  const [page, setPage] = useState<Page>(defaultPage)
+  const [, setDirty] = useState(false)
 
-  const interval = useRef<NodeJS.Timer | undefined>()
   const token = useToken({ redirectIfNotPresent: false })
   const { config } = useConfig()
-  const fetcher = makeFetcher(config, `page/${page.slug}`, token)
+  const fetcher = makeFetcher(config, `page`, token)
 
-  const update = useCallback(async () => {
+  const create = useCallback(async () => {
     await fetcher({
-      method: "PUT",
+      method: "POST",
       body: JSON.stringify({ ...page, date: page.date.getTime() }),
     })
   }, [page])
 
-  useEffect(() => {
-    interval.current = setInterval(async () => {
-      if (dirty) {
-        await update()
-        setDirty(false)
-      }
-    }, 5000)
-    return () => clearInterval(interval.current)
-  }, [dirty, update])
-
   return (
     <form className={styles.form}>
-      <div className={styles.dirtyText}>
-        {dirty ? (
-          <>
-            <IoMdAlert />
-            <span className={styles.dirtyDescription}>Edited</span>
-          </>
-        ) : (
-          <>
-            <IoMdCheckmarkCircleOutline />
-            <span className={styles.dirtyDescription}>Saved</span>
-          </>
-        )}
-      </div>
       <Input
         name="title"
         label="Title"
@@ -97,15 +76,15 @@ const EditPostForm = ({ page: initialPage }: EditPostFormProps) => {
         }}
         name="date"
       />
-
-      <SimpleMDE
-        className={styles.simpleMde}
-        value={page.content}
-        onChange={value => {
-          setPage(newPage => ({ ...newPage, content: value }))
-          setDirty(true)
+      <Button
+        onClick={async event => {
+          event.preventDefault()
+          await create()
+          navigate(`/edit-post/#${page.slug}`)
         }}
-      />
+      >
+        Create
+      </Button>
     </form>
   )
 }
