@@ -37,9 +37,9 @@ const BlogBackend = () => {
           <table className={styles.table}>
             <thead>
               <tr className={styles.row}>
-                <th className={styles.cell}>title</th>
-                <th className={styles.cell}>date</th>
-                <th className={styles.cell}>published</th>
+                <th className={styles.cell}>Title</th>
+                <th className={styles.cell}>Date</th>
+                <th className={styles.cell}>Status</th>
               </tr>
             </thead>
             <tbody>

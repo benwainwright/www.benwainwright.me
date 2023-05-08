@@ -5,10 +5,19 @@ interface ButtonProps {
   children: ReactNode
   onClick?: MouseEventHandler<HTMLButtonElement>
   type?: "button" | "submit" | "reset" | undefined
+  disabled?: boolean
 }
-export const Button = ({ children, onClick, type }: ButtonProps) => {
+export const Button = ({ disabled, children, onClick, type }: ButtonProps) => {
+  const classes = disabled ? [styles.button, styles.disabled] : [styles.button]
+
+  const onClickHandler: MouseEventHandler<HTMLButtonElement> = event => {
+    if (!disabled) {
+      onClick?.(event)
+    }
+  }
+
   return (
-    <button className={styles.button} onClick={onClick} type={type}>
+    <button className={classes.join(" ")} onClick={onClickHandler} type={type}>
       {children}
     </button>
   )

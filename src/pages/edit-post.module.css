@@ -7,6 +7,15 @@
   flex-direction: column;
 }
 
+.loader {
+  color: var(--color-primary);
+}
+
+.headerButtons {
+  display: flex;
+  gap: 1rem;
+}
+
 .header {
   margin-bottom: 1rem;
   align-items: center;

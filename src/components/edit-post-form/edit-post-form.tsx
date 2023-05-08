@@ -11,36 +11,20 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useToken } from "../../hooks/use-token/use-token"
 import { useConfig } from "../../hooks/use-config/use-config"
 import { makeFetcher } from "../../utils/make-fetcher"
+import { Select } from "../select/select"
 
 interface EditPostFormProps {
   page: Page
+  setPage: (page: Page) => void
+  dirty: boolean
+  setDirty: (dirty: boolean) => void
 }
 
-const EditPostForm = ({ page: initialPage }: EditPostFormProps) => {
-  const [page, setPage] = useState(initialPage)
-  const [dirty, setDirty] = useState(false)
-
-  const interval = useRef<NodeJS.Timer | undefined>()
-  const token = useToken({ redirectIfNotPresent: false })
-  const { config } = useConfig()
-  const fetcher = makeFetcher(config, `page/${page.slug}`, token)
-
-  const update = useCallback(async () => {
-    await fetcher({
-      method: "PUT",
-      body: JSON.stringify({ ...page, date: page.date.getTime() }),
-    })
-  }, [page])
-
-  useEffect(() => {
-    interval.current = setInterval(async () => {
-      if (dirty) {
-        await update()
-        setDirty(false)
-      }
-    }, 5000)
-    return () => clearInterval(interval.current)
-  }, [dirty, update])
+const EditPostForm = ({
+  page: initialPage,
+  dirty,
+  setDirty,
+}: EditPostFormProps) => {
 
   return (
     <form className={styles.form}>
@@ -63,6 +47,24 @@ const EditPostForm = ({ page: initialPage }: EditPostFormProps) => {
         value={page.title}
         onChange={event => {
           setPage(newPage => ({ ...newPage, title: event.target.value }))
+          setDirty(true)
+        }}
+      />
+
+      <Select
+        name="status"
+        label="Status"
+        options={[
+          { label: "Draft", value: "draft" },
+          { label: "Public Draft", value: "public-draft" },
+          { label: "Published", value: "published" },
+        ]}
+        value={page.status}
+        onChange={event => {
+          setPage(newPage => ({
+            ...newPage,
+            status: event.target.value as Page["status"],
+          }))
           setDirty(true)
         }}
       />

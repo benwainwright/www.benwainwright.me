@@ -3,12 +3,14 @@ import { Link } from "gatsby"
 import { HiOutlineMenu } from "@react-icons/all-files/hi/HiOutlineMenu"
 import * as styles from "./header.module.css"
 import { IconButton } from "../icon-button"
+import { useToken } from "../../hooks/use-token/use-token"
 
 interface HeaderProps {
   siteTitle: string
 }
 
 export const Header = ({ siteTitle }: HeaderProps) => {
+  const [token] = useToken({ redirectIfNotPresent: false })
   const [showMenu, setShowMenu] = useState(false)
 
   const menuClasses = showMenu
@@ -30,6 +32,11 @@ export const Header = ({ siteTitle }: HeaderProps) => {
         />
       </div>
       <div className={menuClasses.join(" ")}>
+        {token && (
+          <Link className={styles.link} to="/blog-backend">
+            Backend
+          </Link>
+        )}
         <Link className={styles.link} to="/blog">
           Blog
         </Link>

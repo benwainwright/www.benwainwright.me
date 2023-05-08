@@ -9,6 +9,11 @@
   cursor: pointer;
 }
 
+.button.disabled,
+.button.disabled:hover {
+  background-color: var(--color-light);
+}
+
 .button:hover {
   background-color: var(--color-primary-dark);
 }

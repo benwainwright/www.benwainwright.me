@@ -16,7 +16,7 @@ export const PageTableRow = ({ page }: PageTableRowProps) => {
         <Link to={`/edit-post/#${page.slug}`}>{page.title}</Link>
       </td>
       <td className={styles.cell}>{date.toLocaleString(DateTime.DATE_MED)}</td>
-      <td className={styles.cell}>No</td>
+      <td className={styles.cell}>{page.status}</td>
     </tr>
   )
 }
