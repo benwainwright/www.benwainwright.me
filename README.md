@@ -4,9 +4,9 @@ This repository contains the source code for my personal website.
 (https://www.benwainwright.me).
 
 It is a statically Gatsby application written in TypeScript and hosted by AWS
-S3. Changes to the repository are automatically built and deployed by Github
-Actions.
+S3. In order to keep the pages performant but provide myself with a simple
+editing UI, I'm working towards an architecture where blog posts are generated
+statically at build time based on data from an API (see below). The admin area doesn't need
+to be as fast, so it interfaces with the API directly.
 
-Blog posts are generated from markdown files contained in the `blog-entries`
-directory. If I've made a mistake in any of my articles, feel free to raise a
-pull request to correct it.
+![Architecture diagram](./docs/diagrams_image.png)
