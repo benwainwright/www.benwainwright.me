@@ -1,3 +1,9 @@
 .commentsButton {
   font-size: 1rem;
 }
+
+.header {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: baseline;
+}

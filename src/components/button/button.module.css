@@ -9,6 +9,11 @@
   cursor: pointer;
 }
 
+.button.small {
+  padding: 0.2rem 1rem;
+  font-size: 0.8rem;
+}
+
 .button.disabled,
 .button.disabled:hover {
   background-color: var(--color-light);

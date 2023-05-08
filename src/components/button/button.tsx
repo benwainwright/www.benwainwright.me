@@ -6,8 +6,16 @@ interface ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>
   type?: "button" | "submit" | "reset" | undefined
   disabled?: boolean
+  small?: boolean
 }
-export const Button = ({ disabled, children, onClick, type }: ButtonProps) => {
+export const Button = ({
+  disabled,
+  children,
+  onClick,
+  type,
+  small,
+}: ButtonProps) => {
+  const smallClass = small ? [styles.small] : []
   const classes = disabled ? [styles.button, styles.disabled] : [styles.button]
 
   const onClickHandler: MouseEventHandler<HTMLButtonElement> = event => {
@@ -17,7 +25,11 @@ export const Button = ({ disabled, children, onClick, type }: ButtonProps) => {
   }
 
   return (
-    <button className={classes.join(" ")} onClick={onClickHandler} type={type}>
+    <button
+      className={[...classes, ...smallClass].join(" ")}
+      onClick={onClickHandler}
+      type={type}
+    >
       {children}
     </button>
   )

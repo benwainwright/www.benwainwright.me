@@ -26,9 +26,13 @@ import { Bucket, HttpMethods } from "aws-cdk-lib/aws-s3"
 import { COMMENTS_BUCKET, PAGES_TABLE } from "../constants"
 import { AttributeType, Table } from "aws-cdk-lib/aws-dynamodb"
 import {
+  CacheHeaderBehavior,
+  CachePolicy,
   CloudFrontWebDistribution,
+  Distribution,
   OriginProtocolPolicy,
   ViewerCertificate,
+  ViewerProtocolPolicy,
 } from "aws-cdk-lib/aws-cloudfront"
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs"
 import {
@@ -39,6 +43,7 @@ import {
   RestApi,
 } from "aws-cdk-lib/aws-apigateway"
 import { DnsValidatedCertificate } from "aws-cdk-lib/aws-certificatemanager"
+import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins"
 
 export class WwwDotBenwainwrightDotMeStack extends Stack {
   public constructor(scope: App, id: string, props?: StackProps) {
@@ -140,22 +145,25 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
       hostedZone: zone,
     })
 
-    const distribution = new CloudFrontWebDistribution(
+    const cachePolicy = new CachePolicy(
+      this,
+      `include-origin-in-cache-key-policy`,
+      {
+        headerBehavior: CacheHeaderBehavior.allowList("origin"),
+      }
+    )
+
+    const distribution = new Distribution(
       this,
       "BensWebsiteCloudfrontDistribution",
       {
-        originConfigs: [
-          {
-            customOriginSource: {
-              domainName: bucket.bucketWebsiteDomainName,
-              originProtocolPolicy: OriginProtocolPolicy.HTTP_ONLY,
-            },
-            behaviors: [{ isDefaultBehavior: true }],
-          },
-        ],
-        viewerCertificate: ViewerCertificate.fromAcmCertificate(certificate, {
-          aliases: [domainName, `www.${domainName}`],
-        }),
+        certificate,
+        domainNames: [domainName, `www.${domainName}`],
+        defaultBehavior: {
+          cachePolicy,
+          origin: new S3Origin(bucket),
+          viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        },
       }
     )
 
@@ -209,11 +217,6 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
       distribution,
       sources: [Source.jsonData("config.json", config)],
       prune: false,
-    })
-
-    new CfnOutput(this, "api-output", {
-      exportName: "distribution",
-      value: distribution.distributionId,
     })
 
     new ARecord(this, "BensWebsiteBucketRecord", {

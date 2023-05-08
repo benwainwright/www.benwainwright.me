@@ -1,12 +1,11 @@
 import { useState } from "react"
-import { BiMessageAdd } from "@react-icons/all-files/bi/BiMessageAdd"
 import { Comment } from "../comment"
 import * as styles from "./comments.module.css"
 import { Comment as CommentType } from "../../backend/comments/utils/comment"
 import { SubmitCommentForm } from "../submit-comment-form"
 import { ParagraphText } from "../paragraph-text"
-import { IconButton } from "../icon-button"
 import { Heading } from "../heading"
+import { Button } from "../button"
 
 interface CommentsProps {
   slug: string
@@ -17,13 +16,12 @@ export const Comments = (props: CommentsProps) => {
   const [dialogOpen, setDialogOpen] = useState(false)
   return (
     <>
-      <Heading level={2}>Comments </Heading>
-      <IconButton
-        text="Add Comment"
-        icon={BiMessageAdd}
-        onClick={() => setDialogOpen(true)}
-        className={styles.commentsButton}
-      />
+      <Heading level={2} className={styles.header}>
+        <span>Comments</span>
+        <Button small onClick={() => setDialogOpen(true)}>
+          Add
+        </Button>
+      </Heading>
       {props.comments.length === 0 ? (
         <ParagraphText>
           No comments have been added for this post yet! Click on the button
