@@ -19,7 +19,14 @@ import {
   Source,
 } from "aws-cdk-lib/aws-s3-deployment"
 
-import { App, CfnOutput, Duration, Stack, StackProps } from "aws-cdk-lib"
+import {
+  App,
+  CfnOutput,
+  Duration,
+  IgnoreMode,
+  Stack,
+  StackProps,
+} from "aws-cdk-lib"
 import path from "path"
 import { UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito"
 import { Bucket, HttpMethods } from "aws-cdk-lib/aws-s3"
@@ -178,7 +185,7 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
     }
 
     new BucketDeployment(this, `bucket-deployment-for-everything-else`, {
-      sources: [Source.asset(publicDir, { exclude: ["*.html"] })],
+      sources: [Source.asset(publicDir, { exclude: ["index.html"] })],
       destinationBucket: bucket,
       distribution,
       cacheControl: [CacheControl.maxAge(Duration.days(365))],
@@ -186,7 +193,11 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
     })
 
     new BucketDeployment(this, `bucket-deployment-for-html`, {
-      sources: [Source.asset(publicDir, { exclude: ["*", "!*.html"] })],
+      sources: [
+        Source.asset(publicDir, {
+          exclude: ["*.*", "!*.html"],
+        }),
+      ],
       destinationBucket: bucket,
       distribution,
       cacheControl: [CacheControl.noCache()],
