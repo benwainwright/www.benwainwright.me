@@ -71,10 +71,19 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
       environment: { [PAGES_TABLE]: pagesTable.tableName },
     })
 
+    const getPublicPagesFunction = new NodejsFunction(
+      this,
+      "get-public-pages",
+      {
+        environment: { [PAGES_TABLE]: pagesTable.tableName },
+      }
+    )
+
     pagesTable.grantReadWriteData(deletePageFunction)
     pagesTable.grantReadWriteData(updatePageFunction)
     pagesTable.grantReadData(getPagesFunction)
     pagesTable.grantReadData(getPageFunction)
+    pagesTable.grantReadData(getPublicPagesFunction)
 
     const pool = new UserPool(this, "user-pool", {
       selfSignUpEnabled: false,
@@ -257,6 +266,9 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
     })
 
     const pages = api.root.addResource("page")
+
+    const publicPages = pages.addResource("public")
+
     const page = pages.addResource("{slug}")
 
     const authedOptions = {
@@ -275,6 +287,7 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
       authedOptions
     )
     page.addMethod("DELETE", new LambdaIntegration(deletePageFunction))
+    publicPages.addMethod("GET", new LambdaIntegration(getPublicPagesFunction))
 
     page.addMethod("GET", new LambdaIntegration(getPageFunction), authedOptions)
     pages.addMethod(
