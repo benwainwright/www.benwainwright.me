@@ -22,11 +22,11 @@ export const markdownComponents = {
     children,
     ...props
   }: {
-    inline: boolean
-    className: string
+    inline?: boolean
+    className?: string
     children: ReactNode
   }) => {
-    const match = /language-(?:\w+)/u.exec(className || "")
+    const match = /language-(?:\w+)/u.exec(className ?? "")
     return !inline && match ? (
       <SyntaxHighlighter
         {...props}
