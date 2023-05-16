@@ -16,7 +16,13 @@ export const getPublicPages: APIGatewayProxyHandler = async () => {
     TableName: table,
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    FilterExpression: "status = :status AND date > :date",
+    FilterExpression: "#status = :status AND #date < :date",
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    ExpressionAttributeNames: {
+      "#status": "status",
+      "#date": "date",
+    },
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     ExpressionAttributeValues: {
