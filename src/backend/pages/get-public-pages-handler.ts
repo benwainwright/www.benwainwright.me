@@ -5,8 +5,7 @@ import { getEnv } from "../utils/get-env"
 import { DynamoDB } from "@aws-sdk/client-dynamodb"
 import { DynamoDBDocument, ScanCommand } from "@aws-sdk/lib-dynamodb"
 
-
-export const getPages: APIGatewayProxyHandler = async (event) => {
+export const getPublicPages: APIGatewayProxyHandler = async () => {
   const table = getEnv(PAGES_TABLE)
 
   const client = new DynamoDB({})
@@ -15,6 +14,15 @@ export const getPages: APIGatewayProxyHandler = async (event) => {
   const command = new ScanCommand({
     // eslint-disable-next-line @typescript-eslint/naming-convention
     TableName: table,
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    FilterExpression: "status = :status AND date > :date",
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    ExpressionAttributeValues: {
+      ":status": "published",
+      ":date": Date.now(),
+    },
   })
 
   const response = await docClient.send(command)
