@@ -136,7 +136,6 @@ if (process.env.GOOGLE_TRACKING_ID) {
       includeInDevelopment: false,
       defaultDataLayer: { platform: "gatsby" },
       enableWebVitalsTracking: true,
-      selfHostedOrigin: "https://benwainwright.me",
     },
   })
 }
