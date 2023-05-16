@@ -14,7 +14,7 @@ type LayoutProps = {
 } & SeoProps
 
 export const Layout = (props: LayoutProps) => {
-  useToken({ redirectIfNotPresent: Boolean(props.needsAuth) })
+  const [token] = useToken({ redirectIfNotPresent: Boolean(props.needsAuth) })
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -27,12 +27,12 @@ export const Layout = (props: LayoutProps) => {
 
   const { children, ...seoProps } = props
 
-  return (
+  return (token && props.needsAuth) || !props.needsAuth ? (
     <div className={styles.pageGrid}>
       <Seo {...seoProps} />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <main className={styles.mainContainer}>{children}</main>
       <Footer />
     </div>
-  )
+  ) : null
 }

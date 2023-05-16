@@ -16,7 +16,9 @@ interface TokenOptions {
   redirectIfNotPresent: boolean
 }
 
-export const useToken = ({ redirectIfNotPresent }: TokenOptions) => {
+export const useToken = ({
+  redirectIfNotPresent,
+}: TokenOptions): [string, (token: string) => void] => {
   const [{ token }, setToken] = useLocalStorage<{ token: string }>(TOKEN_KEY, {
     token: "",
   })
@@ -41,5 +43,9 @@ export const useToken = ({ redirectIfNotPresent }: TokenOptions) => {
     window.location.href = window.location.origin + window.location.pathname
   }
 
-  return token
+  return [
+    token,
+    (incomingToken: string) =>
+      setToken(token ? { token: incomingToken } : undefined),
+  ]
 }

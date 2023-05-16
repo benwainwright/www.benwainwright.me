@@ -4,7 +4,7 @@ import { Comments, Heading, Layout } from "../../components"
 import ReactMarkdown from "react-markdown"
 import * as styles from "./blog-post.module.css"
 import { DateTime } from "luxon"
-import { markdownComponents } from "./markdown-components"
+import { markdownComponents } from "../../utils/markdown-components"
 
 interface BlogPostProps {
   data: {

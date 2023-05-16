@@ -5,6 +5,7 @@ module.exports = {
   },
   rules: {
     "react/react-in-jsx-scope": "off",
+    "unicorn/no-null": "off",
     "unicorn/no-array-for-each": "off",
     "unicorn/prefer-node-protocol": "off",
     "filenames/naming-convention": "off",

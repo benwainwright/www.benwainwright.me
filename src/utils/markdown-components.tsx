@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Heading, ParagraphText, ListItem, Anchor } from "../../components"
+import { Heading, ParagraphText, ListItem, Anchor } from "../components"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 
 export const markdownComponents = {

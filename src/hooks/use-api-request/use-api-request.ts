@@ -27,8 +27,8 @@ const getPath = (
 
 export const useApiRequest = <T>({ trigger = true, resource, id }: Options) => {
   const path = getPath(trigger, resource, id)
-  const token = useToken({ redirectIfNotPresent: false })
+  const [token, setToken] = useToken({ redirectIfNotPresent: false })
   const { config } = useConfig()
-  const fetcher = makeFetcher(config, path, token)
+  const fetcher = makeFetcher(config, path, token, setToken)
   return useSWR<T>(config && token && path, fetcher)
 }
