@@ -254,22 +254,34 @@ export class WwwDotBenwainwrightDotMeStack extends Stack {
       defaultCorsPreflightOptions: {
         allowOrigins: Cors.ALL_ORIGINS,
       },
-
-      defaultMethodOptions: {
-        authorizationType: AuthorizationType.COGNITO,
-        authorizer,
-      },
     })
 
     const pages = api.root.addResource("page")
     const page = pages.addResource("{slug}")
 
-    pages.addMethod("POST", new LambdaIntegration(updatePageFunction))
-    page.addMethod("PUT", new LambdaIntegration(updatePageFunction))
+    const authedOptions = {
+      authorizationType: AuthorizationType.COGNITO,
+      authorizer,
+    }
+
+    pages.addMethod(
+      "POST",
+      new LambdaIntegration(updatePageFunction),
+      authedOptions
+    )
+    page.addMethod(
+      "PUT",
+      new LambdaIntegration(updatePageFunction),
+      authedOptions
+    )
     page.addMethod("DELETE", new LambdaIntegration(deletePageFunction))
 
-    page.addMethod("GET", new LambdaIntegration(getPageFunction))
-    pages.addMethod("GET", new LambdaIntegration(getPagesFunction))
+    page.addMethod("GET", new LambdaIntegration(getPageFunction), authedOptions)
+    pages.addMethod(
+      "GET",
+      new LambdaIntegration(getPagesFunction),
+      authedOptions
+    )
 
     const comments = api.root.addResource("comments")
     const comment = comments.addResource("{post_slug}")
