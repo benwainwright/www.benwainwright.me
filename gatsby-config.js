@@ -111,26 +111,6 @@ const plugins = [
       path: `${__dirname}/src/images`,
     },
   },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `markdown-pages`,
-      path: `${__dirname}/blog-entries`,
-    },
-  },
-  {
-    resolve: `gatsby-transformer-remark`,
-    options: {
-      plugins: [
-        {
-          resolve: `gatsby-remark-prismjs`,
-          options: {
-            showLineNumbers: true,
-          },
-        },
-      ],
-    },
-  },
   `gatsby-transformer-sharp`,
   `gatsby-plugin-sharp`,
   `gatsby-plugin-gatsby-cloud`,
