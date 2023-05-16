@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import * as styles from "./list-item.module.css"
 
-interface ListItemProps {
+export interface ListItemProps {
   children: ReactNode
 }
 

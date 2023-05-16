@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import * as styles from "./paragraph-text.module.css"
 
-interface ParagraphTextProps {
+export interface ParagraphTextProps {
   role?: string
   children: ReactNode
 }

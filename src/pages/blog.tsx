@@ -6,18 +6,15 @@ import { Layout, BlogSummary, Heading } from "../components"
 import * as styles from "./blog.module.css"
 
 export interface BlogSummaryData {
-  excerpt: string
-  frontmatter: {
-    published: boolean
-    date: string
-    slug: string
-    title: string
-  }
+  description: string
+  date: number
+  slug: string
+  title: string
 }
 
 interface BlogProps {
   data: {
-    allMarkdownRemark: {
+    allBlog: {
       nodes: BlogSummaryData[]
     }
   }
@@ -32,8 +29,8 @@ const Blog: FC<BlogProps> = props => {
           Blog
         </Heading>
         <div className={styles.blogContainer}>
-          {props.data.allMarkdownRemark.nodes.map(entry => (
-            <BlogSummary entry={entry} key={entry.frontmatter.slug} />
+          {props.data.allBlog.nodes.map(entry => (
+            <BlogSummary entry={entry} key={entry.slug} />
           ))}
         </div>
       </div>
@@ -45,18 +42,12 @@ export default Blog
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark(
-      sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { published: { ne: false } } }
-    ) {
+    allBlog(sort: { date: DESC }) {
       nodes {
-        excerpt
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          published
-          slug
-          title
-        }
+        slug
+        title
+        date
+        description
       }
     }
   }

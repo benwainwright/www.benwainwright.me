@@ -1,0 +1,10 @@
+[
+  {
+    "id": "8f432da5-55e7-4c7c-a8f4-2b4f98a8bad8",
+    "title": "My Website Public Posts",
+    "slug": "my-website-posts",
+    "method": "GET",
+    "host": "https://api.benwainwright.me",
+    "path": "page/public"
+  }
+]

@@ -10,14 +10,14 @@ import * as styles from "./index.module.css"
 
 interface IndexProps {
   data: {
-    allMarkdownRemark: {
-      nodes: BlogSummaryData[]
+    allBlog: {
+      nodes: Omit<BlogSummaryData, "date" | "excerpt">[]
     }
   }
 }
 
 const IndexPage = (props: IndexProps) => {
-  const [entry] = props.data.allMarkdownRemark.nodes
+  const [entry] = props.data.allBlog.nodes
 
   if (!entry) {
     throw new Error("Index was executed with incorrect props")
@@ -54,9 +54,7 @@ const IndexPage = (props: IndexProps) => {
         <ul>
           <ListItem>
             <ParagraphText>
-              <Link to={`/blog/${entry.frontmatter.slug}`}>
-                {entry.frontmatter.title}
-              </Link>
+              <Link to={`/blog/${entry.slug}`}>{entry.title}</Link>
             </ParagraphText>
           </ListItem>
         </ul>
@@ -102,19 +100,10 @@ const IndexPage = (props: IndexProps) => {
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark(
-      sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { published: { ne: false } } }
-      limit: 1
-    ) {
+    allBlog(sort: { date: DESC }, limit: 1) {
       nodes {
-        excerpt
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          published
-          slug
-          title
-        }
+        slug
+        title
       }
     }
   }

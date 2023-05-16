@@ -1,5 +1,13 @@
 const siteUrl = `https://benwainwright.me`
+const apiUrl = `https://api.benwainwright.me`
 const plugins = [
+  {
+    resolve: "gatsby-source-custom-api",
+    options: {
+      url: `${apiUrl}/page/public`,
+      rootKey: "blog",
+    },
+  },
   {
     resolve: `gatsby-plugin-feed`,
     options: {

@@ -1,0 +1,73 @@
+.pageContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.headerH1 {
+  margin: 0;
+  padding: 0;
+  flex-grow: 2;
+}
+
+.dateBox {
+  font-family: "Milliard";
+  font-weight: lighter;
+  line-height: 2rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  margin-left: 0.3rem;
+}
+
+.contentContainer {
+  margin: 0 0 1rem 0;
+}
+
+.unpublishedNotice {
+  font-family: "Milliard";
+  font-size: 1.15rem;
+  line-height: 2rem;
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 0.5rem;
+  border: 1px solid black;
+  color: red;
+}
+
+.headingContainer {
+  margin: 0 0 0 0.5rem;
+  flex-grow: 999;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 800px) {
+  .unpublishedNotice {
+    line-height: 1.7rem;
+  }
+
+  .star {
+    display: none;
+  }
+
+  .headingContainer {
+    margin: 0;
+    white-space: break-spaces;
+  }
+
+  .header {
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding-left: 0;
+  }
+}

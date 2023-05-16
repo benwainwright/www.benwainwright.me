@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import * as styles from "./anchor.module.css"
 
-interface AnchorProps {
+export interface AnchorProps {
   href?: string
   children: ReactNode
 }

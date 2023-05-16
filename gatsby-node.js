@@ -49,52 +49,52 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(typeDefs)
 }
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const result = await graphql(
-    `
-      query {
-        allMarkdownRemark {
-          nodes {
-            id
-            htmlAst
-            frontmatter {
-              date(formatString: "MMMM DD, YYYY")
-              last_modified
-              slug
-              published
-              description
-              title
-            }
-            fields {
-              comments {
-                author
-                message
-                timestamp
-              }
-            }
-          }
-        }
-      }
-    `
-  )
+// exports.createPages = async ({ graphql, actions, reporter }) => {
+//   const result = await graphql(
+//     `
+//       query {
+//         allMarkdownRemark {
+//           nodes {
+//             id
+//             htmlAst
+//             frontmatter {
+//               date(formatString: "MMMM DD, YYYY")
+//               last_modified
+//               slug
+//               published
+//               description
+//               title
+//             }
+//             fields {
+//               comments {
+//                 author
+//                 message
+//                 timestamp
+//               }
+//             }
+//           }
+//         }
+//       }
+//     `
+//   )
 
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
-    return
-  }
+//   if (result.errors) {
+//     reporter.panicOnBuild(`Error while running GraphQL query.`)
+//     return
+//   }
 
-  const blogPost = path.resolve(__dirname, "./src/page-templates/blog-post.tsx")
+//   const blogPost = path.resolve(__dirname, "./src/page-templates/blog-post.tsx")
 
-  result.data.allMarkdownRemark.nodes.forEach(entry => {
-    actions.createPage({
-      path: `/blog/${entry.frontmatter.slug}`,
-      component: blogPost,
-      context: {
-        entry,
-      },
-    })
-  })
-}
+//   result.data.allMarkdownRemark.nodes.forEach(entry => {
+//     actions.createPage({
+//       path: `/blog/${entry.frontmatter.slug}`,
+//       component: blogPost,
+//       context: {
+//         entry,
+//       },
+//     })
+//   })
+// }
 
 const { createFilePath } = require(`gatsby-source-filesystem`)
 exports.onCreateNode = async ({ node, actions, getNode }) => {
@@ -111,14 +111,14 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
 
     const apiPath = value.replace(/\//g, "")
 
-    // const { data } = await axios.get(
-    //   `https://api.benwainwright.me/comments/${apiPath}`
-    // )
+    const { data } = await axios.get(
+      `https://api.benwainwright.me/comments/${apiPath}`
+    )
 
     createNodeField({
       name: `comments`,
       node,
-      value: [],
+      value: data,
     })
   }
 }

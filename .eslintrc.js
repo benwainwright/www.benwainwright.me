@@ -7,13 +7,13 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "unicorn/no-array-for-each": "off",
     "unicorn/prefer-node-protocol": "off",
+    "filenames/naming-convention": "off",
   },
   overrides: [
     {
       files: ["./src/infrastructure/**/*"],
       rules: {
         "no-new": "off",
-        "filenames/naming-convention": "off",
         "filenames/match-regex": "off",
       },
     },
