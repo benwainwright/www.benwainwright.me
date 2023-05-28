@@ -29,35 +29,27 @@ const plugins = [
           serialize: ({ query: { site, allBlog } }) => {
             const result = allBlog.edges.map(edge => {
               return {
-                ...edge.node.frontmatter,
-                description: edge.node.excerpt,
-                date: edge.node.frontmatter.date,
-                url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                custom_elements: [{ "content:encoded": edge.node.html }],
+                description: edge.node.description,
+                date: edge.node.date,
+                url: site.siteMetadata.siteUrl + edge.node.slug,
+                guid: site.siteMetadata.siteUrl + edge.node.slug,
+                // custom_elements: [{ "content:encoded": edge.node.html }],
               }
             })
             return result
           },
           query: `{
-          allBlog(
-            sort: { date: DESC }
-          ) {
-            edges {
-              node {
-                excerpt
-                html
-                fields {
-                  slug
-                }
-                frontmatter {
-                  title
-                  date
-                }
-              }
-            }
-          }
-        }`,
+                    allBlog(sort: {date: DESC}) {
+                      edges {
+                        node {
+                          description
+                          date
+                          title
+                          slug
+                        }
+                      }
+                    }
+                  }`,
           output: "/rss.xml",
           title: "benwainwright.me",
         },
