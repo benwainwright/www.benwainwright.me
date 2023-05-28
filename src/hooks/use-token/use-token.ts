@@ -18,10 +18,13 @@ interface TokenOptions {
 
 export const useToken = ({
   redirectIfNotPresent,
-}: TokenOptions): [string, (token: string) => void] => {
-  const [{ token }, setToken] = useLocalStorage<{ token: string }>(TOKEN_KEY, {
-    token: "",
-  })
+}: TokenOptions): [string | undefined, (token: string | undefined) => void] => {
+  const [{ token }, setToken] = useLocalStorage<{ token: string | undefined }>(
+    TOKEN_KEY,
+    {
+      token: "",
+    }
+  )
   const { config } = useConfig()
 
   const params = getHashVars(
@@ -45,7 +48,7 @@ export const useToken = ({
 
   return [
     token,
-    (incomingToken: string) =>
-      setToken(token ? { token: incomingToken } : undefined),
+    (incomingToken: string | undefined) =>
+      setToken(incomingToken ? { token: incomingToken } : { token: undefined }),
   ]
 }

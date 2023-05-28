@@ -26,8 +26,8 @@ const plugins = [
 
       feeds: [
         {
-          serialize: ({ query: { site, allMarkdownRemark } }) => {
-            const result = allMarkdownRemark.edges.map(edge => {
+          serialize: ({ query: { site, allBlog } }) => {
+            const result = allBlog.edges.map(edge => {
               return {
                 ...edge.node.frontmatter,
                 description: edge.node.excerpt,
@@ -40,9 +40,8 @@ const plugins = [
             return result
           },
           query: `{
-          allMarkdownRemark(
-            sort: {order: DESC, fields: [frontmatter___date]}
-            filter: {frontmatter: {published: {eq: true}}}
+          allBlog(
+            sort: { date: DESC }
           ) {
             edges {
               node {

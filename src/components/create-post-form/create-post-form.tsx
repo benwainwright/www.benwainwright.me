@@ -24,16 +24,16 @@ const EditPostForm = () => {
   const [page, setPage] = useState<Page>(defaultPage)
   const [, setDirty] = useState(false)
 
-  const token = useToken({ redirectIfNotPresent: false })
+  const [token, setToken] = useToken({ redirectIfNotPresent: false })
   const { config } = useConfig()
-  const fetcher = makeFetcher(config, `page`, token)
+  const fetcher = makeFetcher(config, `page`, token, setToken)
 
   const create = useCallback(async () => {
     await fetcher({
       method: "POST",
       body: JSON.stringify({ ...page, date: page.date.getTime() }),
     })
-  }, [page])
+  }, [page, fetcher])
 
   return (
     <form className={styles.form}>

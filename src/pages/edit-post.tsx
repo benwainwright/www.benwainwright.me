@@ -45,9 +45,9 @@ const EditPost = () => {
   }, [])
 
   const interval = useRef<NodeJS.Timer | undefined>()
-  const token = useToken({ redirectIfNotPresent: false })
+  const [token, setToken] = useToken({ redirectIfNotPresent: false })
   const { config } = useConfig()
-  const fetcher = makeFetcher(config, `page/${page?.slug}`, token)
+  const fetcher = makeFetcher(config, `page/${page?.slug}`, token, setToken)
 
   const update = useCallback(async () => {
     await fetcher({
@@ -55,7 +55,7 @@ const EditPost = () => {
       body: JSON.stringify({ ...page, date: page?.date.getTime() }),
     })
     setDirty(false)
-  }, [page])
+  }, [page, fetcher])
 
   useEffect(() => {
     interval.current = setInterval(async () => {
